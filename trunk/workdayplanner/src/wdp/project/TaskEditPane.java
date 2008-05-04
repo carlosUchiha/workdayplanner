@@ -6,6 +6,10 @@
 
 package wdp.project;
 
+import javax.swing.JDialog;
+import javax.swing.JFrame;
+import org.jdesktop.application.Action;
+import wdp.WdpApp;
 import wdp.entities.Task;
 
 /**
@@ -90,6 +94,8 @@ public class TaskEditPane extends javax.swing.JPanel {
     jButtonCancel.setText(resourceMap.getString("jButtonCancel.text")); // NOI18N
     jButtonCancel.setName("jButtonCancel"); // NOI18N
 
+    javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance(wdp.WdpApp.class).getContext().getActionMap(TaskEditPane.class, this);
+    jButtonOk.setAction(actionMap.get("acceptValue")); // NOI18N
     jButtonOk.setText(resourceMap.getString("jButtonOk.text")); // NOI18N
     jButtonOk.setName("jButtonOk"); // NOI18N
 
@@ -175,18 +181,48 @@ public class TaskEditPane extends javax.swing.JPanel {
   private javax.swing.JTextField jTextFieldProject;
   private javax.swing.JTextPane jTextPaneDescription;
   // End of variables declaration//GEN-END:variables
-
+  private Task value = null;
+  
   private void setTask(Task aTask) {
+    value = aTask;
     jTextFieldProject.setText(aTask.getIdProject().getName());
     jTextFieldEstimation.setText(aTask.getCurrentEstimation().toString());
+    jTextFieldMood.setText(aTask.getMood().toString());
     jDateChooserStart.setDate(aTask.getStart());
     jDateChooserFinish.setDate(aTask.getFinish());
     jTextPaneDescription.setText(aTask.getDescription());
   }
   
-  public static Task showTaskEditWindow() {
-    
-    return null;
+  private Task getTask() {
+    return value;
+  }
+  
+  @Action
+  public void acceptValue() {
+    value.setCurrentEstimation(Integer.parseInt(jTextFieldEstimation.getText()));
+    value.setMood(Integer.parseInt(jTextFieldMood.getText()));
+    if(jTextPaneDescription.getText().length()>0)
+      value.setDescription(jTextPaneDescription.getText());
+    else {
+      if(value.getIdProject().getRecurring()==1)
+        value.setDescription("Recurring");
+    }
+      
+    value.setStart(jDateChooserStart.getDate());
+    value.setFinish(jDateChooserFinish.getDate());
+    this.setVisible(false);
+  }
+  
+  public static Task showTaskEditWindow(Task aTask) {
+    TaskEditPane pane = new TaskEditPane(aTask);
+    pane.setTask(aTask);
+    JDialog frame = new JDialog();
+		frame.setContentPane(pane);
+		frame.pack();
+    frame.setModal(true);
+		frame.setLocationRelativeTo(WdpApp.getApplication().getMainFrame());
+		WdpApp.getApplication().show(frame);
+    return pane.getTask();
   }
   
 }

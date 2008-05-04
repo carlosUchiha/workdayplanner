@@ -180,6 +180,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="jButtonOk">
       <Properties>
+        <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.swingapp.ActionEditor">
+          <action class="wdp.project.TaskEditPane" id="acceptValue" methodName="acceptValue"/>
+        </Property>
         <Property name="text" type="java.lang.String" resourceKey="jButtonOk.text"/>
         <Property name="name" type="java.lang.String" value="jButtonOk" noResource="true"/>
       </Properties>
