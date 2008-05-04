@@ -84,9 +84,12 @@
                   <SubComponents>
                     <Component class="javax.swing.JButton" name="jButtonAddTaskToList">
                       <Properties>
-                        <Property name="label" type="java.lang.String" resourceKey="jButtonAddTaskToList.label"/>
+                        <Property name="text" type="java.lang.String" resourceKey="jButtonAddTaskToList.text"/>
                         <Property name="name" type="java.lang.String" value="jButtonAddTaskToList" noResource="true"/>
                       </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonAddTaskToListActionPerformed"/>
+                      </Events>
                     </Component>
                   </SubComponents>
                 </Container>

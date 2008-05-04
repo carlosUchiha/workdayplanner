@@ -64,8 +64,13 @@ public class ProjectAndTaskFrame extends javax.swing.JPanel {
     jPanelButtons.setName("jPanelButtons"); // NOI18N
 
     org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(wdp.WdpApp.class).getContext().getResourceMap(ProjectAndTaskFrame.class);
-    jButtonAddTaskToList.setLabel(resourceMap.getString("jButtonAddTaskToList.label")); // NOI18N
+    jButtonAddTaskToList.setText(resourceMap.getString("jButtonAddTaskToList.text")); // NOI18N
     jButtonAddTaskToList.setName("jButtonAddTaskToList"); // NOI18N
+    jButtonAddTaskToList.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButtonAddTaskToListActionPerformed(evt);
+      }
+    });
     jPanelButtons.add(jButtonAddTaskToList);
 
     jPanel1.add(jPanelButtons, java.awt.BorderLayout.CENTER);
@@ -164,6 +169,13 @@ public class ProjectAndTaskFrame extends javax.swing.JPanel {
         .addContainerGap())
     );
   }// </editor-fold>//GEN-END:initComponents
+
+  private void jButtonAddTaskToListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddTaskToListActionPerformed
+    Project selected = projectTreePane.getSelected();
+    Task newTask = new Task(selected);
+    
+    taskListPane.addTask(newTask);
+  }//GEN-LAST:event_jButtonAddTaskToListActionPerformed
   
   public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
