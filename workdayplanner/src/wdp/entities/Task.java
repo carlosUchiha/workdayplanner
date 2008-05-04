@@ -60,6 +60,11 @@ public class Task implements Serializable {
     public Task(Integer id) {
         this.id = id;
     }
+    
+    public Task(Project project) {
+        this.idProject = project;
+        this.start = new Date();
+    }
 
     public Integer getId() {
         return id;
