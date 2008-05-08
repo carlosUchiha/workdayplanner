@@ -1,7 +1,6 @@
 /*
- * WdpApp.java
+ * $Id$
  */
-
 package wdp;
 
 import org.jdesktop.application.Application;
@@ -11,17 +10,17 @@ import org.jdesktop.application.SingleFrameApplication;
  * The main class of the application.
  */
 public class WdpApp extends SingleFrameApplication {
-  
-  private Session session = null;
-  private WdpMainWindow wdpMainWindow = null;
+
+    private Session session = null;
+    private WdpMainWindow wdpMainWindow = null;
 
     /**
      * At startup create and show the main frame of the application.
      */
-    @Override 
+    @Override
     protected void startup() {
-      wdpMainWindow = new WdpMainWindow(this);
-      show(wdpMainWindow);
+        wdpMainWindow = new WdpMainWindow(this);
+        show(wdpMainWindow);
     }
 
     /**
@@ -29,7 +28,7 @@ public class WdpApp extends SingleFrameApplication {
      * Windows shown in our application come fully initialized from the GUI
      * builder, so this additional configuration is not needed.
      */
-    @Override 
+    @Override
     protected void configureWindow(java.awt.Window root) {
     }
 
@@ -47,11 +46,11 @@ public class WdpApp extends SingleFrameApplication {
     public static void main(String[] args) {
         launch(WdpApp.class, args);
     }
-    
+
     public Session getSession() {
-      if(session == null) {
-        session = new Session();
-      }
-      return session;
+        if (session == null) {
+            session = new Session();
+        }
+        return session;
     }
 }

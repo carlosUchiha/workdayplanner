@@ -1,3 +1,6 @@
+/*
+ * $Id$
+ */
 package wdp.worker;
 
 import java.awt.EventQueue;
@@ -9,14 +12,14 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 public class WorkerEditFrame extends JPanel {
-    
+
     public WorkerEditFrame() {
         initComponents();
         TableSelectionListener listener = new TableSelectionListener();
         masterTable.getSelectionModel().addListSelectionListener(listener);
         entityManager.getTransaction().begin();
     }
-    
+
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -521,51 +524,48 @@ public class WorkerEditFrame extends JPanel {
       }
     }
   }// </editor-fold>//GEN-END:initComponents
-    
+
     private class TableSelectionListener implements ListSelectionListener {
-        
+
         public void valueChanged(ListSelectionEvent e) {
             if (e.getSource() == masterTable.getSelectionModel()) {
                 boolean enabled = (masterTable.getSelectedRow() != -1);
                 deleteButton.setEnabled(enabled);
             }
         }
-        
     }
-    
+
     private void refreshButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshButtonActionPerformed
         entityManager.getTransaction().rollback();
         entityManager.getTransaction().begin();
         list.clear();
         list.addAll(query.getResultList());
     }//GEN-LAST:event_refreshButtonActionPerformed
-    
+
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
         int[] selected = masterTable.getSelectedRows();
         List<wdp.entities.Worker> toRemove = new ArrayList<wdp.entities.Worker>(selected.length);
-        for (int idx=0; idx<selected.length; idx++) {
+        for (int idx = 0; idx < selected.length; idx++) {
             wdp.entities.Worker w = list.get(masterTable.convertRowIndexToModel(selected[idx]));
             toRemove.add(w);
             entityManager.remove(w);
         }
         list.removeAll(toRemove);
     }//GEN-LAST:event_deleteButtonActionPerformed
-    
+
     private void newButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newButtonActionPerformed
         wdp.entities.Worker w = new wdp.entities.Worker();
         entityManager.persist(w);
         list.add(w);
-        int row = list.size()-1;
+        int row = list.size() - 1;
         masterTable.setRowSelectionInterval(row, row);
         masterTable.scrollRectToVisible(masterTable.getCellRect(row, 0, true));
     }//GEN-LAST:event_newButtonActionPerformed
-    
+
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
         entityManager.getTransaction().commit();
         entityManager.getTransaction().begin();
     }//GEN-LAST:event_saveButtonActionPerformed
-    
-    
   // Variables declaration - do not modify//GEN-BEGIN:variables
   private com.toedter.calendar.JDateChooser birthdayField;
   private javax.swing.JLabel birthdayLabel;
@@ -616,9 +616,10 @@ public class WorkerEditFrame extends JPanel {
   private javax.swing.JLabel wwwLabel;
   private org.jdesktop.beansbinding.BindingGroup bindingGroup;
   // End of variables declaration//GEN-END:variables
-    
+
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
+
             public void run() {
                 JFrame frame = new JFrame();
                 frame.setContentPane(new WorkerEditFrame());
@@ -628,5 +629,4 @@ public class WorkerEditFrame extends JPanel {
             }
         });
     }
-    
 }

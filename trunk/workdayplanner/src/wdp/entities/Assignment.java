@@ -1,8 +1,6 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ * $Id$
  */
-
 package wdp.entities;
 
 import java.beans.PropertyChangeListener;
@@ -24,10 +22,14 @@ import javax.persistence.Transient;
  */
 @Entity
 @Table(name = "ASSIGNMENT")
-@NamedQueries({@NamedQuery(name = "Assignment.findById", query = "SELECT a FROM Assignment a WHERE a.id = :id"), @NamedQuery(name = "Assignment.findBySkill", query = "SELECT a FROM Assignment a WHERE a.skill = :skill")})
+@NamedQueries({
+    @NamedQuery(name = "Assignment.findById", query = "SELECT a FROM Assignment a WHERE a.id = :id"),
+    @NamedQuery(name = "Assignment.findBySkill", query = "SELECT a FROM Assignment a WHERE a.skill = :skill")
+})
 public class Assignment implements Serializable {
-  @Transient
-  private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
+
+    @Transient
+    private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
     private static final long serialVersionUID = 1L;
     @Id
     @Column(name = "ID", nullable = false)
@@ -56,9 +58,9 @@ public class Assignment implements Serializable {
     }
 
     public void setId(Integer id) {
-    Integer oldId = this.id;
+        Integer oldId = this.id;
         this.id = id;
-    changeSupport.firePropertyChange("id", oldId, id);
+        changeSupport.firePropertyChange("id", oldId, id);
     }
 
     public Integer getSkill() {
@@ -66,9 +68,9 @@ public class Assignment implements Serializable {
     }
 
     public void setSkill(Integer skill) {
-    Integer oldSkill = this.skill;
+        Integer oldSkill = this.skill;
         this.skill = skill;
-    changeSupport.firePropertyChange("skill", oldSkill, skill);
+        changeSupport.firePropertyChange("skill", oldSkill, skill);
     }
 
     public Post getIdPost() {
@@ -76,9 +78,9 @@ public class Assignment implements Serializable {
     }
 
     public void setIdPost(Post idPost) {
-    Post oldIdPost = this.idPost;
+        Post oldIdPost = this.idPost;
         this.idPost = idPost;
-    changeSupport.firePropertyChange("idPost", oldIdPost, idPost);
+        changeSupport.firePropertyChange("idPost", oldIdPost, idPost);
     }
 
     public Project getIdProject() {
@@ -86,9 +88,9 @@ public class Assignment implements Serializable {
     }
 
     public void setIdProject(Project idProject) {
-    Project oldIdProject = this.idProject;
+        Project oldIdProject = this.idProject;
         this.idProject = idProject;
-    changeSupport.firePropertyChange("idProject", oldIdProject, idProject);
+        changeSupport.firePropertyChange("idProject", oldIdProject, idProject);
     }
 
     public Worker getIdWorker() {
@@ -96,9 +98,9 @@ public class Assignment implements Serializable {
     }
 
     public void setIdWorker(Worker idWorker) {
-    Worker oldIdWorker = this.idWorker;
+        Worker oldIdWorker = this.idWorker;
         this.idWorker = idWorker;
-    changeSupport.firePropertyChange("idWorker", oldIdWorker, idWorker);
+        changeSupport.firePropertyChange("idWorker", oldIdWorker, idWorker);
     }
 
     @Override
@@ -126,12 +128,11 @@ public class Assignment implements Serializable {
         return "wdp.entities.Assignment[id=" + id + "]";
     }
 
-  public void addPropertyChangeListener(PropertyChangeListener listener) {
-    changeSupport.addPropertyChangeListener(listener);
-  }
+    public void addPropertyChangeListener(PropertyChangeListener listener) {
+        changeSupport.addPropertyChangeListener(listener);
+    }
 
-  public void removePropertyChangeListener(PropertyChangeListener listener) {
-    changeSupport.addPropertyChangeListener(listener);
-  }
-
+    public void removePropertyChangeListener(PropertyChangeListener listener) {
+        changeSupport.addPropertyChangeListener(listener);
+    }
 }

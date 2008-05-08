@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-
+<!-- $Id$ -->
 <OBJECT CLASS="com.sun.forte4j.modules.dbmodel.SchemaElement" ID="org.netbeans.modules.dbschema.SchemaElement86819">
   <impl>
     <OBJECT CLASS="com.sun.forte4j.modules.dbmodel.jdbcimpl.SchemaElementImpl" ID="org.netbeans.modules.dbschema.jdbcimpl.SchemaElementImpl12637062">
@@ -1367,7 +1367,7 @@
                                                                               </_length>
                                                                               <_name>
                                                                                 <OBJECT CLASS="com.sun.forte4j.modules.dbmodel.DBIdentifier" ID="org.netbeans.modules.dbschema.DBIdentifier30632296">
-                                                                                  <name>START</name>
+                                                                                  <name>STARTED</name>
                                                                                 </OBJECT>
                                                                               </_name>
                                                                               <_scale>
@@ -6053,7 +6053,7 @@
                                       </_length>
                                       <_name>
                                         <OBJECT CLASS="com.sun.forte4j.modules.dbmodel.DBIdentifier" ID="org.netbeans.modules.dbschema.DBIdentifier32613262">
-                                          <name>START</name>
+                                          <name>STARTED</name>
                                         </OBJECT>
                                       </_name>
                                       <_scale>

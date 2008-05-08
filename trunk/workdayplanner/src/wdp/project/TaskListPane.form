@@ -10,7 +10,7 @@
     <Component class="javax.persistence.Query" name="query">
       <Properties>
         <Property name="query" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-          <Connection code="&quot;SELECT t FROM Task t WHERE t.start IS NOT NULL&quot;" type="code"/>
+          <Connection code="&quot;SELECT t FROM Task t WHERE t.started IS NOT NULL&quot;" type="code"/>
         </Property>
         <Property name="entityManager" type="java.lang.Object" editor="org.netbeans.modules.form.j2ee.J2EEPropertyModifier$EMProperty$EntityManagerEditor">
           <ComponentRef name="entityManager"/>
