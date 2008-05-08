@@ -54,8 +54,8 @@ public class TaskListPane extends JPanel {
         org.jdesktop.swingbinding.JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${description}"));
         columnBinding.setColumnName("Description");
         columnBinding.setColumnClass(String.class);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${start}"));
-        columnBinding.setColumnName("Start");
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${started}"));
+        columnBinding.setColumnName("Started");
         columnBinding.setColumnClass(java.util.Date.class);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${finish}"));
         columnBinding.setColumnName("Finish");
@@ -67,10 +67,15 @@ public class TaskListPane extends JPanel {
         columnBinding.setColumnName("Current Estimation");
         columnBinding.setColumnClass(Integer.class);
         bindingGroup.addBinding(jTableBinding);
-
+        jTableBinding.bind();
         masterScrollPane.setViewportView(masterTable);
-
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(wdp.WdpApp.class).getContext().getResourceMap(TaskListPane.class);
+        masterTable.getColumnModel().getColumn(0).setHeaderValue(resourceMap.getString("masterTable.columnModel.title0")); // NOI18N
+        masterTable.getColumnModel().getColumn(1).setHeaderValue(resourceMap.getString("masterTable.columnModel.title1")); // NOI18N
+        masterTable.getColumnModel().getColumn(2).setHeaderValue(resourceMap.getString("masterTable.columnModel.title2")); // NOI18N
+        masterTable.getColumnModel().getColumn(3).setHeaderValue(resourceMap.getString("masterTable.columnModel.title3")); // NOI18N
+        masterTable.getColumnModel().getColumn(4).setHeaderValue(resourceMap.getString("masterTable.columnModel.title4")); // NOI18N
+
         saveButton.setText(resourceMap.getString("saveButton.text")); // NOI18N
         saveButton.setName("saveButton"); // NOI18N
         saveButton.addActionListener(formListener);
@@ -160,7 +165,7 @@ public class TaskListPane extends JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private class TableSelectionListener implements ListSelectionListener {
-
+        @Override
         public void valueChanged(ListSelectionEvent e) {
             if (e.getSource() == masterTable.getSelectionModel()) {
                 boolean enabled = (masterTable.getSelectedRow() != -1);
@@ -203,7 +208,7 @@ public class TaskListPane extends JPanel {
 
   private void jDateChooserTodayPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jDateChooserTodayPropertyChange
       if (evt.getPropertyName().equals("date")) {
-          String qString = "SELECT t FROM Task t WHERE t.start BETWEEN '" +
+          String qString = "SELECT t FROM Task t WHERE t.started BETWEEN '" +
                   new SimpleDateFormat("yyyy-MM-dd 00:00:00").format(jDateChooserToday.getDate()) +
                   "' AND '" +
                   new SimpleDateFormat("yyyy-MM-dd 23:59:59").format(jDateChooserToday.getDate()) +
@@ -245,7 +250,7 @@ public class TaskListPane extends JPanel {
 
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
-
+            @Override
             public void run() {
                 JFrame frame = new JFrame();
                 frame.setContentPane(new TaskListPane());

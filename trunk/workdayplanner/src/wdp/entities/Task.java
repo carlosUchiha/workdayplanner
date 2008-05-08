@@ -67,9 +67,17 @@ public class Task implements Serializable {
         this.id = id;
     }
 
+    /**
+     * 
+     * TODO global parameter - default estimation
+     * TODO global parameter - default task mood
+     * @param project
+     */
     public Task(Project project) {
         this.idProject = project;
         this.started = new Date();
+        this.currentEstimation = 2;
+        this.mood = 50;
     }
 
     public Integer getId() {
@@ -92,14 +100,14 @@ public class Task implements Serializable {
         changeSupport.firePropertyChange("description", oldDescription, description);
     }
 
-    public Date getStart() {
+    public Date getStarted() {
         return started;
     }
 
-    public void setStart(Date start) {
+    public void setStarted(Date start) {
         Date oldStart = this.started;
         this.started = start;
-        changeSupport.firePropertyChange("start", oldStart, start);
+        changeSupport.firePropertyChange("started", oldStart, start);
     }
 
     public Date getFinish() {
