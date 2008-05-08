@@ -177,7 +177,7 @@ public class Project implements Serializable {
     public void setStart(Date start) {
         Date oldStart = this.started;
         this.started = start;
-        changeSupport.firePropertyChange("start", oldStart, start);
+        changeSupport.firePropertyChange("started", oldStart, start);
     }
 
     public Date getFinish() {

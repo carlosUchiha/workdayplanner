@@ -169,15 +169,12 @@ public class ProjectAndTaskFrame extends javax.swing.JPanel {
   }// </editor-fold>//GEN-END:initComponents
 
   private void jButtonAddTaskToListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddTaskToListActionPerformed
-      Project selected = projectTreePane.getSelected();
-      Task newTask = new Task(selected);
-
-      taskListPane.addTask(newTask);
+      addTask();
   }//GEN-LAST:event_jButtonAddTaskToListActionPerformed
 
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
-
+            @Override
             public void run() {
                 JFrame frame = new JFrame();
                 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -210,7 +207,7 @@ public class ProjectAndTaskFrame extends javax.swing.JPanel {
         projectTreePane = new ProjectTreePane();
         jSplitPaneVert.setLeftComponent(projectTreePane);
         projectTreePane.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-
+            @Override
             public void propertyChange(java.beans.PropertyChangeEvent evt) {
                 if (evt.getPropertyName().equals("selected")) {
                     System.out.println("New value: " + ((Project) evt.getNewValue()).toString());
@@ -219,15 +216,10 @@ public class ProjectAndTaskFrame extends javax.swing.JPanel {
             }
         });
         projectTreePane.getJTreeProjects().addMouseListener(new java.awt.event.MouseAdapter() {
-
             @Override
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 if (evt.getClickCount() >= 2) {
-                    Task aTask = new Task();
-                    aTask.setIdProject(projectTreePane.getSelected());
-                    aTask.setStart(new Date());
-                    aTask.setIdWorker(WdpApp.getApplication().getSession().getWorker());
-                    taskListPane.addTask(aTask);
+                    addTask();
                 }
             }
         });
@@ -241,5 +233,14 @@ public class ProjectAndTaskFrame extends javax.swing.JPanel {
     private void projectSelected(Project aProject) {
         jTextAreaProjectDescription.setText(aProject.getDescription());
         jTextFieldProjectPriority.setText(aProject.getPriority().toString());
+    }
+
+    private void addTask() {
+        Task aTask = new Task(projectTreePane.getSelected());
+        aTask.setStarted(new Date());
+        aTask.setIdWorker(WdpApp.getApplication().getSession().getWorker());
+        Task tmpTask = TaskEditPane.showTaskEditWindow(aTask);
+        if(tmpTask != null)
+            taskListPane.addTask(aTask);
     }
 }
