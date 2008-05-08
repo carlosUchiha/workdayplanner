@@ -1,8 +1,6 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ * $Id$
  */
-
 package wdp.entities;
 
 import java.beans.PropertyChangeListener;
@@ -27,19 +25,27 @@ import javax.persistence.Transient;
  */
 @Entity
 @Table(name = "TASK")
-@NamedQueries({@NamedQuery(name = "Task.findById", query = "SELECT t FROM Task t WHERE t.id = :id"), @NamedQuery(name = "Task.findByDescription", query = "SELECT t FROM Task t WHERE t.description = :description"), @NamedQuery(name = "Task.findByStart", query = "SELECT t FROM Task t WHERE t.start = :start"), @NamedQuery(name = "Task.findByFinish", query = "SELECT t FROM Task t WHERE t.finish = :finish"), @NamedQuery(name = "Task.findByMood", query = "SELECT t FROM Task t WHERE t.mood = :mood"), @NamedQuery(name = "Task.findByCurrentEstimation", query = "SELECT t FROM Task t WHERE t.currentEstimation = :currentEstimation")})
+@NamedQueries({
+    @NamedQuery(name = "Task.findById", query = "SELECT t FROM Task t WHERE t.id = :id"),
+    @NamedQuery(name = "Task.findByDescription", query = "SELECT t FROM Task t WHERE t.description = :description"),
+    @NamedQuery(name = "Task.findByStarted", query = "SELECT t FROM Task t WHERE t.started = :started"),
+    @NamedQuery(name = "Task.findByFinish", query = "SELECT t FROM Task t WHERE t.finish = :finish"),
+    @NamedQuery(name = "Task.findByMood", query = "SELECT t FROM Task t WHERE t.mood = :mood"),
+    @NamedQuery(name = "Task.findByCurrentEstimation", query = "SELECT t FROM Task t WHERE t.currentEstimation = :currentEstimation")
+})
 public class Task implements Serializable {
-	@Transient
-	private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
+
+    @Transient
+    private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
     private static final long serialVersionUID = 1L;
     @Id
     @Column(name = "ID", nullable = false)
     private Integer id;
     @Column(name = "DESCRIPTION")
     private String description;
-    @Column(name = "START")
+    @Column(name = "STARTED")
     @Temporal(TemporalType.TIMESTAMP)
-    private Date start;
+    private Date started;
     @Column(name = "FINISH")
     @Temporal(TemporalType.TIMESTAMP)
     private Date finish;
@@ -60,10 +66,10 @@ public class Task implements Serializable {
     public Task(Integer id) {
         this.id = id;
     }
-    
+
     public Task(Project project) {
         this.idProject = project;
-        this.start = new Date();
+        this.started = new Date();
     }
 
     public Integer getId() {
@@ -71,9 +77,9 @@ public class Task implements Serializable {
     }
 
     public void setId(Integer id) {
-		Integer oldId = this.id;
+        Integer oldId = this.id;
         this.id = id;
-		changeSupport.firePropertyChange("id", oldId, id);
+        changeSupport.firePropertyChange("id", oldId, id);
     }
 
     public String getDescription() {
@@ -81,19 +87,19 @@ public class Task implements Serializable {
     }
 
     public void setDescription(String description) {
-		String oldDescription = this.description;
+        String oldDescription = this.description;
         this.description = description;
-		changeSupport.firePropertyChange("description", oldDescription, description);
+        changeSupport.firePropertyChange("description", oldDescription, description);
     }
 
     public Date getStart() {
-        return start;
+        return started;
     }
 
     public void setStart(Date start) {
-		Date oldStart = this.start;
-        this.start = start;
-		changeSupport.firePropertyChange("start", oldStart, start);
+        Date oldStart = this.started;
+        this.started = start;
+        changeSupport.firePropertyChange("start", oldStart, start);
     }
 
     public Date getFinish() {
@@ -101,9 +107,9 @@ public class Task implements Serializable {
     }
 
     public void setFinish(Date finish) {
-		Date oldFinish = this.finish;
+        Date oldFinish = this.finish;
         this.finish = finish;
-		changeSupport.firePropertyChange("finish", oldFinish, finish);
+        changeSupport.firePropertyChange("finish", oldFinish, finish);
     }
 
     public Integer getMood() {
@@ -111,9 +117,9 @@ public class Task implements Serializable {
     }
 
     public void setMood(Integer mood) {
-		Integer oldMood = this.mood;
+        Integer oldMood = this.mood;
         this.mood = mood;
-		changeSupport.firePropertyChange("mood", oldMood, mood);
+        changeSupport.firePropertyChange("mood", oldMood, mood);
     }
 
     public Integer getCurrentEstimation() {
@@ -121,9 +127,9 @@ public class Task implements Serializable {
     }
 
     public void setCurrentEstimation(Integer currentEstimation) {
-		Integer oldCurrentEstimation = this.currentEstimation;
+        Integer oldCurrentEstimation = this.currentEstimation;
         this.currentEstimation = currentEstimation;
-		changeSupport.firePropertyChange("currentEstimation", oldCurrentEstimation, currentEstimation);
+        changeSupport.firePropertyChange("currentEstimation", oldCurrentEstimation, currentEstimation);
     }
 
     public Project getIdProject() {
@@ -131,9 +137,9 @@ public class Task implements Serializable {
     }
 
     public void setIdProject(Project idProject) {
-		Project oldIdProject = this.idProject;
+        Project oldIdProject = this.idProject;
         this.idProject = idProject;
-		changeSupport.firePropertyChange("idProject", oldIdProject, idProject);
+        changeSupport.firePropertyChange("idProject", oldIdProject, idProject);
     }
 
     public Worker getIdWorker() {
@@ -141,9 +147,9 @@ public class Task implements Serializable {
     }
 
     public void setIdWorker(Worker idWorker) {
-		Worker oldIdWorker = this.idWorker;
+        Worker oldIdWorker = this.idWorker;
         this.idWorker = idWorker;
-		changeSupport.firePropertyChange("idWorker", oldIdWorker, idWorker);
+        changeSupport.firePropertyChange("idWorker", oldIdWorker, idWorker);
     }
 
     @Override
@@ -171,12 +177,11 @@ public class Task implements Serializable {
         return "wdp.entities.Task[id=" + id + "]";
     }
 
-	public void addPropertyChangeListener(PropertyChangeListener listener) {
-		changeSupport.addPropertyChangeListener(listener);
-	}
+    public void addPropertyChangeListener(PropertyChangeListener listener) {
+        changeSupport.addPropertyChangeListener(listener);
+    }
 
-	public void removePropertyChangeListener(PropertyChangeListener listener) {
-		changeSupport.addPropertyChangeListener(listener);
-	}
-
+    public void removePropertyChangeListener(PropertyChangeListener listener) {
+        changeSupport.addPropertyChangeListener(listener);
+    }
 }

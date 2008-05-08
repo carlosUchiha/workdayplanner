@@ -1,8 +1,6 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ * $Id$
  */
-
 package wdp.entities;
 
 import java.beans.PropertyChangeListener;
@@ -24,10 +22,17 @@ import javax.persistence.Transient;
  */
 @Entity
 @Table(name = "SETTINGS")
-@NamedQueries({@NamedQuery(name = "Settings.findById", query = "SELECT s FROM Settings s WHERE s.id = :id"), @NamedQuery(name = "Settings.findByKeyword", query = "SELECT s FROM Settings s WHERE s.keyword = :keyword"), @NamedQuery(name = "Settings.findByValueString", query = "SELECT s FROM Settings s WHERE s.valueString = :valueString"), @NamedQuery(name = "Settings.findByDefaultValue", query = "SELECT s FROM Settings s WHERE s.defaultValue = :defaultValue"), @NamedQuery(name = "Settings.findByDescription", query = "SELECT s FROM Settings s WHERE s.description = :description")})
+@NamedQueries({
+    @NamedQuery(name = "Settings.findById", query = "SELECT s FROM Settings s WHERE s.id = :id"),
+    @NamedQuery(name = "Settings.findByKeyword", query = "SELECT s FROM Settings s WHERE s.keyword = :keyword"),
+    @NamedQuery(name = "Settings.findByValueString", query = "SELECT s FROM Settings s WHERE s.valueString = :valueString"),
+    @NamedQuery(name = "Settings.findByDefaultValue", query = "SELECT s FROM Settings s WHERE s.defaultValue = :defaultValue"),
+    @NamedQuery(name = "Settings.findByDescription", query = "SELECT s FROM Settings s WHERE s.description = :description")
+})
 public class Settings implements Serializable {
-  @Transient
-  private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
+
+    @Transient
+    private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
     private static final long serialVersionUID = 1L;
     @Id
     @Column(name = "ID", nullable = false)
@@ -56,9 +61,9 @@ public class Settings implements Serializable {
     }
 
     public void setId(Integer id) {
-    Integer oldId = this.id;
+        Integer oldId = this.id;
         this.id = id;
-    changeSupport.firePropertyChange("id", oldId, id);
+        changeSupport.firePropertyChange("id", oldId, id);
     }
 
     public String getKeyword() {
@@ -66,9 +71,9 @@ public class Settings implements Serializable {
     }
 
     public void setKeyword(String keyword) {
-    String oldKeyword = this.keyword;
+        String oldKeyword = this.keyword;
         this.keyword = keyword;
-    changeSupport.firePropertyChange("keyword", oldKeyword, keyword);
+        changeSupport.firePropertyChange("keyword", oldKeyword, keyword);
     }
 
     public String getValueString() {
@@ -76,9 +81,9 @@ public class Settings implements Serializable {
     }
 
     public void setValueString(String valueString) {
-    String oldValueString = this.valueString;
+        String oldValueString = this.valueString;
         this.valueString = valueString;
-    changeSupport.firePropertyChange("valueString", oldValueString, valueString);
+        changeSupport.firePropertyChange("valueString", oldValueString, valueString);
     }
 
     public String getDefaultValue() {
@@ -86,9 +91,9 @@ public class Settings implements Serializable {
     }
 
     public void setDefaultValue(String defaultValue) {
-    String oldDefaultValue = this.defaultValue;
+        String oldDefaultValue = this.defaultValue;
         this.defaultValue = defaultValue;
-    changeSupport.firePropertyChange("defaultValue", oldDefaultValue, defaultValue);
+        changeSupport.firePropertyChange("defaultValue", oldDefaultValue, defaultValue);
     }
 
     public String getDescription() {
@@ -96,9 +101,9 @@ public class Settings implements Serializable {
     }
 
     public void setDescription(String description) {
-    String oldDescription = this.description;
+        String oldDescription = this.description;
         this.description = description;
-    changeSupport.firePropertyChange("description", oldDescription, description);
+        changeSupport.firePropertyChange("description", oldDescription, description);
     }
 
     public Worker getIdWorker() {
@@ -106,9 +111,9 @@ public class Settings implements Serializable {
     }
 
     public void setIdWorker(Worker idWorker) {
-    Worker oldIdWorker = this.idWorker;
+        Worker oldIdWorker = this.idWorker;
         this.idWorker = idWorker;
-    changeSupport.firePropertyChange("idWorker", oldIdWorker, idWorker);
+        changeSupport.firePropertyChange("idWorker", oldIdWorker, idWorker);
     }
 
     @Override
@@ -136,12 +141,11 @@ public class Settings implements Serializable {
         return "wdp.entities.Settings[id=" + id + "]";
     }
 
-  public void addPropertyChangeListener(PropertyChangeListener listener) {
-    changeSupport.addPropertyChangeListener(listener);
-  }
+    public void addPropertyChangeListener(PropertyChangeListener listener) {
+        changeSupport.addPropertyChangeListener(listener);
+    }
 
-  public void removePropertyChangeListener(PropertyChangeListener listener) {
-    changeSupport.addPropertyChangeListener(listener);
-  }
-
+    public void removePropertyChangeListener(PropertyChangeListener listener) {
+        changeSupport.addPropertyChangeListener(listener);
+    }
 }

@@ -1,8 +1,6 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ * $Id$
  */
-
 package wdp.entities;
 
 import java.beans.PropertyChangeListener;
@@ -30,10 +28,23 @@ import javax.persistence.Transient;
  */
 @Entity
 @Table(name = "PROJECT")
-@NamedQueries({@NamedQuery(name = "Project.findById", query = "SELECT p FROM Project p WHERE p.id = :id"), @NamedQuery(name = "Project.findByName", query = "SELECT p FROM Project p WHERE p.name = :name"), @NamedQuery(name = "Project.findByDescription", query = "SELECT p FROM Project p WHERE p.description = :description"), @NamedQuery(name = "Project.findByDocumentation", query = "SELECT p FROM Project p WHERE p.documentation = :documentation"), @NamedQuery(name = "Project.findByPriority", query = "SELECT p FROM Project p WHERE p.priority = :priority"), @NamedQuery(name = "Project.findByCompleted", query = "SELECT p FROM Project p WHERE p.completed = :completed"), @NamedQuery(name = "Project.findByRecurring", query = "SELECT p FROM Project p WHERE p.recurring = :recurring"), @NamedQuery(name = "Project.findByStart", query = "SELECT p FROM Project p WHERE p.start = :start"), @NamedQuery(name = "Project.findByFinish", query = "SELECT p FROM Project p WHERE p.finish = :finish"), @NamedQuery(name = "Project.findByDeadline", query = "SELECT p FROM Project p WHERE p.deadline = :deadline"), @NamedQuery(name = "Project.findByEstimation", query = "SELECT p FROM Project p WHERE p.estimation = :estimation")})
+@NamedQueries({
+    @NamedQuery(name = "Project.findById", query = "SELECT p FROM Project p WHERE p.id = :id"),
+    @NamedQuery(name = "Project.findByName", query = "SELECT p FROM Project p WHERE p.name = :name"),
+    @NamedQuery(name = "Project.findByDescription", query = "SELECT p FROM Project p WHERE p.description = :description"),
+    @NamedQuery(name = "Project.findByDocumentation", query = "SELECT p FROM Project p WHERE p.documentation = :documentation"),
+    @NamedQuery(name = "Project.findByPriority", query = "SELECT p FROM Project p WHERE p.priority = :priority"),
+    @NamedQuery(name = "Project.findByCompleted", query = "SELECT p FROM Project p WHERE p.completed = :completed"),
+    @NamedQuery(name = "Project.findByRecurring", query = "SELECT p FROM Project p WHERE p.recurring = :recurring"),
+    @NamedQuery(name = "Project.findByStarted", query = "SELECT p FROM Project p WHERE p.started = :started"),
+    @NamedQuery(name = "Project.findByFinish", query = "SELECT p FROM Project p WHERE p.finish = :finish"),
+    @NamedQuery(name = "Project.findByDeadline", query = "SELECT p FROM Project p WHERE p.deadline = :deadline"),
+    @NamedQuery(name = "Project.findByEstimation", query = "SELECT p FROM Project p WHERE p.estimation = :estimation")
+})
 public class Project implements Serializable {
-	@Transient
-	private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
+
+    @Transient
+    private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
     private static final long serialVersionUID = 1L;
     @Id
     @Column(name = "ID", nullable = false)
@@ -50,9 +61,9 @@ public class Project implements Serializable {
     private int completed;
     @Column(name = "RECURRING")
     private Short recurring;
-    @Column(name = "START")
+    @Column(name = "STARTED")
     @Temporal(TemporalType.TIMESTAMP)
-    private Date start;
+    private Date started;
     @Column(name = "FINISH")
     @Temporal(TemporalType.TIMESTAMP)
     private Date finish;
@@ -94,9 +105,9 @@ public class Project implements Serializable {
     }
 
     public void setId(Integer id) {
-		Integer oldId = this.id;
+        Integer oldId = this.id;
         this.id = id;
-		changeSupport.firePropertyChange("id", oldId, id);
+        changeSupport.firePropertyChange("id", oldId, id);
     }
 
     public String getName() {
@@ -104,9 +115,9 @@ public class Project implements Serializable {
     }
 
     public void setName(String name) {
-		String oldName = this.name;
+        String oldName = this.name;
         this.name = name;
-		changeSupport.firePropertyChange("name", oldName, name);
+        changeSupport.firePropertyChange("name", oldName, name);
     }
 
     public String getDescription() {
@@ -114,9 +125,9 @@ public class Project implements Serializable {
     }
 
     public void setDescription(String description) {
-		String oldDescription = this.description;
+        String oldDescription = this.description;
         this.description = description;
-		changeSupport.firePropertyChange("description", oldDescription, description);
+        changeSupport.firePropertyChange("description", oldDescription, description);
     }
 
     public String getDocumentation() {
@@ -124,9 +135,9 @@ public class Project implements Serializable {
     }
 
     public void setDocumentation(String documentation) {
-		String oldDocumentation = this.documentation;
+        String oldDocumentation = this.documentation;
         this.documentation = documentation;
-		changeSupport.firePropertyChange("documentation", oldDocumentation, documentation);
+        changeSupport.firePropertyChange("documentation", oldDocumentation, documentation);
     }
 
     public Integer getPriority() {
@@ -134,9 +145,9 @@ public class Project implements Serializable {
     }
 
     public void setPriority(Integer priority) {
-		Integer oldPriority = this.priority;
+        Integer oldPriority = this.priority;
         this.priority = priority;
-		changeSupport.firePropertyChange("priority", oldPriority, priority);
+        changeSupport.firePropertyChange("priority", oldPriority, priority);
     }
 
     public int getCompleted() {
@@ -144,9 +155,9 @@ public class Project implements Serializable {
     }
 
     public void setCompleted(int completed) {
-		int oldCompleted = this.completed;
+        int oldCompleted = this.completed;
         this.completed = completed;
-		changeSupport.firePropertyChange("completed", oldCompleted, completed);
+        changeSupport.firePropertyChange("completed", oldCompleted, completed);
     }
 
     public Short getRecurring() {
@@ -154,19 +165,19 @@ public class Project implements Serializable {
     }
 
     public void setRecurring(Short recurring) {
-		Short oldRecurring = this.recurring;
+        Short oldRecurring = this.recurring;
         this.recurring = recurring;
-		changeSupport.firePropertyChange("recurring", oldRecurring, recurring);
+        changeSupport.firePropertyChange("recurring", oldRecurring, recurring);
     }
 
     public Date getStart() {
-        return start;
+        return started;
     }
 
     public void setStart(Date start) {
-		Date oldStart = this.start;
-        this.start = start;
-		changeSupport.firePropertyChange("start", oldStart, start);
+        Date oldStart = this.started;
+        this.started = start;
+        changeSupport.firePropertyChange("start", oldStart, start);
     }
 
     public Date getFinish() {
@@ -174,9 +185,9 @@ public class Project implements Serializable {
     }
 
     public void setFinish(Date finish) {
-		Date oldFinish = this.finish;
+        Date oldFinish = this.finish;
         this.finish = finish;
-		changeSupport.firePropertyChange("finish", oldFinish, finish);
+        changeSupport.firePropertyChange("finish", oldFinish, finish);
     }
 
     public Date getDeadline() {
@@ -184,9 +195,9 @@ public class Project implements Serializable {
     }
 
     public void setDeadline(Date deadline) {
-		Date oldDeadline = this.deadline;
+        Date oldDeadline = this.deadline;
         this.deadline = deadline;
-		changeSupport.firePropertyChange("deadline", oldDeadline, deadline);
+        changeSupport.firePropertyChange("deadline", oldDeadline, deadline);
     }
 
     public Integer getEstimation() {
@@ -194,9 +205,9 @@ public class Project implements Serializable {
     }
 
     public void setEstimation(Integer estimation) {
-		Integer oldEstimation = this.estimation;
+        Integer oldEstimation = this.estimation;
         this.estimation = estimation;
-		changeSupport.firePropertyChange("estimation", oldEstimation, estimation);
+        changeSupport.firePropertyChange("estimation", oldEstimation, estimation);
     }
 
     public Collection<Right> getRightCollection() {
@@ -228,9 +239,9 @@ public class Project implements Serializable {
     }
 
     public void setIdCost(Cost idCost) {
-		Cost oldIdCost = this.idCost;
+        Cost oldIdCost = this.idCost;
         this.idCost = idCost;
-		changeSupport.firePropertyChange("idCost", oldIdCost, idCost);
+        changeSupport.firePropertyChange("idCost", oldIdCost, idCost);
     }
 
     public Collection<Project> getProjectCollection() {
@@ -246,9 +257,9 @@ public class Project implements Serializable {
     }
 
     public void setIdParrent(Project idParrent) {
-		Project oldIdParrent = this.idParrent;
+        Project oldIdParrent = this.idParrent;
         this.idParrent = idParrent;
-		changeSupport.firePropertyChange("idParrent", oldIdParrent, idParrent);
+        changeSupport.firePropertyChange("idParrent", oldIdParrent, idParrent);
     }
 
     @Override
@@ -274,15 +285,14 @@ public class Project implements Serializable {
     @Override
     public String toString() {
         //return "wdp.entities.Project[id=" + id + "]";
-      return name;
+        return name;
     }
 
-	public void addPropertyChangeListener(PropertyChangeListener listener) {
-		changeSupport.addPropertyChangeListener(listener);
-	}
+    public void addPropertyChangeListener(PropertyChangeListener listener) {
+        changeSupport.addPropertyChangeListener(listener);
+    }
 
-	public void removePropertyChangeListener(PropertyChangeListener listener) {
-		changeSupport.addPropertyChangeListener(listener);
-	}
-
+    public void removePropertyChangeListener(PropertyChangeListener listener) {
+        changeSupport.addPropertyChangeListener(listener);
+    }
 }

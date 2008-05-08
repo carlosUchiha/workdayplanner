@@ -1,5 +1,5 @@
 /*
- * WdpMainWindow.java
+ * $Id$
  */
 package wdp;
 
@@ -28,80 +28,80 @@ import wdp.worker.TeamEditFrame;
  */
 public class WdpMainWindow extends FrameView {
 
-	public WdpMainWindow(SingleFrameApplication app) {
-		super(app);
+    public WdpMainWindow(SingleFrameApplication app) {
+        super(app);
 
-		initComponents();
+        initComponents();
 
-		// status bar initialization - message timeout, idle icon and busy animation, etc
-		ResourceMap resourceMap = getResourceMap();
-		int messageTimeout = resourceMap.getInteger("StatusBar.messageTimeout");
-		messageTimer = new Timer(messageTimeout, new ActionListener() {
+        // status bar initialization - message timeout, idle icon and busy animation, etc
+        ResourceMap resourceMap = getResourceMap();
+        int messageTimeout = resourceMap.getInteger("StatusBar.messageTimeout");
+        messageTimer = new Timer(messageTimeout, new ActionListener() {
 
-			public void actionPerformed(ActionEvent e) {
-				statusMessageLabel.setText("");
-			}
-		});
-		messageTimer.setRepeats(false);
-		int busyAnimationRate = resourceMap.getInteger("StatusBar.busyAnimationRate");
-		for (int i = 0; i < busyIcons.length; i++) {
-			busyIcons[i] = resourceMap.getIcon("StatusBar.busyIcons[" + i + "]");
-		}
-		busyIconTimer = new Timer(busyAnimationRate, new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                statusMessageLabel.setText("");
+            }
+        });
+        messageTimer.setRepeats(false);
+        int busyAnimationRate = resourceMap.getInteger("StatusBar.busyAnimationRate");
+        for (int i = 0; i < busyIcons.length; i++) {
+            busyIcons[i] = resourceMap.getIcon("StatusBar.busyIcons[" + i + "]");
+        }
+        busyIconTimer = new Timer(busyAnimationRate, new ActionListener() {
 
-			public void actionPerformed(ActionEvent e) {
-				busyIconIndex = (busyIconIndex + 1) % busyIcons.length;
-				statusAnimationLabel.setIcon(busyIcons[busyIconIndex]);
-			}
-		});
-		idleIcon = resourceMap.getIcon("StatusBar.idleIcon");
-		statusAnimationLabel.setIcon(idleIcon);
-		progressBar.setVisible(false);
+            public void actionPerformed(ActionEvent e) {
+                busyIconIndex = (busyIconIndex + 1) % busyIcons.length;
+                statusAnimationLabel.setIcon(busyIcons[busyIconIndex]);
+            }
+        });
+        idleIcon = resourceMap.getIcon("StatusBar.idleIcon");
+        statusAnimationLabel.setIcon(idleIcon);
+        progressBar.setVisible(false);
 
-		// connecting action tasks to status bar via TaskMonitor
-		TaskMonitor taskMonitor = new TaskMonitor(getApplication().getContext());
-		taskMonitor.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+        // connecting action tasks to status bar via TaskMonitor
+        TaskMonitor taskMonitor = new TaskMonitor(getApplication().getContext());
+        taskMonitor.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
 
-			public void propertyChange(java.beans.PropertyChangeEvent evt) {
-				String propertyName = evt.getPropertyName();
-				if ("started".equals(propertyName)) {
-					if (!busyIconTimer.isRunning()) {
-						statusAnimationLabel.setIcon(busyIcons[0]);
-						busyIconIndex = 0;
-						busyIconTimer.start();
-					}
-					progressBar.setVisible(true);
-					progressBar.setIndeterminate(true);
-				} else if ("done".equals(propertyName)) {
-					busyIconTimer.stop();
-					statusAnimationLabel.setIcon(idleIcon);
-					progressBar.setVisible(false);
-					progressBar.setValue(0);
-				} else if ("message".equals(propertyName)) {
-					String text = (String) (evt.getNewValue());
-					statusMessageLabel.setText((text == null) ? "" : text);
-					messageTimer.restart();
-				} else if ("progress".equals(propertyName)) {
-					int value = (Integer) (evt.getNewValue());
-					progressBar.setVisible(true);
-					progressBar.setIndeterminate(false);
-					progressBar.setValue(value);
-				}
-			}
-		});
-    
-    initMainPane();
-	}
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                String propertyName = evt.getPropertyName();
+                if ("started".equals(propertyName)) {
+                    if (!busyIconTimer.isRunning()) {
+                        statusAnimationLabel.setIcon(busyIcons[0]);
+                        busyIconIndex = 0;
+                        busyIconTimer.start();
+                    }
+                    progressBar.setVisible(true);
+                    progressBar.setIndeterminate(true);
+                } else if ("done".equals(propertyName)) {
+                    busyIconTimer.stop();
+                    statusAnimationLabel.setIcon(idleIcon);
+                    progressBar.setVisible(false);
+                    progressBar.setValue(0);
+                } else if ("message".equals(propertyName)) {
+                    String text = (String) (evt.getNewValue());
+                    statusMessageLabel.setText((text == null) ? "" : text);
+                    messageTimer.restart();
+                } else if ("progress".equals(propertyName)) {
+                    int value = (Integer) (evt.getNewValue());
+                    progressBar.setVisible(true);
+                    progressBar.setIndeterminate(false);
+                    progressBar.setValue(value);
+                }
+            }
+        });
 
-	public boolean isSaveNeeded() {
-		return saveNeeded;
-	}
+        initMainPane();
+    }
 
-	/** This method is called from within the constructor to
-	 * initialize the form.
-	 * WARNING: Do NOT modify this code. The content of this method is
-	 * always regenerated by the Form Editor.
-	 */
+    public boolean isSaveNeeded() {
+        return saveNeeded;
+    }
+
+    /** This method is called from within the constructor to
+     * initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is
+     * always regenerated by the Form Editor.
+     */
   // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
   private void initComponents() {
 
@@ -233,108 +233,108 @@ public class WdpMainWindow extends FrameView {
     setStatusBar(statusPanel);
   }// </editor-fold>//GEN-END:initComponents
 
-  @Action
-	public void showAboutBox() {
-		if (aboutBox == null) {
-			JFrame mainFrame = WdpApp.getApplication().getMainFrame();
-			aboutBox = new WdpAboutBox(mainFrame);
-			aboutBox.setLocationRelativeTo(mainFrame);
-		}
-		WdpApp.getApplication().show(aboutBox);
-	}
-  
-  @Action
-  public void showTasksWindow() {
-    JFrame frame = new JFrame();
-		frame.setContentPane(new TaskEditFrame());
-		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-    org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(wdp.WdpApp.class).getContext().getResourceMap(WdpMainWindow.class);
-		frame.setTitle(resourceMap.getString("showTasksWindow.Action.text"));
-    frame.setIconImage(resourceMap.getImageIcon("showTasksWindow.Action.icon").getImage());
-    frame.pack();
-		frame.setVisible(true);
-		frame.setLocationRelativeTo(WdpApp.getApplication().getMainFrame());
-		WdpApp.getApplication().show(frame);
-  }
+    @Action
+    public void showAboutBox() {
+        if (aboutBox == null) {
+            JFrame mainFrame = WdpApp.getApplication().getMainFrame();
+            aboutBox = new WdpAboutBox(mainFrame);
+            aboutBox.setLocationRelativeTo(mainFrame);
+        }
+        WdpApp.getApplication().show(aboutBox);
+    }
 
-  @Action
-  public void showWorkersWindow() {
-    JFrame frame = new JFrame();
-		frame.setContentPane(new WorkerEditFrame());
-		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-    org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(wdp.WdpApp.class).getContext().getResourceMap(WdpMainWindow.class);
-		frame.setTitle(resourceMap.getString("showWorkersWindow.Action.text"));
-    frame.setIconImage(resourceMap.getImageIcon("showWorkersWindow.Action.icon").getImage());
-		frame.pack();
-		frame.setVisible(true);
-		frame.setLocationRelativeTo(WdpApp.getApplication().getMainFrame());
-		WdpApp.getApplication().show(frame);
-  }
+    @Action
+    public void showTasksWindow() {
+        JFrame frame = new JFrame();
+        frame.setContentPane(new TaskEditFrame());
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(wdp.WdpApp.class).getContext().getResourceMap(WdpMainWindow.class);
+        frame.setTitle(resourceMap.getString("showTasksWindow.Action.text"));
+        frame.setIconImage(resourceMap.getImageIcon("showTasksWindow.Action.icon").getImage());
+        frame.pack();
+        frame.setVisible(true);
+        frame.setLocationRelativeTo(WdpApp.getApplication().getMainFrame());
+        WdpApp.getApplication().show(frame);
+    }
 
-  @Action
-  public void showTeamsWindow() {
-    JFrame frame = new JFrame();
-		frame.setContentPane(new TeamEditFrame());
-		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-    org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(wdp.WdpApp.class).getContext().getResourceMap(WdpMainWindow.class);
-		frame.setTitle(resourceMap.getString("showTeamsWindow.Action.text"));
-    frame.setIconImage(resourceMap.getImageIcon("showTeamsWindow.Action.icon").getImage());
-		frame.pack();
-		frame.setVisible(true);
-		frame.setLocationRelativeTo(WdpApp.getApplication().getMainFrame());
-		WdpApp.getApplication().show(frame);
-  }
+    @Action
+    public void showWorkersWindow() {
+        JFrame frame = new JFrame();
+        frame.setContentPane(new WorkerEditFrame());
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(wdp.WdpApp.class).getContext().getResourceMap(WdpMainWindow.class);
+        frame.setTitle(resourceMap.getString("showWorkersWindow.Action.text"));
+        frame.setIconImage(resourceMap.getImageIcon("showWorkersWindow.Action.icon").getImage());
+        frame.pack();
+        frame.setVisible(true);
+        frame.setLocationRelativeTo(WdpApp.getApplication().getMainFrame());
+        WdpApp.getApplication().show(frame);
+    }
 
-  @Action
-  public void showPostsWindow() {
-    JFrame frame = new JFrame();
-		frame.setContentPane(new PostEditFrame());
-		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-    org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(wdp.WdpApp.class).getContext().getResourceMap(WdpMainWindow.class);
-		frame.setTitle(resourceMap.getString("showPostsWindow.Action.text"));
-    frame.setIconImage(resourceMap.getImageIcon("showPostsWindow.Action.icon").getImage());
-		frame.pack();
-		frame.setVisible(true);
-		frame.setLocationRelativeTo(WdpApp.getApplication().getMainFrame());
-		WdpApp.getApplication().show(frame);
-  }
+    @Action
+    public void showTeamsWindow() {
+        JFrame frame = new JFrame();
+        frame.setContentPane(new TeamEditFrame());
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(wdp.WdpApp.class).getContext().getResourceMap(WdpMainWindow.class);
+        frame.setTitle(resourceMap.getString("showTeamsWindow.Action.text"));
+        frame.setIconImage(resourceMap.getImageIcon("showTeamsWindow.Action.icon").getImage());
+        frame.pack();
+        frame.setVisible(true);
+        frame.setLocationRelativeTo(WdpApp.getApplication().getMainFrame());
+        WdpApp.getApplication().show(frame);
+    }
 
-  @Action
-  public void showCostsWindow() {
-    JFrame frame = new JFrame();
-		frame.setContentPane(new CostEditFrame());
-		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-    org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(wdp.WdpApp.class).getContext().getResourceMap(WdpMainWindow.class);
-		frame.setTitle(resourceMap.getString("showCostsWindow.Action.text"));
-    frame.setIconImage(resourceMap.getImageIcon("showCostsWindow.Action.icon").getImage());
-		frame.pack();
-		frame.setVisible(true);
-		frame.setLocationRelativeTo(WdpApp.getApplication().getMainFrame());
-		WdpApp.getApplication().show(frame);
-  }
+    @Action
+    public void showPostsWindow() {
+        JFrame frame = new JFrame();
+        frame.setContentPane(new PostEditFrame());
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(wdp.WdpApp.class).getContext().getResourceMap(WdpMainWindow.class);
+        frame.setTitle(resourceMap.getString("showPostsWindow.Action.text"));
+        frame.setIconImage(resourceMap.getImageIcon("showPostsWindow.Action.icon").getImage());
+        frame.pack();
+        frame.setVisible(true);
+        frame.setLocationRelativeTo(WdpApp.getApplication().getMainFrame());
+        WdpApp.getApplication().show(frame);
+    }
 
-  @Action
-  public void showProjectsWindow() {
-    JFrame frame = new JFrame();
-		frame.setContentPane(new ProjectEditFrame());
-		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-    org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(wdp.WdpApp.class).getContext().getResourceMap(WdpMainWindow.class);
-		frame.setTitle(resourceMap.getString("showProjectsWindow.Action.text"));
-    frame.setIconImage(resourceMap.getImageIcon("showProjectsWindow.Action.icon").getImage());
-		frame.pack();
-		frame.setVisible(true);
-		frame.setLocationRelativeTo(WdpApp.getApplication().getMainFrame());
-		WdpApp.getApplication().show(frame);
-  }
+    @Action
+    public void showCostsWindow() {
+        JFrame frame = new JFrame();
+        frame.setContentPane(new CostEditFrame());
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(wdp.WdpApp.class).getContext().getResourceMap(WdpMainWindow.class);
+        frame.setTitle(resourceMap.getString("showCostsWindow.Action.text"));
+        frame.setIconImage(resourceMap.getImageIcon("showCostsWindow.Action.icon").getImage());
+        frame.pack();
+        frame.setVisible(true);
+        frame.setLocationRelativeTo(WdpApp.getApplication().getMainFrame());
+        WdpApp.getApplication().show(frame);
+    }
 
-  @Action
-  public void showProjectTree() {
-    JFrame frame = new JFrame();
-		frame.setContentPane(new ProjectTreePane());
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.pack();
-    frame.setVisible(true);
-  }
+    @Action
+    public void showProjectsWindow() {
+        JFrame frame = new JFrame();
+        frame.setContentPane(new ProjectEditFrame());
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(wdp.WdpApp.class).getContext().getResourceMap(WdpMainWindow.class);
+        frame.setTitle(resourceMap.getString("showProjectsWindow.Action.text"));
+        frame.setIconImage(resourceMap.getImageIcon("showProjectsWindow.Action.icon").getImage());
+        frame.pack();
+        frame.setVisible(true);
+        frame.setLocationRelativeTo(WdpApp.getApplication().getMainFrame());
+        WdpApp.getApplication().show(frame);
+    }
+
+    @Action
+    public void showProjectTree() {
+        JFrame frame = new JFrame();
+        frame.setContentPane(new ProjectTreePane());
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.pack();
+        frame.setVisible(true);
+    }
 
   // Variables declaration - do not modify//GEN-BEGIN:variables
   private javax.swing.JMenuItem jMenuItemCosts;
@@ -351,16 +351,16 @@ public class WdpMainWindow extends FrameView {
   private javax.swing.JLabel statusMessageLabel;
   private javax.swing.JPanel statusPanel;
   // End of variables declaration//GEN-END:variables
-	private final Timer messageTimer;
-	private final Timer busyIconTimer;
-	private final Icon idleIcon;
-	private final Icon[] busyIcons = new Icon[15];
-	private int busyIconIndex = 0;
-	private JDialog aboutBox;
-	private boolean saveNeeded;
+    private final Timer messageTimer;
+    private final Timer busyIconTimer;
+    private final Icon idleIcon;
+    private final Icon[] busyIcons = new Icon[15];
+    private int busyIconIndex = 0;
+    private JDialog aboutBox;
+    private boolean saveNeeded;
 
-  private void initMainPane() {
-    ProjectAndTaskFrame projectAndTaskFrame = new ProjectAndTaskFrame();
-    setComponent(projectAndTaskFrame);
-  }
+    private void initMainPane() {
+        ProjectAndTaskFrame projectAndTaskFrame = new ProjectAndTaskFrame();
+        setComponent(projectAndTaskFrame);
+    }
 }

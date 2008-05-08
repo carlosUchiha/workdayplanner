@@ -1,8 +1,6 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ * $Id$
  */
-
 package wdp.entities;
 
 import java.beans.PropertyChangeListener;
@@ -31,24 +29,26 @@ import javax.persistence.Transient;
 @Entity
 @Table(name = "WORKER")
 @NamedQueries({
-    @NamedQuery(name = "Worker.findById", query = "SELECT w FROM Worker w WHERE w.id = :id"), 
-    @NamedQuery(name = "Worker.findByFirstname", query = "SELECT w FROM Worker w WHERE w.firstname = :firstname"), 
-    @NamedQuery(name = "Worker.findBySurname", query = "SELECT w FROM Worker w WHERE w.surname = :surname"), 
-    @NamedQuery(name = "Worker.findByBirthday", query = "SELECT w FROM Worker w WHERE w.birthday = :birthday"), 
-    @NamedQuery(name = "Worker.findByEmail", query = "SELECT w FROM Worker w WHERE w.email = :email"), 
-    @NamedQuery(name = "Worker.findByWww", query = "SELECT w FROM Worker w WHERE w.www = :www"), 
-    @NamedQuery(name = "Worker.findByTelWork", query = "SELECT w FROM Worker w WHERE w.telWork = :telWork"), 
-    @NamedQuery(name = "Worker.findByTelMobile", query = "SELECT w FROM Worker w WHERE w.telMobile = :telMobile"), 
-    @NamedQuery(name = "Worker.findByTelHome", query = "SELECT w FROM Worker w WHERE w.telHome = :telHome"), 
-    @NamedQuery(name = "Worker.findByIm1", query = "SELECT w FROM Worker w WHERE w.im1 = :im1"), 
-    @NamedQuery(name = "Worker.findByIm2", query = "SELECT w FROM Worker w WHERE w.im2 = :im2"), 
-    @NamedQuery(name = "Worker.findByIm3", query = "SELECT w FROM Worker w WHERE w.im3 = :im3"), 
-    @NamedQuery(name = "Worker.findByOffice", query = "SELECT w FROM Worker w WHERE w.office = :office"), 
-    @NamedQuery(name = "Worker.findByLoginName", query = "SELECT w FROM Worker w WHERE w.loginName = :loginName"), 
-    @NamedQuery(name = "Worker.findByLoginPassword", query = "SELECT w FROM Worker w WHERE w.loginPassword = :loginPassword"), 
-    @NamedQuery(name = "Worker.findByHired", query = "SELECT w FROM Worker w WHERE w.hired = :hired"), 
-    @NamedQuery(name = "Worker.findByFired", query = "SELECT w FROM Worker w WHERE w.fired = :fired")})
+    @NamedQuery(name = "Worker.findById", query = "SELECT w FROM Worker w WHERE w.id = :id"),
+    @NamedQuery(name = "Worker.findByFirstname", query = "SELECT w FROM Worker w WHERE w.firstname = :firstname"),
+    @NamedQuery(name = "Worker.findBySurname", query = "SELECT w FROM Worker w WHERE w.surname = :surname"),
+    @NamedQuery(name = "Worker.findByBirthday", query = "SELECT w FROM Worker w WHERE w.birthday = :birthday"),
+    @NamedQuery(name = "Worker.findByEmail", query = "SELECT w FROM Worker w WHERE w.email = :email"),
+    @NamedQuery(name = "Worker.findByWww", query = "SELECT w FROM Worker w WHERE w.www = :www"),
+    @NamedQuery(name = "Worker.findByTelWork", query = "SELECT w FROM Worker w WHERE w.telWork = :telWork"),
+    @NamedQuery(name = "Worker.findByTelMobile", query = "SELECT w FROM Worker w WHERE w.telMobile = :telMobile"),
+    @NamedQuery(name = "Worker.findByTelHome", query = "SELECT w FROM Worker w WHERE w.telHome = :telHome"),
+    @NamedQuery(name = "Worker.findByIm1", query = "SELECT w FROM Worker w WHERE w.im1 = :im1"),
+    @NamedQuery(name = "Worker.findByIm2", query = "SELECT w FROM Worker w WHERE w.im2 = :im2"),
+    @NamedQuery(name = "Worker.findByIm3", query = "SELECT w FROM Worker w WHERE w.im3 = :im3"),
+    @NamedQuery(name = "Worker.findByOffice", query = "SELECT w FROM Worker w WHERE w.office = :office"),
+    @NamedQuery(name = "Worker.findByLoginName", query = "SELECT w FROM Worker w WHERE w.loginName = :loginName"),
+    @NamedQuery(name = "Worker.findByLoginPassword", query = "SELECT w FROM Worker w WHERE w.loginPassword = :loginPassword"),
+    @NamedQuery(name = "Worker.findByHired", query = "SELECT w FROM Worker w WHERE w.hired = :hired"),
+    @NamedQuery(name = "Worker.findByFired", query = "SELECT w FROM Worker w WHERE w.fired = :fired")
+})
 public class Worker implements Serializable {
+
     @Transient
     private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
     private static final long serialVersionUID = 1L;
@@ -397,7 +397,7 @@ public class Worker implements Serializable {
     @Override
     public String toString() {
         //return "wdp.entities.Worker[id=" + id + "]";
-      return firstname+" "+surname;
+        return firstname + " " + surname;
     }
 
     public void addPropertyChangeListener(PropertyChangeListener listener) {
@@ -407,5 +407,4 @@ public class Worker implements Serializable {
     public void removePropertyChangeListener(PropertyChangeListener listener) {
         changeSupport.addPropertyChangeListener(listener);
     }
-
 }

@@ -1,8 +1,6 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ * $Id$
  */
-
 package wdp.entities;
 
 import java.beans.PropertyChangeListener;
@@ -25,10 +23,14 @@ import javax.persistence.Transient;
  */
 @Entity
 @Table(name = "POST")
-@NamedQueries({@NamedQuery(name = "Post.findById", query = "SELECT p FROM Post p WHERE p.id = :id"), @NamedQuery(name = "Post.findByName", query = "SELECT p FROM Post p WHERE p.name = :name")})
+@NamedQueries({
+    @NamedQuery(name = "Post.findById", query = "SELECT p FROM Post p WHERE p.id = :id"),
+    @NamedQuery(name = "Post.findByName", query = "SELECT p FROM Post p WHERE p.name = :name")
+})
 public class Post implements Serializable {
-	@Transient
-	private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
+
+    @Transient
+    private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
     private static final long serialVersionUID = 1L;
     @Id
     @Column(name = "ID", nullable = false)
@@ -57,9 +59,9 @@ public class Post implements Serializable {
     }
 
     public void setId(Integer id) {
-		Integer oldId = this.id;
+        Integer oldId = this.id;
         this.id = id;
-		changeSupport.firePropertyChange("id", oldId, id);
+        changeSupport.firePropertyChange("id", oldId, id);
     }
 
     public String getName() {
@@ -67,9 +69,9 @@ public class Post implements Serializable {
     }
 
     public void setName(String name) {
-		String oldName = this.name;
+        String oldName = this.name;
         this.name = name;
-		changeSupport.firePropertyChange("name", oldName, name);
+        changeSupport.firePropertyChange("name", oldName, name);
     }
 
     public Collection<Assignment> getAssignmentCollection() {
@@ -111,15 +113,14 @@ public class Post implements Serializable {
     @Override
     public String toString() {
         //return "wdp.entities.Post[id=" + id + "]";
-      return name;
+        return name;
     }
 
-	public void addPropertyChangeListener(PropertyChangeListener listener) {
-		changeSupport.addPropertyChangeListener(listener);
-	}
+    public void addPropertyChangeListener(PropertyChangeListener listener) {
+        changeSupport.addPropertyChangeListener(listener);
+    }
 
-	public void removePropertyChangeListener(PropertyChangeListener listener) {
-		changeSupport.addPropertyChangeListener(listener);
-	}
-
+    public void removePropertyChangeListener(PropertyChangeListener listener) {
+        changeSupport.addPropertyChangeListener(listener);
+    }
 }

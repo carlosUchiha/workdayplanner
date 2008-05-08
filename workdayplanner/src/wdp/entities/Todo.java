@@ -1,8 +1,6 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ * $Id$
  */
-
 package wdp.entities;
 
 import java.beans.PropertyChangeListener;
@@ -22,10 +20,15 @@ import javax.persistence.Transient;
  */
 @Entity
 @Table(name = "TODO")
-@NamedQueries({@NamedQuery(name = "Todo.findById", query = "SELECT t FROM Todo t WHERE t.id = :id"), @NamedQuery(name = "Todo.findByIdProject", query = "SELECT t FROM Todo t WHERE t.idProject = :idProject"), @NamedQuery(name = "Todo.findByIdWorker", query = "SELECT t FROM Todo t WHERE t.idWorker = :idWorker")})
+@NamedQueries({
+    @NamedQuery(name = "Todo.findById", query = "SELECT t FROM Todo t WHERE t.id = :id"),
+    @NamedQuery(name = "Todo.findByIdProject", query = "SELECT t FROM Todo t WHERE t.idProject = :idProject"),
+    @NamedQuery(name = "Todo.findByIdWorker", query = "SELECT t FROM Todo t WHERE t.idWorker = :idWorker")
+})
 public class Todo implements Serializable {
-  @Transient
-  private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
+
+    @Transient
+    private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
     private static final long serialVersionUID = 1L;
     @Id
     @Column(name = "ID", nullable = false)
@@ -53,9 +56,9 @@ public class Todo implements Serializable {
     }
 
     public void setId(Integer id) {
-    Integer oldId = this.id;
+        Integer oldId = this.id;
         this.id = id;
-    changeSupport.firePropertyChange("id", oldId, id);
+        changeSupport.firePropertyChange("id", oldId, id);
     }
 
     public int getIdProject() {
@@ -63,9 +66,9 @@ public class Todo implements Serializable {
     }
 
     public void setIdProject(int idProject) {
-    int oldIdProject = this.idProject;
+        int oldIdProject = this.idProject;
         this.idProject = idProject;
-    changeSupport.firePropertyChange("idProject", oldIdProject, idProject);
+        changeSupport.firePropertyChange("idProject", oldIdProject, idProject);
     }
 
     public int getIdWorker() {
@@ -73,9 +76,9 @@ public class Todo implements Serializable {
     }
 
     public void setIdWorker(int idWorker) {
-    int oldIdWorker = this.idWorker;
+        int oldIdWorker = this.idWorker;
         this.idWorker = idWorker;
-    changeSupport.firePropertyChange("idWorker", oldIdWorker, idWorker);
+        changeSupport.firePropertyChange("idWorker", oldIdWorker, idWorker);
     }
 
     @Override
@@ -103,12 +106,11 @@ public class Todo implements Serializable {
         return "wdp.entities.Todo[id=" + id + "]";
     }
 
-  public void addPropertyChangeListener(PropertyChangeListener listener) {
-    changeSupport.addPropertyChangeListener(listener);
-  }
+    public void addPropertyChangeListener(PropertyChangeListener listener) {
+        changeSupport.addPropertyChangeListener(listener);
+    }
 
-  public void removePropertyChangeListener(PropertyChangeListener listener) {
-    changeSupport.addPropertyChangeListener(listener);
-  }
-
+    public void removePropertyChangeListener(PropertyChangeListener listener) {
+        changeSupport.addPropertyChangeListener(listener);
+    }
 }

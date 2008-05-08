@@ -1,8 +1,6 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ * $Id$
  */
-
 package wdp.entities;
 
 import java.io.Serializable;
@@ -24,8 +22,17 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "NOTE")
-@NamedQueries({@NamedQuery(name = "Note.findById", query = "SELECT n FROM Note n WHERE n.id = :id"), @NamedQuery(name = "Note.findByTitle", query = "SELECT n FROM Note n WHERE n.title = :title"), @NamedQuery(name = "Note.findByDescription", query = "SELECT n FROM Note n WHERE n.description = :description"), @NamedQuery(name = "Note.findByCreated", query = "SELECT n FROM Note n WHERE n.created = :created"), @NamedQuery(name = "Note.findByTypename", query = "SELECT n FROM Note n WHERE n.typename = :typename"), @NamedQuery(name = "Note.findByIdPosition", query = "SELECT n FROM Note n WHERE n.idPosition = :idPosition"), @NamedQuery(name = "Note.findByPrivateOnly", query = "SELECT n FROM Note n WHERE n.privateOnly = :privateOnly")})
+@NamedQueries({
+    @NamedQuery(name = "Note.findById", query = "SELECT n FROM Note n WHERE n.id = :id"),
+    @NamedQuery(name = "Note.findByTitle", query = "SELECT n FROM Note n WHERE n.title = :title"),
+    @NamedQuery(name = "Note.findByDescription", query = "SELECT n FROM Note n WHERE n.description = :description"),
+    @NamedQuery(name = "Note.findByCreated", query = "SELECT n FROM Note n WHERE n.created = :created"),
+    @NamedQuery(name = "Note.findByTypename", query = "SELECT n FROM Note n WHERE n.typename = :typename"),
+    @NamedQuery(name = "Note.findByIdPosition", query = "SELECT n FROM Note n WHERE n.idPosition = :idPosition"),
+    @NamedQuery(name = "Note.findByPrivateOnly", query = "SELECT n FROM Note n WHERE n.privateOnly = :privateOnly")
+})
 public class Note implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @Column(name = "ID", nullable = false)
@@ -150,5 +157,4 @@ public class Note implements Serializable {
     public String toString() {
         return "wdp.entities.Note[id=" + id + "]";
     }
-
 }

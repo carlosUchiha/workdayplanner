@@ -1,8 +1,6 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ * $Id$
  */
-
 package wdp.entities;
 
 import java.io.Serializable;
@@ -21,8 +19,15 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "OPERATION")
-@NamedQueries({@NamedQuery(name = "Operation.findById", query = "SELECT o FROM Operation o WHERE o.id = :id"), @NamedQuery(name = "Operation.findByOperationName", query = "SELECT o FROM Operation o WHERE o.operationName = :operationName"), @NamedQuery(name = "Operation.findByLogging", query = "SELECT o FROM Operation o WHERE o.logging = :logging"), @NamedQuery(name = "Operation.findByIsRead", query = "SELECT o FROM Operation o WHERE o.isRead = :isRead"), @NamedQuery(name = "Operation.findByIsWrite", query = "SELECT o FROM Operation o WHERE o.isWrite = :isWrite")})
+@NamedQueries({
+    @NamedQuery(name = "Operation.findById", query = "SELECT o FROM Operation o WHERE o.id = :id"),
+    @NamedQuery(name = "Operation.findByOperationName", query = "SELECT o FROM Operation o WHERE o.operationName = :operationName"),
+    @NamedQuery(name = "Operation.findByLogging", query = "SELECT o FROM Operation o WHERE o.logging = :logging"),
+    @NamedQuery(name = "Operation.findByIsRead", query = "SELECT o FROM Operation o WHERE o.isRead = :isRead"),
+    @NamedQuery(name = "Operation.findByIsWrite", query = "SELECT o FROM Operation o WHERE o.isWrite = :isWrite")
+})
 public class Operation implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @Column(name = "ID", nullable = false)
@@ -117,5 +122,4 @@ public class Operation implements Serializable {
     public String toString() {
         return "wdp.entities.Operation[id=" + id + "]";
     }
-
 }

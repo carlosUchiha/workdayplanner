@@ -1,8 +1,6 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ * $Id$
  */
-
 package wdp.entities;
 
 import java.beans.PropertyChangeListener;
@@ -24,10 +22,14 @@ import javax.persistence.Transient;
  */
 @Entity
 @Table(name = "RIGHT")
-@NamedQueries({@NamedQuery(name = "Right.findById", query = "SELECT r FROM Right r WHERE r.id = :id"), @NamedQuery(name = "Right.findByAllowed", query = "SELECT r FROM Right r WHERE r.allowed = :allowed")})
+@NamedQueries({
+    @NamedQuery(name = "Right.findById", query = "SELECT r FROM Right r WHERE r.id = :id"),
+    @NamedQuery(name = "Right.findByAllowed", query = "SELECT r FROM Right r WHERE r.allowed = :allowed")
+})
 public class Right implements Serializable {
-  @Transient
-  private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
+
+    @Transient
+    private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
     private static final long serialVersionUID = 1L;
     @Id
     @Column(name = "ID", nullable = false)
@@ -56,9 +58,9 @@ public class Right implements Serializable {
     }
 
     public void setId(Integer id) {
-    Integer oldId = this.id;
+        Integer oldId = this.id;
         this.id = id;
-    changeSupport.firePropertyChange("id", oldId, id);
+        changeSupport.firePropertyChange("id", oldId, id);
     }
 
     public Short getAllowed() {
@@ -66,9 +68,9 @@ public class Right implements Serializable {
     }
 
     public void setAllowed(Short allowed) {
-    Short oldAllowed = this.allowed;
+        Short oldAllowed = this.allowed;
         this.allowed = allowed;
-    changeSupport.firePropertyChange("allowed", oldAllowed, allowed);
+        changeSupport.firePropertyChange("allowed", oldAllowed, allowed);
     }
 
     public Operation getIdOperation() {
@@ -76,9 +78,9 @@ public class Right implements Serializable {
     }
 
     public void setIdOperation(Operation idOperation) {
-    Operation oldIdOperation = this.idOperation;
+        Operation oldIdOperation = this.idOperation;
         this.idOperation = idOperation;
-    changeSupport.firePropertyChange("idOperation", oldIdOperation, idOperation);
+        changeSupport.firePropertyChange("idOperation", oldIdOperation, idOperation);
     }
 
     public Project getIdProject() {
@@ -86,9 +88,9 @@ public class Right implements Serializable {
     }
 
     public void setIdProject(Project idProject) {
-    Project oldIdProject = this.idProject;
+        Project oldIdProject = this.idProject;
         this.idProject = idProject;
-    changeSupport.firePropertyChange("idProject", oldIdProject, idProject);
+        changeSupport.firePropertyChange("idProject", oldIdProject, idProject);
     }
 
     public Worker getIdWorker() {
@@ -96,9 +98,9 @@ public class Right implements Serializable {
     }
 
     public void setIdWorker(Worker idWorker) {
-    Worker oldIdWorker = this.idWorker;
+        Worker oldIdWorker = this.idWorker;
         this.idWorker = idWorker;
-    changeSupport.firePropertyChange("idWorker", oldIdWorker, idWorker);
+        changeSupport.firePropertyChange("idWorker", oldIdWorker, idWorker);
     }
 
     @Override
@@ -126,12 +128,11 @@ public class Right implements Serializable {
         return "wdp.entities.Right[id=" + id + "]";
     }
 
-  public void addPropertyChangeListener(PropertyChangeListener listener) {
-    changeSupport.addPropertyChangeListener(listener);
-  }
+    public void addPropertyChangeListener(PropertyChangeListener listener) {
+        changeSupport.addPropertyChangeListener(listener);
+    }
 
-  public void removePropertyChangeListener(PropertyChangeListener listener) {
-    changeSupport.addPropertyChangeListener(listener);
-  }
-
+    public void removePropertyChangeListener(PropertyChangeListener listener) {
+        changeSupport.addPropertyChangeListener(listener);
+    }
 }
