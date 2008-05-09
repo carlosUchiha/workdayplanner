@@ -62,11 +62,13 @@ public class TaskEditPane extends javax.swing.JPanel {
         jLabel1.setText(resourceMap.getString("jLabel1.text")); // NOI18N
         jLabel1.setName("jLabel1"); // NOI18N
 
+        jDateChooserStart.setDateFormatString(resourceMap.getString("jDateChooserStart.dateFormatString")); // NOI18N
         jDateChooserStart.setName("jDateChooserStart"); // NOI18N
 
         jLabel2.setText(resourceMap.getString("jLabel2.text")); // NOI18N
         jLabel2.setName("jLabel2"); // NOI18N
 
+        jDateChooserFinish.setDateFormatString(resourceMap.getString("jDateChooserFinish.dateFormatString")); // NOI18N
         jDateChooserFinish.setName("jDateChooserFinish"); // NOI18N
 
         jLabel3.setText(resourceMap.getString("jLabel3.text")); // NOI18N
