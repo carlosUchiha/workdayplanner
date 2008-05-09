@@ -114,6 +114,7 @@
     </Component>
     <Component class="com.toedter.calendar.JDateChooser" name="jDateChooserStart">
       <Properties>
+        <Property name="dateFormatString" type="java.lang.String" resourceKey="jDateChooserStart.dateFormatString"/>
         <Property name="name" type="java.lang.String" value="jDateChooserStart" noResource="true"/>
       </Properties>
     </Component>
@@ -125,6 +126,7 @@
     </Component>
     <Component class="com.toedter.calendar.JDateChooser" name="jDateChooserFinish">
       <Properties>
+        <Property name="dateFormatString" type="java.lang.String" resourceKey="jDateChooserFinish.dateFormatString"/>
         <Property name="name" type="java.lang.String" value="jDateChooserFinish" noResource="true"/>
       </Properties>
     </Component>

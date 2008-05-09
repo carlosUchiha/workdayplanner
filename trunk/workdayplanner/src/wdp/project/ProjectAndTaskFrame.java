@@ -219,7 +219,8 @@ public class ProjectAndTaskFrame extends javax.swing.JPanel {
             @Override
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 if (evt.getClickCount() >= 2) {
-                    addTask();
+                    if(projectTreePane.getSelected() != null)
+                        addTask();
                 }
             }
         });
