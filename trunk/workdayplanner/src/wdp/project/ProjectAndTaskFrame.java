@@ -238,7 +238,9 @@ public class ProjectAndTaskFrame extends javax.swing.JPanel {
 
     private void addTask() {
         Task aTask = new Task(projectTreePane.getSelected());
-        aTask.setStarted(new Date());
+        Task lastTask = taskListPane.getLastTask();
+        Date startDate = lastTask.getFinish();
+        aTask.setStarted(startDate);
         aTask.setIdWorker(WdpApp.getApplication().getSession().getWorker());
         Task tmpTask = TaskEditPane.showTaskEditWindow(aTask);
         if(tmpTask != null)

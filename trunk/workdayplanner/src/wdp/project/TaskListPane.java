@@ -6,7 +6,9 @@ package wdp.project;
 import java.awt.EventQueue;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.event.ListSelectionEvent;
@@ -15,6 +17,8 @@ import wdp.TimeCellRenderer;
 import wdp.entities.Task;
 
 public class TaskListPane extends JPanel {
+    
+    Logger log = Logger.getLogger(TaskListPane.class.getName());
 
     public TaskListPane() {
         initComponents();
@@ -49,21 +53,22 @@ public class TaskListPane extends JPanel {
 
         masterScrollPane.setName("masterScrollPane"); // NOI18N
 
+        masterTable.setColumnSelectionAllowed(true);
         masterTable.setName("masterTable"); // NOI18N
 
         org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, list, masterTable);
-        org.jdesktop.swingbinding.JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${description}"));
-        columnBinding.setColumnName("Description");
-        columnBinding.setColumnClass(String.class);
+        org.jdesktop.swingbinding.JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${idProject}"));
+        columnBinding.setColumnName("Id Project");
+        columnBinding.setColumnClass(wdp.entities.Project.class);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${started}"));
         columnBinding.setColumnName("Started");
         columnBinding.setColumnClass(java.util.Date.class);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${finish}"));
         columnBinding.setColumnName("Finish");
         columnBinding.setColumnClass(java.util.Date.class);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${idProject}"));
-        columnBinding.setColumnName("Id Project");
-        columnBinding.setColumnClass(wdp.entities.Project.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${description}"));
+        columnBinding.setColumnName("Description");
+        columnBinding.setColumnClass(String.class);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${currentEstimation}"));
         columnBinding.setColumnName("Current Estimation");
         columnBinding.setColumnClass(Integer.class);
@@ -71,12 +76,16 @@ public class TaskListPane extends JPanel {
         jTableBinding.bind();
         masterScrollPane.setViewportView(masterTable);
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(wdp.WdpApp.class).getContext().getResourceMap(TaskListPane.class);
-        masterTable.getColumnModel().getColumn(0).setHeaderValue(resourceMap.getString("masterTable.columnModel.title0")); // NOI18N
+        masterTable.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        masterTable.getColumnModel().getColumn(0).setHeaderValue(resourceMap.getString("masterTable.columnModel.title3")); // NOI18N
+        masterTable.getColumnModel().getColumn(1).setPreferredWidth(40);
         masterTable.getColumnModel().getColumn(1).setHeaderValue(resourceMap.getString("masterTable.columnModel.title1")); // NOI18N
         masterTable.getColumnModel().getColumn(1).setCellRenderer(new TimeCellRenderer());
+        masterTable.getColumnModel().getColumn(2).setPreferredWidth(40);
         masterTable.getColumnModel().getColumn(2).setHeaderValue(resourceMap.getString("masterTable.columnModel.title2")); // NOI18N
         masterTable.getColumnModel().getColumn(2).setCellRenderer(new TimeCellRenderer());
-        masterTable.getColumnModel().getColumn(3).setHeaderValue(resourceMap.getString("masterTable.columnModel.title3")); // NOI18N
+        masterTable.getColumnModel().getColumn(3).setHeaderValue(resourceMap.getString("masterTable.columnModel.title0")); // NOI18N
+        masterTable.getColumnModel().getColumn(4).setPreferredWidth(15);
         masterTable.getColumnModel().getColumn(4).setHeaderValue(resourceMap.getString("masterTable.columnModel.title4")); // NOI18N
 
         saveButton.setText(resourceMap.getString("saveButton.text")); // NOI18N
@@ -116,7 +125,7 @@ public class TaskListPane extends JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(saveButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jDateChooserToday, javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE)))
+                        .addComponent(jDateChooserToday, javax.swing.GroupLayout.DEFAULT_SIZE, 214, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -168,6 +177,7 @@ public class TaskListPane extends JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private class TableSelectionListener implements ListSelectionListener {
+
         @Override
         public void valueChanged(ListSelectionEvent e) {
             if (e.getSource() == masterTable.getSelectionModel()) {
@@ -216,7 +226,7 @@ public class TaskListPane extends JPanel {
                   "' AND '" +
                   new SimpleDateFormat("yyyy-MM-dd 23:59:59").format(jDateChooserToday.getDate()) +
                   "'";
-          System.out.println(qString);
+          log.fine(qString);
           query = entityManager.createQuery(qString);
           entityManager.getTransaction().rollback();
           entityManager.getTransaction().begin();
@@ -238,6 +248,29 @@ public class TaskListPane extends JPanel {
         masterTable.scrollRectToVisible(masterTable.getCellRect(row, 0, true));
     }
 
+    public Task getLastTask() {
+        Date day = jDateChooserToday.getDate();
+        if(day == null)
+            day = new Date();
+        String qString = "SELECT FIRST 1 t FROM Task t WHERE t.started BETWEEN '" +
+                new SimpleDateFormat("yyyy-MM-dd 00:00:00").format(day) +
+                "' AND '" +
+                new SimpleDateFormat("yyyy-MM-dd 23:59:59").format(day) +
+                "' ORDER BY t.started DESC";
+        qString = "SELECT FIRST 1 * FROM Task WHERE t.started BETWEEN '" +
+                 new SimpleDateFormat("yyyy-MM-dd 00:00:00").format(day) +
+                "' AND '" +
+                new SimpleDateFormat("yyyy-MM-dd 23:59:59").format(day) +
+                "' ORDER BY started DESC";
+        log.fine(qString);
+        query = entityManager.createNativeQuery(qString, Task.class);
+        //query = entityManager.createQuery(qString);
+        entityManager.getTransaction().rollback();
+        entityManager.getTransaction().begin();
+        log.fine("Wybrane ostatnie: "+query.getSingleResult());
+        return (Task)query.getSingleResult();
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton deleteButton;
     private javax.persistence.EntityManager entityManager;
@@ -254,6 +287,7 @@ public class TaskListPane extends JPanel {
 
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
+
             @Override
             public void run() {
                 JFrame frame = new JFrame();
