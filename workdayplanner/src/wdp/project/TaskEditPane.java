@@ -163,6 +163,7 @@ public class TaskEditPane extends javax.swing.JPanel {
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCancel;
     private javax.swing.JButton jButtonOk;
@@ -217,6 +218,7 @@ public class TaskEditPane extends javax.swing.JPanel {
         value.setFinish(jDateChooserFinish.getDate());
         exitState = SelectWinExitState.ACCEPT;
         this.setVisible(false);
+        firePropertyChange("visible", true, false);
     }
 
     @Action
@@ -224,15 +226,25 @@ public class TaskEditPane extends javax.swing.JPanel {
         value = null;
         exitState = SelectWinExitState.CANCEL;
         this.setVisible(false);
+        firePropertyChange("visible", true, false);
     }
 
     public static Task showTaskEditWindow(Task aTask) {
         TaskEditPane pane = new TaskEditPane(aTask);
-        JDialog frame = new JDialog();
+        final JDialog frame = new JDialog();
         frame.setContentPane(pane);
         frame.pack();
         frame.setModal(true);
         frame.setLocationRelativeTo(WdpApp.getApplication().getMainFrame());
+        pane.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            @Override
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                if (evt.getPropertyName().equals("visible")) {
+                    System.out.println("panel niewidoczny: ");
+                    frame.setVisible(false);
+                }
+            }
+        });
         WdpApp.getApplication().show(frame);
         if(pane.exitState == SelectWinExitState.ACCEPT)
             return pane.getTask();
