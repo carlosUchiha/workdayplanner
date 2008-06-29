@@ -14,7 +14,7 @@ import wdp.entities.Project;
  *
  * @author  Robson
  */
-public class JProject extends javax.swing.JPanel {
+public class JProject extends javax.swing.JComponent {
 
     /** Creates new form JProject */
     public JProject() {
@@ -66,7 +66,7 @@ public class JProject extends javax.swing.JPanel {
             jTextFieldValue.setText("");
             jTextFieldValue.setToolTipText("");
         }
-        changeSupport.firePropertyChange("object", oldValue, object);
+        //changeSupport.firePropertyChange("object", oldValue, object);
     }
 
     @Override
@@ -75,7 +75,7 @@ public class JProject extends javax.swing.JPanel {
         jButtonSelect.setEnabled(aEnabled);
     }
 
-    @Override
+    /*@Override
     public void addPropertyChangeListener(PropertyChangeListener listener) {
         changeSupport.addPropertyChangeListener(listener);
     }
@@ -83,7 +83,7 @@ public class JProject extends javax.swing.JPanel {
     @Override
     public void removePropertyChangeListener(PropertyChangeListener listener) {
         changeSupport.addPropertyChangeListener(listener);
-    }
+    }*/
 
     @Action
     public void showProjectsListWindow() {
@@ -93,6 +93,6 @@ public class JProject extends javax.swing.JPanel {
   private javax.swing.JTextField jTextFieldValue;
   // End of variables declaration//GEN-END:variables
     private Project object = null;
-    @Transient
-    private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
+    //@Transient
+    //private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
 }

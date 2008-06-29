@@ -233,7 +233,8 @@ public class TaskListPane extends JPanel {
 private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editButtonActionPerformed
     Task t = list.get(masterTable.convertRowIndexToModel(masterTable.getSelectedRow()));
     t = TaskEditPane.showTaskEditWindow(t);
-    entityManager.persist(t);
+    if(t!=null)
+        entityManager.persist(t);
     refreshTable();
 }//GEN-LAST:event_editButtonActionPerformed
 

@@ -37,12 +37,12 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jTextFieldProject" alignment="0" pref="324" max="32767" attributes="0"/>
                           <Component id="jDateChooserStart" alignment="0" pref="324" max="32767" attributes="0"/>
                           <Component id="jDateChooserFinish" alignment="0" pref="324" max="32767" attributes="0"/>
                           <Component id="jTextFieldEstimation" alignment="0" pref="324" max="32767" attributes="0"/>
                           <Component id="jTextFieldMood" alignment="1" pref="324" max="32767" attributes="0"/>
                           <Component id="jScrollPane1" alignment="0" pref="324" max="32767" attributes="0"/>
+                          <Component id="jProject" alignment="0" pref="324" max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -54,9 +54,9 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jLabelProject" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jTextFieldProject" alignment="3" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Component id="jLabelProject" min="-2" max="-2" attributes="0"/>
+                  <Component id="jProject" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
@@ -98,12 +98,6 @@
       <Properties>
         <Property name="text" type="java.lang.String" resourceKey="jLabelProject.text"/>
         <Property name="name" type="java.lang.String" value="jLabelProject" noResource="true"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="jTextFieldProject">
-      <Properties>
-        <Property name="text" type="java.lang.String" resourceKey="jTextFieldProject.text"/>
-        <Property name="name" type="java.lang.String" value="jTextFieldProject" noResource="true"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">
@@ -190,6 +184,11 @@
         </Property>
         <Property name="text" type="java.lang.String" resourceKey="jButtonOk.text"/>
         <Property name="name" type="java.lang.String" value="jButtonOk" noResource="true"/>
+      </Properties>
+    </Component>
+    <Component class="wdp.project.JProject" name="jProject">
+      <Properties>
+        <Property name="name" type="java.lang.String" value="jProject" noResource="true"/>
       </Properties>
     </Component>
   </SubComponents>
