@@ -17,7 +17,7 @@ import wdp.TimeCellRenderer;
 import wdp.entities.Task;
 
 public class TaskListPane extends JPanel {
-    
+
     Logger log = Logger.getLogger(TaskListPane.class.getName());
 
     public TaskListPane() {
@@ -39,15 +39,18 @@ public class TaskListPane extends JPanel {
         entityManager = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory("db.fdbPU").createEntityManager();
         query = java.beans.Beans.isDesignTime() ? null : entityManager.createQuery("SELECT t FROM Task t WHERE t.started IS NOT NULL");
         list = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : org.jdesktop.observablecollections.ObservableCollections.observableList(query.getResultList());
+        jPopupMenu1 = new javax.swing.JPopupMenu();
         masterScrollPane = new javax.swing.JScrollPane();
         masterTable = new javax.swing.JTable();
         saveButton = new javax.swing.JButton();
         refreshButton = new javax.swing.JButton();
-        newButton = new javax.swing.JButton();
+        editButton = new javax.swing.JButton();
         deleteButton = new javax.swing.JButton();
         jDateChooserToday = new com.toedter.calendar.JDateChooser();
 
         FormListener formListener = new FormListener();
+
+        jPopupMenu1.setName("jPopupMenu1"); // NOI18N
 
         setName("Form"); // NOI18N
 
@@ -96,9 +99,9 @@ public class TaskListPane extends JPanel {
         refreshButton.setName("refreshButton"); // NOI18N
         refreshButton.addActionListener(formListener);
 
-        newButton.setText(resourceMap.getString("newButton.text")); // NOI18N
-        newButton.setName("newButton"); // NOI18N
-        newButton.addActionListener(formListener);
+        editButton.setText(resourceMap.getString("editButton.text")); // NOI18N
+        editButton.setName("editButton"); // NOI18N
+        editButton.addActionListener(formListener);
 
         deleteButton.setText(resourceMap.getString("deleteButton.text")); // NOI18N
         deleteButton.setEnabled(false);
@@ -117,7 +120,7 @@ public class TaskListPane extends JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(masterScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 478, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(newButton)
+                        .addComponent(editButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(deleteButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -129,7 +132,7 @@ public class TaskListPane extends JPanel {
                 .addContainerGap())
         );
 
-        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {deleteButton, newButton, refreshButton, saveButton});
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {deleteButton, editButton, refreshButton, saveButton});
 
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -137,7 +140,7 @@ public class TaskListPane extends JPanel {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(newButton)
+                        .addComponent(editButton)
                         .addComponent(deleteButton)
                         .addComponent(refreshButton)
                         .addComponent(saveButton))
@@ -161,11 +164,11 @@ public class TaskListPane extends JPanel {
             else if (evt.getSource() == refreshButton) {
                 TaskListPane.this.refreshButtonActionPerformed(evt);
             }
-            else if (evt.getSource() == newButton) {
-                TaskListPane.this.newButtonActionPerformed(evt);
-            }
             else if (evt.getSource() == deleteButton) {
                 TaskListPane.this.deleteButtonActionPerformed(evt);
+            }
+            else if (evt.getSource() == editButton) {
+                TaskListPane.this.editButtonActionPerformed(evt);
             }
         }
 
@@ -205,15 +208,6 @@ public class TaskListPane extends JPanel {
       list.removeAll(toRemove);
   }//GEN-LAST:event_deleteButtonActionPerformed
 
-  private void newButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newButtonActionPerformed
-      wdp.entities.Task t = new wdp.entities.Task();
-      entityManager.persist(t);
-      list.add(t);
-      int row = list.size() - 1;
-      masterTable.setRowSelectionInterval(row, row);
-      masterTable.scrollRectToVisible(masterTable.getCellRect(row, 0, true));
-  }//GEN-LAST:event_newButtonActionPerformed
-
   private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
       entityManager.getTransaction().commit();
       entityManager.getTransaction().begin();
@@ -236,6 +230,13 @@ public class TaskListPane extends JPanel {
       }
   }//GEN-LAST:event_jDateChooserTodayPropertyChange
 
+private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editButtonActionPerformed
+    Task t = list.get(masterTable.convertRowIndexToModel(masterTable.getSelectedRow()));
+    t = TaskEditPane.showTaskEditWindow(t);
+    entityManager.persist(t);
+    refreshTable();
+}//GEN-LAST:event_editButtonActionPerformed
+
     public void addTask(Task aTask) {
         entityManager.persist(aTask);
         list.add(aTask);
@@ -244,27 +245,27 @@ public class TaskListPane extends JPanel {
 
     private void refreshTable() {
         int row = list.size() - 1;
-        masterTable.setRowSelectionInterval(row, row);
-        masterTable.scrollRectToVisible(masterTable.getCellRect(row, 0, true));
+        if(row>=0){
+            masterTable.setRowSelectionInterval(row, row);
+            masterTable.scrollRectToVisible(masterTable.getCellRect(row, 0, true));
+        }
     }
 
     public Task getLastTask() {
         Date day = jDateChooserToday.getDate();
-        if(day == null)
-            day = new Date();
-        String qString = "SELECT FIRST 1 t FROM Task t WHERE t.started BETWEEN '" +
-                new SimpleDateFormat("yyyy-MM-dd 00:00:00").format(day) +
-                "' AND '" +
-                new SimpleDateFormat("yyyy-MM-dd 23:59:59").format(day) +
-                "' ORDER BY t.started DESC";
-        qString = "SELECT FIRST 1 * FROM Task WHERE t.started BETWEEN '" +
-                 new SimpleDateFormat("yyyy-MM-dd 00:00:00").format(day) +
-                "' AND '" +
-                new SimpleDateFormat("yyyy-MM-dd 23:59:59").format(day) +
-                "' ORDER BY started DESC";
+        String qString;
+        if (day != null) {
+            qString = "SELECT FIRST 1 * FROM Task WHERE started BETWEEN '" +
+                    new SimpleDateFormat("yyyy-MM-dd 00:00:00").format(day) +
+                    "' AND '" +
+                    new SimpleDateFormat("yyyy-MM-dd 23:59:59").format(day) +
+                    "' ORDER BY started DESC";
+        } else {
+            qString = "SELECT FIRST 1 * FROM Task ORDER BY started DESC";
+        }
+        
         log.fine(qString);
         query = entityManager.createNativeQuery(qString, Task.class);
-        //query = entityManager.createQuery(qString);
         entityManager.getTransaction().rollback();
         entityManager.getTransaction().begin();
         log.fine("Wybrane ostatnie: "+query.getSingleResult());
@@ -273,12 +274,13 @@ public class TaskListPane extends JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton deleteButton;
+    private javax.swing.JButton editButton;
     private javax.persistence.EntityManager entityManager;
     private com.toedter.calendar.JDateChooser jDateChooserToday;
+    private javax.swing.JPopupMenu jPopupMenu1;
     private java.util.List<wdp.entities.Task> list;
     private javax.swing.JScrollPane masterScrollPane;
     private javax.swing.JTable masterTable;
-    private javax.swing.JButton newButton;
     private javax.persistence.Query query;
     private javax.swing.JButton refreshButton;
     private javax.swing.JButton saveButton;
