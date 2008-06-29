@@ -35,7 +35,6 @@ public class TaskEditPane extends javax.swing.JPanel {
     private void initComponents() {
 
         jLabelProject = new javax.swing.JLabel();
-        jTextFieldProject = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jDateChooserStart = new com.toedter.calendar.JDateChooser();
         jLabel2 = new javax.swing.JLabel();
@@ -49,15 +48,13 @@ public class TaskEditPane extends javax.swing.JPanel {
         jTextPaneDescription = new javax.swing.JTextPane();
         jButtonCancel = new javax.swing.JButton();
         jButtonOk = new javax.swing.JButton();
+        jProject = new wdp.project.JProject();
 
         setName("Form"); // NOI18N
 
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(wdp.WdpApp.class).getContext().getResourceMap(TaskEditPane.class);
         jLabelProject.setText(resourceMap.getString("jLabelProject.text")); // NOI18N
         jLabelProject.setName("jLabelProject"); // NOI18N
-
-        jTextFieldProject.setText(resourceMap.getString("jTextFieldProject.text")); // NOI18N
-        jTextFieldProject.setName("jTextFieldProject"); // NOI18N
 
         jLabel1.setText(resourceMap.getString("jLabel1.text")); // NOI18N
         jLabel1.setName("jLabel1"); // NOI18N
@@ -100,6 +97,8 @@ public class TaskEditPane extends javax.swing.JPanel {
         jButtonOk.setText(resourceMap.getString("jButtonOk.text")); // NOI18N
         jButtonOk.setName("jButtonOk"); // NOI18N
 
+        jProject.setName("jProject"); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -121,21 +120,21 @@ public class TaskEditPane extends javax.swing.JPanel {
                             .addComponent(jLabelProject))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextFieldProject, javax.swing.GroupLayout.DEFAULT_SIZE, 324, Short.MAX_VALUE)
                             .addComponent(jDateChooserStart, javax.swing.GroupLayout.DEFAULT_SIZE, 324, Short.MAX_VALUE)
                             .addComponent(jDateChooserFinish, javax.swing.GroupLayout.DEFAULT_SIZE, 324, Short.MAX_VALUE)
                             .addComponent(jTextFieldEstimation, javax.swing.GroupLayout.DEFAULT_SIZE, 324, Short.MAX_VALUE)
                             .addComponent(jTextFieldMood, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 324, Short.MAX_VALUE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 324, Short.MAX_VALUE))))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 324, Short.MAX_VALUE)
+                            .addComponent(jProject, javax.swing.GroupLayout.DEFAULT_SIZE, 324, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabelProject)
-                    .addComponent(jTextFieldProject, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jProject, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel1)
@@ -175,10 +174,10 @@ public class TaskEditPane extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabelProject;
+    private wdp.project.JProject jProject;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextFieldEstimation;
     private javax.swing.JTextField jTextFieldMood;
-    private javax.swing.JTextField jTextFieldProject;
     private javax.swing.JTextPane jTextPaneDescription;
     // End of variables declaration//GEN-END:variables
     private Task value = null;
@@ -187,7 +186,8 @@ public class TaskEditPane extends javax.swing.JPanel {
     private void setTask(Task aTask) {
         if (aTask != null) {
             value = aTask;
-            jTextFieldProject.setText(aTask.getIdProject().getName());
+            //jTextFieldProject.setText(aTask.getIdProject().getName());
+            jProject.setObject(aTask.getIdProject());
             jTextFieldEstimation.setText(aTask.getCurrentEstimation().toString());
             jTextFieldMood.setText(aTask.getMood().toString());
             jDateChooserStart.setDate(aTask.getStarted());
