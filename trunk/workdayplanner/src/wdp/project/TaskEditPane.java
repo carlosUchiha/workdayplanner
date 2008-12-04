@@ -8,7 +8,7 @@ import javax.swing.JDialog;
 import org.jdesktop.application.Action;
 import wdp.SelectWinExitState;
 import wdp.WdpApp;
-import wdp.entities.Task;
+import wdp.entities.ready.Task;
 
 /**
  *
@@ -38,7 +38,6 @@ public class TaskEditPane extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jDateChooserStart = new com.toedter.calendar.JDateChooser();
         jLabel2 = new javax.swing.JLabel();
-        jDateChooserFinish = new com.toedter.calendar.JDateChooser();
         jLabel3 = new javax.swing.JLabel();
         jTextFieldEstimation = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
@@ -49,6 +48,7 @@ public class TaskEditPane extends javax.swing.JPanel {
         jButtonCancel = new javax.swing.JButton();
         jButtonOk = new javax.swing.JButton();
         jProject = new wdp.project.JProject();
+        jDateChooserFinish = new wdp.beans.JDateTimeChooser();
 
         setName("Form"); // NOI18N
 
@@ -64,9 +64,6 @@ public class TaskEditPane extends javax.swing.JPanel {
 
         jLabel2.setText(resourceMap.getString("jLabel2.text")); // NOI18N
         jLabel2.setName("jLabel2"); // NOI18N
-
-        jDateChooserFinish.setDateFormatString(resourceMap.getString("jDateChooserFinish.dateFormatString")); // NOI18N
-        jDateChooserFinish.setName("jDateChooserFinish"); // NOI18N
 
         jLabel3.setText(resourceMap.getString("jLabel3.text")); // NOI18N
         jLabel3.setName("jLabel3"); // NOI18N
@@ -99,6 +96,8 @@ public class TaskEditPane extends javax.swing.JPanel {
 
         jProject.setName("jProject"); // NOI18N
 
+        jDateChooserFinish.setName("jDateChooserFinish"); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -120,12 +119,12 @@ public class TaskEditPane extends javax.swing.JPanel {
                             .addComponent(jLabelProject))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jDateChooserStart, javax.swing.GroupLayout.DEFAULT_SIZE, 324, Short.MAX_VALUE)
-                            .addComponent(jDateChooserFinish, javax.swing.GroupLayout.DEFAULT_SIZE, 324, Short.MAX_VALUE)
-                            .addComponent(jTextFieldEstimation, javax.swing.GroupLayout.DEFAULT_SIZE, 324, Short.MAX_VALUE)
-                            .addComponent(jTextFieldMood, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 324, Short.MAX_VALUE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 324, Short.MAX_VALUE)
-                            .addComponent(jProject, javax.swing.GroupLayout.DEFAULT_SIZE, 324, Short.MAX_VALUE))))
+                            .addComponent(jDateChooserStart, javax.swing.GroupLayout.DEFAULT_SIZE, 373, Short.MAX_VALUE)
+                            .addComponent(jTextFieldEstimation, javax.swing.GroupLayout.DEFAULT_SIZE, 373, Short.MAX_VALUE)
+                            .addComponent(jTextFieldMood, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 373, Short.MAX_VALUE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 373, Short.MAX_VALUE)
+                            .addComponent(jProject, javax.swing.GroupLayout.DEFAULT_SIZE, 373, Short.MAX_VALUE)
+                            .addComponent(jDateChooserFinish, javax.swing.GroupLayout.DEFAULT_SIZE, 373, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -166,7 +165,7 @@ public class TaskEditPane extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCancel;
     private javax.swing.JButton jButtonOk;
-    private com.toedter.calendar.JDateChooser jDateChooserFinish;
+    private wdp.beans.JDateTimeChooser jDateChooserFinish;
     private com.toedter.calendar.JDateChooser jDateChooserStart;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

@@ -78,7 +78,7 @@ public class SettingsEditFrame extends JPanel {
     columnBinding.setColumnClass(String.class);
     columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${idWorker}"));
     columnBinding.setColumnName("Id Worker");
-    columnBinding.setColumnClass(wdp.entities.Worker.class);
+    columnBinding.setColumnClass(wdp.entities.ready.Worker.class);
     bindingGroup.addBinding(jTableBinding);
 
     masterScrollPane.setViewportView(masterTable);
@@ -285,9 +285,9 @@ public class SettingsEditFrame extends JPanel {
 
   private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
       int[] selected = masterTable.getSelectedRows();
-      List<wdp.entities.Settings> toRemove = new ArrayList<wdp.entities.Settings>(selected.length);
+      List<wdp.entities.ready.Settings> toRemove = new ArrayList<wdp.entities.ready.Settings>(selected.length);
       for (int idx = 0; idx < selected.length; idx++) {
-          wdp.entities.Settings s = list.get(masterTable.convertRowIndexToModel(selected[idx]));
+            wdp.entities.ready.Settings s = list.get(masterTable.convertRowIndexToModel(selected[idx]));
           toRemove.add(s);
           entityManager.remove(s);
       }
@@ -295,7 +295,7 @@ public class SettingsEditFrame extends JPanel {
   }//GEN-LAST:event_deleteButtonActionPerformed
 
   private void newButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newButtonActionPerformed
-      wdp.entities.Settings s = new wdp.entities.Settings();
+        wdp.entities.ready.Settings s = new wdp.entities.ready.Settings();
       entityManager.persist(s);
       list.add(s);
       int row = list.size() - 1;
@@ -320,7 +320,7 @@ public class SettingsEditFrame extends JPanel {
   private javax.swing.JLabel idWorkerLabel;
   private javax.swing.JTextField keywordField;
   private javax.swing.JLabel keywordLabel;
-  private java.util.List<wdp.entities.Settings> list;
+  private java.util.List<wdp.entities.ready.Settings> list;
   private javax.swing.JScrollPane masterScrollPane;
   private javax.swing.JTable masterTable;
   private javax.swing.JButton newButton;

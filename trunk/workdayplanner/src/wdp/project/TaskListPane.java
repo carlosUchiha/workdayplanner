@@ -9,12 +9,13 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
+import javax.persistence.NoResultException;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import wdp.TimeCellRenderer;
-import wdp.entities.Task;
+import wdp.entities.ready.Task;
 
 public class TaskListPane extends JPanel {
 
@@ -62,7 +63,7 @@ public class TaskListPane extends JPanel {
         org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, list, masterTable);
         org.jdesktop.swingbinding.JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${idProject}"));
         columnBinding.setColumnName("Id Project");
-        columnBinding.setColumnClass(wdp.entities.Project.class);
+        columnBinding.setColumnClass(wdp.entities.ready.Project.class);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${started}"));
         columnBinding.setColumnName("Started");
         columnBinding.setColumnClass(java.util.Date.class);
@@ -199,9 +200,9 @@ public class TaskListPane extends JPanel {
 
   private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
       int[] selected = masterTable.getSelectedRows();
-      List<wdp.entities.Task> toRemove = new ArrayList<wdp.entities.Task>(selected.length);
+      List<wdp.entities.ready.Task> toRemove = new ArrayList<wdp.entities.ready.Task>(selected.length);
       for (int idx = 0; idx < selected.length; idx++) {
-          wdp.entities.Task t = list.get(masterTable.convertRowIndexToModel(selected[idx]));
+            wdp.entities.ready.Task t = list.get(masterTable.convertRowIndexToModel(selected[idx]));
           toRemove.add(t);
           entityManager.remove(t);
       }
@@ -269,8 +270,12 @@ private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
         query = entityManager.createNativeQuery(qString, Task.class);
         entityManager.getTransaction().rollback();
         entityManager.getTransaction().begin();
-        log.fine("Wybrane ostatnie: "+query.getSingleResult());
-        return (Task)query.getSingleResult();
+        try {
+            log.fine("Wybrane ostatnie: "+query.getSingleResult());
+            return (Task)query.getSingleResult();
+        } catch(NoResultException ex) {
+            return null;
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -279,7 +284,7 @@ private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     private javax.persistence.EntityManager entityManager;
     private com.toedter.calendar.JDateChooser jDateChooserToday;
     private javax.swing.JPopupMenu jPopupMenu1;
-    private java.util.List<wdp.entities.Task> list;
+    private java.util.List<wdp.entities.ready.Task> list;
     private javax.swing.JScrollPane masterScrollPane;
     private javax.swing.JTable masterTable;
     private javax.persistence.Query query;

@@ -9,7 +9,7 @@ import javax.swing.JFrame;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import wdp.WdpApp;
-import wdp.entities.Post;
+import wdp.entities.ready.Post;
 
 public class PostSelectFrame extends JDialog {
 
@@ -89,7 +89,7 @@ public class PostSelectFrame extends JDialog {
         columnBinding.setEditable(false);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${idTeam}"));
         columnBinding.setColumnName("Id Team");
-        columnBinding.setColumnClass(wdp.entities.Team.class);
+        columnBinding.setColumnClass(wdp.entities.ready.Team.class);
         columnBinding.setEditable(false);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${office}"));
         columnBinding.setColumnName("Office");
@@ -97,7 +97,7 @@ public class PostSelectFrame extends JDialog {
         columnBinding.setEditable(false);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${idBoss}"));
         columnBinding.setColumnName("Id Boss");
-        columnBinding.setColumnClass(wdp.entities.Worker.class);
+        columnBinding.setColumnClass(wdp.entities.ready.Worker.class);
         columnBinding.setEditable(false);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${loginName}"));
         columnBinding.setColumnName("Login Name");
@@ -215,7 +215,7 @@ public class PostSelectFrame extends JDialog {
     }
 
   private void newButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newButtonActionPerformed
-      wdp.entities.Post p = new wdp.entities.Post();
+        wdp.entities.ready.Post p = new wdp.entities.ready.Post();
       entityManager.persist(p);
       list.add(p);
       int row = list.size() - 1;
@@ -243,7 +243,7 @@ public class PostSelectFrame extends JDialog {
     private javax.persistence.EntityManager entityManager;
     private javax.swing.JButton jButtonNone;
     private javax.swing.JButton jButtonSelect;
-    private java.util.List<wdp.entities.Post> list;
+    private java.util.List<wdp.entities.ready.Post> list;
     private javax.swing.JScrollPane masterScrollPane;
     private javax.swing.JTable masterTable;
     private javax.swing.JButton newButton;

@@ -8,7 +8,7 @@ import javax.swing.JFrame;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import wdp.WdpApp;
-import wdp.entities.Team;
+import wdp.entities.ready.Team;
 
 public class TeamSelectFrame extends JDialog {
 
@@ -83,7 +83,7 @@ public class TeamSelectFrame extends JDialog {
     columnBinding.setEditable(false);
     columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${idPost}"));
     columnBinding.setColumnName("Id Post");
-    columnBinding.setColumnClass(wdp.entities.Post.class);
+    columnBinding.setColumnClass(wdp.entities.ready.Post.class);
     columnBinding.setEditable(false);
     columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${office}"));
     columnBinding.setColumnName("Office");
@@ -220,7 +220,7 @@ public class TeamSelectFrame extends JDialog {
     }
 
   private void newButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newButtonActionPerformed
-      wdp.entities.Team t = new wdp.entities.Team();
+        wdp.entities.ready.Team t = new wdp.entities.ready.Team();
       entityManager.persist(t);
       list.add(t);
       int row = list.size() - 1;
@@ -248,7 +248,7 @@ public class TeamSelectFrame extends JDialog {
   private javax.persistence.EntityManager entityManager;
   private javax.swing.JButton jButtonNone;
   private javax.swing.JButton jButtonSelect;
-  private java.util.List<wdp.entities.Team> list;
+  private java.util.List<wdp.entities.ready.Team> list;
   private javax.swing.JScrollPane masterScrollPane;
   private javax.swing.JTable masterTable;
   private javax.swing.JButton newButton;

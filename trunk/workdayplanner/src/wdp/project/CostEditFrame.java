@@ -219,9 +219,9 @@ public class CostEditFrame extends JPanel {
 
 	private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
             int[] selected = masterTable.getSelectedRows();
-            List<wdp.entities.Cost> toRemove = new ArrayList<wdp.entities.Cost>(selected.length);
+            List<wdp.entities.ready.Cost> toRemove = new ArrayList<wdp.entities.ready.Cost>(selected.length);
             for (int idx = 0; idx < selected.length; idx++) {
-                wdp.entities.Cost c = list.get(masterTable.convertRowIndexToModel(selected[idx]));
+                wdp.entities.ready.Cost c = list.get(masterTable.convertRowIndexToModel(selected[idx]));
                 toRemove.add(c);
                 entityManager.remove(c);
             }
@@ -229,7 +229,7 @@ public class CostEditFrame extends JPanel {
 	}//GEN-LAST:event_deleteButtonActionPerformed
 
 	private void newButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newButtonActionPerformed
-            wdp.entities.Cost c = new wdp.entities.Cost();
+            wdp.entities.ready.Cost c = new wdp.entities.ready.Cost();
             entityManager.persist(c);
             list.add(c);
             int row = list.size() - 1;
@@ -248,7 +248,7 @@ public class CostEditFrame extends JPanel {
   private javax.persistence.EntityManager entityManager;
   private javax.swing.JTextField includeField;
   private javax.swing.JLabel includeLabel;
-  private java.util.List<wdp.entities.Cost> list;
+  private java.util.List<wdp.entities.ready.Cost> list;
   private javax.swing.JScrollPane masterScrollPane;
   private javax.swing.JTable masterTable;
   private javax.swing.JTextField nameField;

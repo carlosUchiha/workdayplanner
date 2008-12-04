@@ -5,7 +5,7 @@ package wdp;
 
 import java.util.Date;
 import javax.persistence.EntityManager;
-import wdp.entities.Worker;
+import wdp.entities.ready.Worker;
 
 /**
  * @author Robson

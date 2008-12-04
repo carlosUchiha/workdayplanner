@@ -8,7 +8,7 @@ import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import javax.persistence.Transient;
 import org.jdesktop.application.Action;
-import wdp.entities.Worker;
+import wdp.entities.ready.Worker;
 
 /**
  *

@@ -37,12 +37,12 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jDateChooserStart" alignment="0" pref="324" max="32767" attributes="0"/>
-                          <Component id="jDateChooserFinish" alignment="0" pref="324" max="32767" attributes="0"/>
-                          <Component id="jTextFieldEstimation" alignment="0" pref="324" max="32767" attributes="0"/>
-                          <Component id="jTextFieldMood" alignment="1" pref="324" max="32767" attributes="0"/>
-                          <Component id="jScrollPane1" alignment="0" pref="324" max="32767" attributes="0"/>
-                          <Component id="jProject" alignment="0" pref="324" max="32767" attributes="0"/>
+                          <Component id="jDateChooserStart" alignment="0" pref="373" max="32767" attributes="0"/>
+                          <Component id="jTextFieldEstimation" alignment="0" pref="373" max="32767" attributes="0"/>
+                          <Component id="jTextFieldMood" alignment="1" pref="373" max="32767" attributes="0"/>
+                          <Component id="jScrollPane1" alignment="0" pref="373" max="32767" attributes="0"/>
+                          <Component id="jProject" alignment="0" pref="373" max="32767" attributes="0"/>
+                          <Component id="jDateChooserFinish" alignment="0" pref="373" max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -118,12 +118,6 @@
         <Property name="name" type="java.lang.String" value="jLabel2" noResource="true"/>
       </Properties>
     </Component>
-    <Component class="com.toedter.calendar.JDateChooser" name="jDateChooserFinish">
-      <Properties>
-        <Property name="dateFormatString" type="java.lang.String" resourceKey="jDateChooserFinish.dateFormatString"/>
-        <Property name="name" type="java.lang.String" value="jDateChooserFinish" noResource="true"/>
-      </Properties>
-    </Component>
     <Component class="javax.swing.JLabel" name="jLabel3">
       <Properties>
         <Property name="text" type="java.lang.String" resourceKey="jLabel3.text"/>
@@ -189,6 +183,11 @@
     <Component class="wdp.project.JProject" name="jProject">
       <Properties>
         <Property name="name" type="java.lang.String" value="jProject" noResource="true"/>
+      </Properties>
+    </Component>
+    <Component class="wdp.beans.JDateTimeChooser" name="jDateChooserFinish">
+      <Properties>
+        <Property name="name" type="java.lang.String" value="jDateChooserFinish" noResource="true"/>
       </Properties>
     </Component>
   </SubComponents>
