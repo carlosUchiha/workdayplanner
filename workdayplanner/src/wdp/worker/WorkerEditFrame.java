@@ -98,10 +98,10 @@ public class WorkerEditFrame extends JPanel {
     columnBinding.setColumnClass(String.class);
     columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${idPost}"));
     columnBinding.setColumnName("Post");
-    columnBinding.setColumnClass(wdp.entities.Post.class);
+    columnBinding.setColumnClass(wdp.entities.ready.Post.class);
     columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${idTeam}"));
     columnBinding.setColumnName("Team");
-    columnBinding.setColumnClass(wdp.entities.Team.class);
+    columnBinding.setColumnClass(wdp.entities.ready.Team.class);
     columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${office}"));
     columnBinding.setColumnName("Office");
     columnBinding.setColumnClass(String.class);
@@ -544,9 +544,9 @@ public class WorkerEditFrame extends JPanel {
 
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
         int[] selected = masterTable.getSelectedRows();
-        List<wdp.entities.Worker> toRemove = new ArrayList<wdp.entities.Worker>(selected.length);
+        List<wdp.entities.ready.Worker> toRemove = new ArrayList<wdp.entities.ready.Worker>(selected.length);
         for (int idx = 0; idx < selected.length; idx++) {
-            wdp.entities.Worker w = list.get(masterTable.convertRowIndexToModel(selected[idx]));
+            wdp.entities.ready.Worker w = list.get(masterTable.convertRowIndexToModel(selected[idx]));
             toRemove.add(w);
             entityManager.remove(w);
         }
@@ -554,7 +554,7 @@ public class WorkerEditFrame extends JPanel {
     }//GEN-LAST:event_deleteButtonActionPerformed
 
     private void newButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newButtonActionPerformed
-        wdp.entities.Worker w = new wdp.entities.Worker();
+        wdp.entities.ready.Worker w = new wdp.entities.ready.Worker();
         entityManager.persist(w);
         list.add(w);
         int row = list.size() - 1;
@@ -589,7 +589,7 @@ public class WorkerEditFrame extends JPanel {
   private javax.swing.JTextField im3Field;
   private javax.swing.JLabel im3Label;
   private wdp.worker.JPost jPost1;
-  private java.util.List<wdp.entities.Worker> list;
+  private java.util.List<wdp.entities.ready.Worker> list;
   private javax.swing.JTextField loginNameField;
   private javax.swing.JLabel loginNameLabel;
   private javax.swing.JTextField loginPasswordField;

@@ -10,7 +10,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import org.jdesktop.application.Action;
 import wdp.WdpApp;
-import wdp.entities.Worker;
+import wdp.entities.ready.Worker;
 
 public class WorkerSelectFrame extends JDialog {
 
@@ -60,11 +60,11 @@ public class WorkerSelectFrame extends JDialog {
     columnBinding.setEditable(false);
     columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${idPost}"));
     columnBinding.setColumnName("Id Post");
-    columnBinding.setColumnClass(wdp.entities.Post.class);
+    columnBinding.setColumnClass(wdp.entities.ready.Post.class);
     columnBinding.setEditable(false);
     columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${idTeam}"));
     columnBinding.setColumnName("Id Team");
-    columnBinding.setColumnClass(wdp.entities.Team.class);
+    columnBinding.setColumnClass(wdp.entities.ready.Team.class);
     columnBinding.setEditable(false);
     columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${office}"));
     columnBinding.setColumnName("Office");
@@ -196,7 +196,7 @@ public class WorkerSelectFrame extends JDialog {
     }
 
   private void newButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newButtonActionPerformed
-      wdp.entities.Worker w = new wdp.entities.Worker();
+        wdp.entities.ready.Worker w = new wdp.entities.ready.Worker();
       entityManager.persist(w);
       list.add(w);
       int row = list.size() - 1;
@@ -218,7 +218,7 @@ public class WorkerSelectFrame extends JDialog {
   private javax.persistence.EntityManager entityManager;
   private javax.swing.JButton jButtonNone;
   private javax.swing.JButton jButtonSelect;
-  private java.util.List<wdp.entities.Worker> list;
+  private java.util.List<wdp.entities.ready.Worker> list;
   private javax.swing.JScrollPane masterScrollPane;
   private javax.swing.JTable masterTable;
   private javax.swing.JButton newButton;

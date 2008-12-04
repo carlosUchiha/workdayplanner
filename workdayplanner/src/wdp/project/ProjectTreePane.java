@@ -10,7 +10,7 @@ import javax.swing.JFrame;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreePath;
-import wdp.entities.Project;
+import wdp.entities.ready.Project;
 
 /**
  *
@@ -73,7 +73,7 @@ public class ProjectTreePane extends javax.swing.JPanel {
   private javax.persistence.EntityManager entityManager;
   private javax.swing.JScrollPane jScrollPaneProjectTree;
   private javax.swing.JTree jTreeProjects;
-  private java.util.List<wdp.entities.Project> list;
+  private java.util.List<wdp.entities.ready.Project> list;
   private javax.persistence.Query query;
   // End of variables declaration//GEN-END:variables
     private DefaultMutableTreeNode top = new DefaultMutableTreeNode("Projects");

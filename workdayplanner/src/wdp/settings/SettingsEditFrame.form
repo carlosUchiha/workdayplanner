@@ -23,7 +23,7 @@
         <Property name="observable" type="boolean" value="true"/>
       </Properties>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;wdp.entities.Settings&gt;"/>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;wdp.entities.ready.Settings&gt;"/>
       </AuxValues>
     </Component>
   </NonVisualComponents>
@@ -170,7 +170,7 @@
               </Subbinding>
               <Subbinding sourcePath="${idWorker}">
                 <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN" value="5"/>
-                <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="wdp.entities.Worker.class"/>
+                <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="wdp.entities.ready.Worker.class"/>
               </Subbinding>
             </BindingProperty>
           </BindingProperties>

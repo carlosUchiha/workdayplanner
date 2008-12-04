@@ -23,7 +23,7 @@
         <Property name="observable" type="boolean" value="true"/>
       </Properties>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;wdp.entities.Team&gt;"/>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;wdp.entities.ready.Team&gt;"/>
       </AuxValues>
     </Component>
   </NonVisualComponents>
@@ -205,7 +205,7 @@
                 <BindingParameter name="javax.swing.binding.ParameterKeys.EDITABLE" value="false"/>
               </Subbinding>
               <Subbinding sourcePath="${idPost}">
-                <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="wdp.entities.Post.class"/>
+                <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="wdp.entities.ready.Post.class"/>
                 <BindingParameter name="javax.swing.binding.ParameterKeys.EDITABLE" value="false"/>
               </Subbinding>
               <Subbinding sourcePath="${office}">

@@ -23,7 +23,7 @@
         <Property name="observable" type="boolean" value="true"/>
       </Properties>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;wdp.entities.Post&gt;"/>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;wdp.entities.ready.Post&gt;"/>
       </AuxValues>
     </Component>
   </NonVisualComponents>
@@ -215,7 +215,7 @@
                 <BindingParameter name="javax.swing.binding.ParameterKeys.EDITABLE" value="false"/>
               </Subbinding>
               <Subbinding sourcePath="${idTeam}">
-                <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="wdp.entities.Team.class"/>
+                <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="wdp.entities.ready.Team.class"/>
                 <BindingParameter name="javax.swing.binding.ParameterKeys.EDITABLE" value="false"/>
               </Subbinding>
               <Subbinding sourcePath="${office}">
@@ -223,7 +223,7 @@
                 <BindingParameter name="javax.swing.binding.ParameterKeys.EDITABLE" value="false"/>
               </Subbinding>
               <Subbinding sourcePath="${idBoss}">
-                <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="wdp.entities.Worker.class"/>
+                <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="wdp.entities.ready.Worker.class"/>
                 <BindingParameter name="javax.swing.binding.ParameterKeys.EDITABLE" value="false"/>
               </Subbinding>
               <Subbinding sourcePath="${loginName}">

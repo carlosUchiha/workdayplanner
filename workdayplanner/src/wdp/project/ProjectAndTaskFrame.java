@@ -8,8 +8,8 @@ import java.awt.EventQueue;
 import java.util.Date;
 import javax.swing.JFrame;
 import wdp.WdpApp;
-import wdp.entities.Project;
-import wdp.entities.Task;
+import wdp.entities.ready.Project;
+import wdp.entities.ready.Task;
 
 /**
  *
@@ -239,7 +239,12 @@ public class ProjectAndTaskFrame extends javax.swing.JPanel {
     private void addTask() {
         Task aTask = new Task(projectTreePane.getSelected());
         Task lastTask = taskListPane.getLastTask();
-        Date startDate = lastTask.getFinish();
+        Date startDate = null;
+        if(lastTask!=null) {
+            startDate = lastTask.getFinish();
+        } else {
+            startDate = new Date();
+        }
         aTask.setStarted(startDate);
         aTask.setIdWorker(WdpApp.getApplication().getSession().getWorker());
         Task tmpTask = TaskEditPane.showTaskEditWindow(aTask);

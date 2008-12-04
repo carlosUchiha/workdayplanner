@@ -197,9 +197,9 @@ public class TodoEditFrame extends JPanel {
 
   private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
       int[] selected = masterTable.getSelectedRows();
-      List<wdp.entities.Todo> toRemove = new ArrayList<wdp.entities.Todo>(selected.length);
+      List<wdp.entities.ready.Todo> toRemove = new ArrayList<wdp.entities.ready.Todo>(selected.length);
       for (int idx = 0; idx < selected.length; idx++) {
-          wdp.entities.Todo t = list.get(masterTable.convertRowIndexToModel(selected[idx]));
+            wdp.entities.ready.Todo t = list.get(masterTable.convertRowIndexToModel(selected[idx]));
           toRemove.add(t);
           entityManager.remove(t);
       }
@@ -207,7 +207,7 @@ public class TodoEditFrame extends JPanel {
   }//GEN-LAST:event_deleteButtonActionPerformed
 
   private void newButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newButtonActionPerformed
-      wdp.entities.Todo t = new wdp.entities.Todo();
+        wdp.entities.ready.Todo t = new wdp.entities.ready.Todo();
       entityManager.persist(t);
       list.add(t);
       int row = list.size() - 1;
@@ -226,7 +226,7 @@ public class TodoEditFrame extends JPanel {
   private javax.swing.JLabel idProjectLabel;
   private javax.swing.JTextField idWorkerField;
   private javax.swing.JLabel idWorkerLabel;
-  private java.util.List<wdp.entities.Todo> list;
+  private java.util.List<wdp.entities.ready.Todo> list;
   private javax.swing.JScrollPane masterScrollPane;
   private javax.swing.JTable masterTable;
   private javax.swing.JButton newButton;

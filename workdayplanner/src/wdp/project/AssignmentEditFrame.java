@@ -59,13 +59,13 @@ public class AssignmentEditFrame extends JPanel {
     org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, list, masterTable);
     org.jdesktop.swingbinding.JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${idWorker}"));
     columnBinding.setColumnName("Id Worker");
-    columnBinding.setColumnClass(wdp.entities.Worker.class);
+    columnBinding.setColumnClass(wdp.entities.ready.Worker.class);
     columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${idProject}"));
     columnBinding.setColumnName("Id Project");
-    columnBinding.setColumnClass(wdp.entities.Project.class);
+    columnBinding.setColumnClass(wdp.entities.ready.Project.class);
     columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${idPost}"));
     columnBinding.setColumnName("Id Post");
-    columnBinding.setColumnClass(wdp.entities.Post.class);
+    columnBinding.setColumnClass(wdp.entities.ready.Post.class);
     bindingGroup.addBinding(jTableBinding);
     jTableBinding.bind();
     masterScrollPane.setViewportView(masterTable);
@@ -238,9 +238,9 @@ public class AssignmentEditFrame extends JPanel {
 
   private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
       int[] selected = masterTable.getSelectedRows();
-      List<wdp.entities.Assignment> toRemove = new ArrayList<wdp.entities.Assignment>(selected.length);
+      List<wdp.entities.ready.Assignment> toRemove = new ArrayList<wdp.entities.ready.Assignment>(selected.length);
       for (int idx = 0; idx < selected.length; idx++) {
-          wdp.entities.Assignment a = list.get(masterTable.convertRowIndexToModel(selected[idx]));
+            wdp.entities.ready.Assignment a = list.get(masterTable.convertRowIndexToModel(selected[idx]));
           toRemove.add(a);
           entityManager.remove(a);
       }
@@ -248,7 +248,7 @@ public class AssignmentEditFrame extends JPanel {
   }//GEN-LAST:event_deleteButtonActionPerformed
 
   private void newButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newButtonActionPerformed
-      wdp.entities.Assignment a = new wdp.entities.Assignment();
+        wdp.entities.ready.Assignment a = new wdp.entities.ready.Assignment();
       entityManager.persist(a);
       list.add(a);
       int row = list.size() - 1;
@@ -269,7 +269,7 @@ public class AssignmentEditFrame extends JPanel {
   private javax.swing.JLabel idProjectLabel;
   private javax.swing.JTextField idWorkerField;
   private javax.swing.JLabel idWorkerLabel;
-  private java.util.List<wdp.entities.Assignment> list;
+  private java.util.List<wdp.entities.ready.Assignment> list;
   private javax.swing.JScrollPane masterScrollPane;
   private javax.swing.JTable masterTable;
   private javax.swing.JButton newButton;

@@ -175,9 +175,9 @@ public class PostEditFrame extends JPanel {
 
 	private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
             int[] selected = masterTable.getSelectedRows();
-            List<wdp.entities.Post> toRemove = new ArrayList<wdp.entities.Post>(selected.length);
+            List<wdp.entities.ready.Post> toRemove = new ArrayList<wdp.entities.ready.Post>(selected.length);
             for (int idx = 0; idx < selected.length; idx++) {
-                wdp.entities.Post p = list.get(masterTable.convertRowIndexToModel(selected[idx]));
+                wdp.entities.ready.Post p = list.get(masterTable.convertRowIndexToModel(selected[idx]));
                 toRemove.add(p);
                 entityManager.remove(p);
             }
@@ -185,7 +185,7 @@ public class PostEditFrame extends JPanel {
 	}//GEN-LAST:event_deleteButtonActionPerformed
 
 	private void newButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newButtonActionPerformed
-            wdp.entities.Post p = new wdp.entities.Post();
+            wdp.entities.ready.Post p = new wdp.entities.ready.Post();
             entityManager.persist(p);
             list.add(p);
             int row = list.size() - 1;
@@ -200,7 +200,7 @@ public class PostEditFrame extends JPanel {
   // Variables declaration - do not modify//GEN-BEGIN:variables
   private javax.swing.JButton deleteButton;
   private javax.persistence.EntityManager entityManager;
-  private java.util.List<wdp.entities.Post> list;
+  private java.util.List<wdp.entities.ready.Post> list;
   private javax.swing.JScrollPane masterScrollPane;
   private javax.swing.JTable masterTable;
   private javax.swing.JTextField nameField;

@@ -412,9 +412,9 @@ public class ProjectEditFrame extends JPanel {
 
 	private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
             int[] selected = masterTable.getSelectedRows();
-            List<wdp.entities.Project> toRemove = new ArrayList<wdp.entities.Project>(selected.length);
+            List<wdp.entities.ready.Project> toRemove = new ArrayList<wdp.entities.ready.Project>(selected.length);
             for (int idx = 0; idx < selected.length; idx++) {
-                wdp.entities.Project p = list.get(masterTable.convertRowIndexToModel(selected[idx]));
+                wdp.entities.ready.Project p = list.get(masterTable.convertRowIndexToModel(selected[idx]));
                 toRemove.add(p);
                 entityManager.remove(p);
             }
@@ -422,7 +422,7 @@ public class ProjectEditFrame extends JPanel {
 	}//GEN-LAST:event_deleteButtonActionPerformed
 
 	private void newButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newButtonActionPerformed
-            wdp.entities.Project p = new wdp.entities.Project();
+            wdp.entities.ready.Project p = new wdp.entities.ready.Project();
             entityManager.persist(p);
             list.add(p);
             int row = list.size() - 1;
@@ -453,7 +453,7 @@ public class ProjectEditFrame extends JPanel {
     private javax.swing.JLabel idCostLabel;
     private javax.swing.JTextField idParrentField;
     private javax.swing.JLabel idParrentLabel;
-    private java.util.List<wdp.entities.Project> list;
+    private java.util.List<wdp.entities.ready.Project> list;
     private javax.swing.JScrollPane masterScrollPane;
     private javax.swing.JTable masterTable;
     private javax.swing.JTextField nameField;

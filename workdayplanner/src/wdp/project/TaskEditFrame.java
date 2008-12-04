@@ -71,10 +71,10 @@ public class TaskEditFrame extends JPanel {
         columnBinding.setColumnClass(java.util.Date.class);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${idProject}"));
         columnBinding.setColumnName("Id Project");
-        columnBinding.setColumnClass(wdp.entities.Project.class);
+        columnBinding.setColumnClass(wdp.entities.ready.Project.class);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${idWorker}"));
         columnBinding.setColumnName("Id Worker");
-        columnBinding.setColumnClass(wdp.entities.Worker.class);
+        columnBinding.setColumnClass(wdp.entities.ready.Worker.class);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${currentEstimation}"));
         columnBinding.setColumnName("Current Estimation");
         columnBinding.setColumnClass(Integer.class);
@@ -306,9 +306,9 @@ public class TaskEditFrame extends JPanel {
 
 	private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
             int[] selected = masterTable.getSelectedRows();
-            List<wdp.entities.Task> toRemove = new ArrayList<wdp.entities.Task>(selected.length);
+            List<wdp.entities.ready.Task> toRemove = new ArrayList<wdp.entities.ready.Task>(selected.length);
             for (int idx = 0; idx < selected.length; idx++) {
-                wdp.entities.Task t = list.get(masterTable.convertRowIndexToModel(selected[idx]));
+                wdp.entities.ready.Task t = list.get(masterTable.convertRowIndexToModel(selected[idx]));
                 toRemove.add(t);
                 entityManager.remove(t);
             }
@@ -316,7 +316,7 @@ public class TaskEditFrame extends JPanel {
 	}//GEN-LAST:event_deleteButtonActionPerformed
 
 	private void newButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newButtonActionPerformed
-            wdp.entities.Task t = new wdp.entities.Task();
+            wdp.entities.ready.Task t = new wdp.entities.ready.Task();
             entityManager.persist(t);
             list.add(t);
             int row = list.size() - 1;
@@ -341,7 +341,7 @@ public class TaskEditFrame extends JPanel {
     private javax.swing.JLabel idProjectLabel;
     private javax.swing.JTextField idWorkerField;
     private javax.swing.JLabel idWorkerLabel;
-    private java.util.List<wdp.entities.Task> list;
+    private java.util.List<wdp.entities.ready.Task> list;
     private javax.swing.JScrollPane masterScrollPane;
     private javax.swing.JTable masterTable;
     private javax.swing.JTextField moodField;

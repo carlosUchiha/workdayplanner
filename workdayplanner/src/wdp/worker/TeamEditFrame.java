@@ -173,9 +173,9 @@ public class TeamEditFrame extends JPanel {
 
 	private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
             int[] selected = masterTable.getSelectedRows();
-            List<wdp.entities.Team> toRemove = new ArrayList<wdp.entities.Team>(selected.length);
+            List<wdp.entities.ready.Team> toRemove = new ArrayList<wdp.entities.ready.Team>(selected.length);
             for (int idx = 0; idx < selected.length; idx++) {
-                wdp.entities.Team t = list.get(masterTable.convertRowIndexToModel(selected[idx]));
+                wdp.entities.ready.Team t = list.get(masterTable.convertRowIndexToModel(selected[idx]));
                 toRemove.add(t);
                 entityManager.remove(t);
             }
@@ -183,7 +183,7 @@ public class TeamEditFrame extends JPanel {
 	}//GEN-LAST:event_deleteButtonActionPerformed
 
 	private void newButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newButtonActionPerformed
-            wdp.entities.Team t = new wdp.entities.Team();
+            wdp.entities.ready.Team t = new wdp.entities.ready.Team();
             entityManager.persist(t);
             list.add(t);
             int row = list.size() - 1;
@@ -198,7 +198,7 @@ public class TeamEditFrame extends JPanel {
   // Variables declaration - do not modify//GEN-BEGIN:variables
   private javax.swing.JButton deleteButton;
   private javax.persistence.EntityManager entityManager;
-  private java.util.List<wdp.entities.Team> list;
+  private java.util.List<wdp.entities.ready.Team> list;
   private javax.swing.JScrollPane masterScrollPane;
   private javax.swing.JTable masterTable;
   private javax.swing.JTextField nameField;
