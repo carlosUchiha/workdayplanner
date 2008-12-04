@@ -3,18 +3,6 @@
 <persistence version="1.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd">
   <persistence-unit name="db.fdbPU" transaction-type="RESOURCE_LOCAL">
     <provider>oracle.toplink.essentials.PersistenceProvider</provider>
-    <class>wdp.entities.ready.Cost</class>
-    <class>wdp.entities.ready.Worker</class>
-    <class>wdp.entities.ready.Task</class>
-    <class>wdp.entities.ready.Right</class>
-    <class>wdp.entities.ready.Operation</class>
-    <class>wdp.entities.ready.Team</class>
-    <class>wdp.entities.ready.Project</class>
-    <class>wdp.entities.ready.Todo</class>
-    <class>wdp.entities.ready.Post</class>
-    <class>wdp.entities.ready.Assignment</class>
-    <class>wdp.entities.ready.Note</class>
-    <class>wdp.entities.ready.Settings</class>
     <class>wdp.entities.raw.Project</class>
     <class>wdp.entities.raw.Worker</class>
     <class>wdp.entities.raw.Assignment</class>
@@ -31,11 +19,9 @@
       <property name="toplink.jdbc.user" value="sysdba"/>
       <property name="toplink.jdbc.password" value="masterkey"/>
       <!-- <property name="toplink.jdbc.url" value="jdbc:firebirdsql:localhost:/home/robson/Projects/workdayplanner/db/db.fdb"/> -->
-      <property name="toplink.jdbc.url" value="jdbc:firebirdsql:localhost:D:/Projects/workdayplanner/db/db.fdb"/>
+      <property name="toplink.jdbc.url" value="jdbc:firebirdsql:localhost:c:/Projects/workdayplanner/db/db.fdb"/>
       <property name="toplink.jdbc.driver" value="org.firebirdsql.jdbc.FBDriver"/>
       <property name="toplink.target-database" value="Oracle"/>
-     --&gt;
-
-      !-- </properties>
+    </properties>
   </persistence-unit>
 </persistence>
