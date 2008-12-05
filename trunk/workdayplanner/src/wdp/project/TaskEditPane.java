@@ -188,7 +188,7 @@ public class TaskEditPane extends javax.swing.JPanel {
             //jTextFieldProject.setText(aTask.getIdProject().getName());
             jProject.setObject(aTask.getIdProject());
             jTextFieldEstimation.setText(aTask.getCurrentEstimation().toString());
-            jTextFieldMood.setText(aTask.getMood().toString());
+            jTextFieldMood.setText(""+aTask.getMood());
             jDateChooserStart.setDate(aTask.getStarted());
             jDateChooserFinish.setDate(aTask.getFinish());
             jTextPaneDescription.setText(aTask.getDescription());

@@ -30,8 +30,9 @@ public class Right implements Serializable {
     @Basic(optional = false)
     @Column(name = "ID", nullable = false)
     private Integer id;
-    @Column(name = "ALLOWED")
-    private Short allowed;
+    @Basic(optional = false)
+    @Column(name = "ALLOWED", nullable = false)
+    private short allowed;
     @JoinColumn(name = "ID_OPERATION", referencedColumnName = "ID")
     @ManyToOne
     private Operation idOperation;
@@ -49,6 +50,11 @@ public class Right implements Serializable {
         this.id = id;
     }
 
+    public Right(Integer id, short allowed) {
+        this.id = id;
+        this.allowed = allowed;
+    }
+
     public Integer getId() {
         return id;
     }
@@ -57,11 +63,11 @@ public class Right implements Serializable {
         this.id = id;
     }
 
-    public Short getAllowed() {
+    public short getAllowed() {
         return allowed;
     }
 
-    public void setAllowed(Short allowed) {
+    public void setAllowed(short allowed) {
         this.allowed = allowed;
     }
 

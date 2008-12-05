@@ -43,16 +43,12 @@ public class DbConnectionFrame extends javax.swing.JPanel {
 
         setName("Form"); // NOI18N
 
-        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(wdp.WdpApp.class).getContext().getResourceMap(DbConnectionFrame.class);
-        jLabel1.setText(resourceMap.getString("jLabel1.text")); // NOI18N
         jLabel1.setName("jLabel1"); // NOI18N
 
-        jTextFieldDbUrl.setText(resourceMap.getString("jTextFieldDbUrl.text")); // NOI18N
         jTextFieldDbUrl.setName("jTextFieldDbUrl"); // NOI18N
 
         javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance(wdp.WdpApp.class).getContext().getActionMap(DbConnectionFrame.class, this);
         jButtonSave.setAction(actionMap.get("saveDbConnection")); // NOI18N
-        jButtonSave.setText(resourceMap.getString("jButtonSave.text")); // NOI18N
         jButtonSave.setName("jButtonSave"); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -65,7 +61,7 @@ public class DbConnectionFrame extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextFieldDbUrl, javax.swing.GroupLayout.DEFAULT_SIZE, 395, Short.MAX_VALUE))
+                        .addComponent(jTextFieldDbUrl, javax.swing.GroupLayout.DEFAULT_SIZE, 377, Short.MAX_VALUE))
                     .addComponent(jButtonSave, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
         );
@@ -76,7 +72,7 @@ public class DbConnectionFrame extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jTextFieldDbUrl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 262, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 125, Short.MAX_VALUE)
                 .addComponent(jButtonSave)
                 .addContainerGap())
         );
@@ -86,6 +82,7 @@ public class DbConnectionFrame extends javax.swing.JPanel {
     public void saveDbConnection() {
         document.setDbUrl(jTextFieldDbUrl.getText());
         document.save();
+        this.setVisible(false);
     }
 
     /**

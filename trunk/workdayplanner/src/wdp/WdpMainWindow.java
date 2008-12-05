@@ -20,6 +20,7 @@ import wdp.project.ProjectAndTaskFrame;
 import wdp.project.ProjectEditFrame;
 import wdp.project.ProjectTreePane;
 import wdp.project.TaskEditFrame;
+import wdp.settings.DbConnectionFrame;
 import wdp.worker.PostEditFrame;
 import wdp.worker.TeamEditFrame;
 
@@ -360,7 +361,21 @@ public class WdpMainWindow extends FrameView {
     private boolean saveNeeded;
 
     private void initMainPane() {
+        testDbConnection();
         ProjectAndTaskFrame projectAndTaskFrame = new ProjectAndTaskFrame();
         setComponent(projectAndTaskFrame);
+    }
+
+    private void testDbConnection() {
+        try{
+        javax.persistence.EntityManager entityManager = 
+                javax.persistence.Persistence.createEntityManagerFactory("db.fdbPU").createEntityManager();
+        } catch (Exception ex) {
+            JFrame frame = new JFrame();
+            frame.setContentPane(new DbConnectionFrame());
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            frame.pack();
+            frame.setVisible(true);
+        }
     }
 }

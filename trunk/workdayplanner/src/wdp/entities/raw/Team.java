@@ -6,7 +6,7 @@
 package wdp.entities.raw;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -31,16 +31,22 @@ public class Team implements Serializable {
     @Basic(optional = false)
     @Column(name = "ID", nullable = false)
     private Integer id;
-    @Column(name = "NAME", length = 255)
+    @Basic(optional = false)
+    @Column(name = "NAME", nullable = false, length = 255)
     private String name;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idTeam")
-    private List<Worker> workerCollection;
+    private Collection<Worker> workerCollection;
 
     public Team() {
     }
 
     public Team(Integer id) {
         this.id = id;
+    }
+
+    public Team(Integer id, String name) {
+        this.id = id;
+        this.name = name;
     }
 
     public Integer getId() {
@@ -59,11 +65,11 @@ public class Team implements Serializable {
         this.name = name;
     }
 
-    public List<Worker> getWorkerCollection() {
+    public Collection<Worker> getWorkerCollection() {
         return workerCollection;
     }
 
-    public void setWorkerCollection(List<Worker> workerCollection) {
+    public void setWorkerCollection(Collection<Worker> workerCollection) {
         this.workerCollection = workerCollection;
     }
 

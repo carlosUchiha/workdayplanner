@@ -32,7 +32,8 @@ public class Note implements Serializable {
     @Basic(optional = false)
     @Column(name = "ID", nullable = false)
     private Integer id;
-    @Column(name = "TITLE", length = 255)
+    @Basic(optional = false)
+    @Column(name = "TITLE", nullable = false, length = 255)
     private String title;
     @Column(name = "DESCRIPTION", length = 1000)
     private String description;
@@ -60,8 +61,9 @@ public class Note implements Serializable {
         this.id = id;
     }
 
-    public Note(Integer id, Date created, String typename, int idPosition, short privateOnly) {
+    public Note(Integer id, String title, Date created, String typename, int idPosition, short privateOnly) {
         this.id = id;
+        this.title = title;
         this.created = created;
         this.typename = typename;
         this.idPosition = idPosition;

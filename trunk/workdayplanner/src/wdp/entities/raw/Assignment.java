@@ -30,8 +30,9 @@ public class Assignment implements Serializable {
     @Basic(optional = false)
     @Column(name = "ID", nullable = false)
     private Integer id;
-    @Column(name = "SKILL")
-    private Integer skill;
+    @Basic(optional = false)
+    @Column(name = "SKILL", nullable = false)
+    private int skill;
     @JoinColumn(name = "ID_POST", referencedColumnName = "ID", nullable = false)
     @ManyToOne(optional = false)
     private Post idPost;
@@ -49,6 +50,11 @@ public class Assignment implements Serializable {
         this.id = id;
     }
 
+    public Assignment(Integer id, int skill) {
+        this.id = id;
+        this.skill = skill;
+    }
+
     public Integer getId() {
         return id;
     }
@@ -57,11 +63,11 @@ public class Assignment implements Serializable {
         this.id = id;
     }
 
-    public Integer getSkill() {
+    public int getSkill() {
         return skill;
     }
 
-    public void setSkill(Integer skill) {
+    public void setSkill(int skill) {
         this.skill = skill;
     }
 
