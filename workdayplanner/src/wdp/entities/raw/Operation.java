@@ -6,7 +6,7 @@
 package wdp.entities.raw;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -30,22 +30,34 @@ public class Operation implements Serializable {
     @Basic(optional = false)
     @Column(name = "ID", nullable = false)
     private Integer id;
-    @Column(name = "OPERATION_NAME", length = 255)
+    @Basic(optional = false)
+    @Column(name = "OPERATION_NAME", nullable = false, length = 255)
     private String operationName;
-    @Column(name = "LOGGING")
-    private Short logging;
-    @Column(name = "IS_READ")
-    private Short isRead;
-    @Column(name = "IS_WRITE")
-    private Short isWrite;
+    @Basic(optional = false)
+    @Column(name = "LOGGING", nullable = false)
+    private short logging;
+    @Basic(optional = false)
+    @Column(name = "IS_READ", nullable = false)
+    private short isRead;
+    @Basic(optional = false)
+    @Column(name = "IS_WRITE", nullable = false)
+    private short isWrite;
     @OneToMany(mappedBy = "idOperation")
-    private List<Right> rightCollection;
+    private Collection<Right> rightCollection;
 
     public Operation() {
     }
 
     public Operation(Integer id) {
         this.id = id;
+    }
+
+    public Operation(Integer id, String operationName, short logging, short isRead, short isWrite) {
+        this.id = id;
+        this.operationName = operationName;
+        this.logging = logging;
+        this.isRead = isRead;
+        this.isWrite = isWrite;
     }
 
     public Integer getId() {
@@ -64,35 +76,35 @@ public class Operation implements Serializable {
         this.operationName = operationName;
     }
 
-    public Short getLogging() {
+    public short getLogging() {
         return logging;
     }
 
-    public void setLogging(Short logging) {
+    public void setLogging(short logging) {
         this.logging = logging;
     }
 
-    public Short getIsRead() {
+    public short getIsRead() {
         return isRead;
     }
 
-    public void setIsRead(Short isRead) {
+    public void setIsRead(short isRead) {
         this.isRead = isRead;
     }
 
-    public Short getIsWrite() {
+    public short getIsWrite() {
         return isWrite;
     }
 
-    public void setIsWrite(Short isWrite) {
+    public void setIsWrite(short isWrite) {
         this.isWrite = isWrite;
     }
 
-    public List<Right> getRightCollection() {
+    public Collection<Right> getRightCollection() {
         return rightCollection;
     }
 
-    public void setRightCollection(List<Right> rightCollection) {
+    public void setRightCollection(Collection<Right> rightCollection) {
         this.rightCollection = rightCollection;
     }
 

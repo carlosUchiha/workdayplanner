@@ -3,9 +3,11 @@
  */
 package wdp;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.logging.Level;
 import java.util.logging.LogManager;
+import java.util.logging.Logger;
 import org.jdesktop.application.Application;
 import org.jdesktop.application.SingleFrameApplication;
 
@@ -22,10 +24,14 @@ public class WdpApp extends SingleFrameApplication {
      */
     @Override
     protected void startup() {
-        InputStream str = new InputStream();
-        LogManager.getLogManager().readConfiguration(str);
-        wdpMainWindow = new WdpMainWindow(this);
-        show(wdpMainWindow);
+        try {
+             InputStream is = getClass().getResourceAsStream("META-INF/logger.properties");
+            //LogManager.getLogManager().readConfiguration(str);
+            wdpMainWindow = new WdpMainWindow(this);
+            show(wdpMainWindow);
+        } catch (SecurityException ex) {
+            Logger.getLogger(WdpApp.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

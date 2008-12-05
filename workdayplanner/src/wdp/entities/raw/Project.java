@@ -6,8 +6,8 @@
 package wdp.entities.raw;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
-import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -47,8 +47,9 @@ public class Project implements Serializable {
     @Basic(optional = false)
     @Column(name = "COMPLETED", nullable = false)
     private int completed;
-    @Column(name = "RECURRING")
-    private Short recurring;
+    @Basic(optional = false)
+    @Column(name = "RECURRING", nullable = false)
+    private short recurring;
     @Column(name = "STARTED")
     @Temporal(TemporalType.TIMESTAMP)
     private Date started;
@@ -61,16 +62,16 @@ public class Project implements Serializable {
     @Column(name = "ESTIMATION")
     private Integer estimation;
     @OneToMany(mappedBy = "idProject")
-    private List<Right> rightCollection;
+    private Collection<Right> rightCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idProject")
-    private List<Assignment> assignmentCollection;
+    private Collection<Assignment> assignmentCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idProject")
-    private List<Task> taskCollection;
+    private Collection<Task> taskCollection;
     @JoinColumn(name = "ID_COST", referencedColumnName = "ID", nullable = false)
     @ManyToOne(optional = false)
     private Cost idCost;
     @OneToMany(mappedBy = "idParrent")
-    private List<Project> projectCollection;
+    private Collection<Project> projectCollection;
     @JoinColumn(name = "ID_PARRENT", referencedColumnName = "ID")
     @ManyToOne
     private Project idParrent;
@@ -82,10 +83,11 @@ public class Project implements Serializable {
         this.id = id;
     }
 
-    public Project(Integer id, String name, int completed) {
+    public Project(Integer id, String name, int completed, short recurring) {
         this.id = id;
         this.name = name;
         this.completed = completed;
+        this.recurring = recurring;
     }
 
     public Integer getId() {
@@ -136,11 +138,11 @@ public class Project implements Serializable {
         this.completed = completed;
     }
 
-    public Short getRecurring() {
+    public short getRecurring() {
         return recurring;
     }
 
-    public void setRecurring(Short recurring) {
+    public void setRecurring(short recurring) {
         this.recurring = recurring;
     }
 
@@ -176,27 +178,27 @@ public class Project implements Serializable {
         this.estimation = estimation;
     }
 
-    public List<Right> getRightCollection() {
+    public Collection<Right> getRightCollection() {
         return rightCollection;
     }
 
-    public void setRightCollection(List<Right> rightCollection) {
+    public void setRightCollection(Collection<Right> rightCollection) {
         this.rightCollection = rightCollection;
     }
 
-    public List<Assignment> getAssignmentCollection() {
+    public Collection<Assignment> getAssignmentCollection() {
         return assignmentCollection;
     }
 
-    public void setAssignmentCollection(List<Assignment> assignmentCollection) {
+    public void setAssignmentCollection(Collection<Assignment> assignmentCollection) {
         this.assignmentCollection = assignmentCollection;
     }
 
-    public List<Task> getTaskCollection() {
+    public Collection<Task> getTaskCollection() {
         return taskCollection;
     }
 
-    public void setTaskCollection(List<Task> taskCollection) {
+    public void setTaskCollection(Collection<Task> taskCollection) {
         this.taskCollection = taskCollection;
     }
 
@@ -208,11 +210,11 @@ public class Project implements Serializable {
         this.idCost = idCost;
     }
 
-    public List<Project> getProjectCollection() {
+    public Collection<Project> getProjectCollection() {
         return projectCollection;
     }
 
-    public void setProjectCollection(List<Project> projectCollection) {
+    public void setProjectCollection(Collection<Project> projectCollection) {
         this.projectCollection = projectCollection;
     }
 

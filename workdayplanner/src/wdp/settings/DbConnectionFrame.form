@@ -25,7 +25,7 @@
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jTextFieldDbUrl" pref="395" max="32767" attributes="0"/>
+                      <Component id="jTextFieldDbUrl" pref="377" max="32767" attributes="0"/>
                   </Group>
                   <Component id="jButtonSave" alignment="1" min="-2" max="-2" attributes="0"/>
               </Group>
@@ -41,7 +41,7 @@
                   <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jTextFieldDbUrl" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="262" max="32767" attributes="0"/>
+              <EmptySpace pref="125" max="32767" attributes="0"/>
               <Component id="jButtonSave" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -51,13 +51,11 @@
   <SubComponents>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
-        <Property name="text" type="java.lang.String" resourceKey="jLabel1.text"/>
         <Property name="name" type="java.lang.String" value="jLabel1" noResource="true"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jTextFieldDbUrl">
       <Properties>
-        <Property name="text" type="java.lang.String" resourceKey="jTextFieldDbUrl.text"/>
         <Property name="name" type="java.lang.String" value="jTextFieldDbUrl" noResource="true"/>
       </Properties>
     </Component>
@@ -66,7 +64,6 @@
         <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.swingapp.ActionEditor">
           <action class="wdp.settings.DbConnectionFrame" id="saveDbConnection" methodName="saveDbConnection"/>
         </Property>
-        <Property name="text" type="java.lang.String" resourceKey="jButtonSave.text"/>
         <Property name="name" type="java.lang.String" value="jButtonSave" noResource="true"/>
       </Properties>
     </Component>

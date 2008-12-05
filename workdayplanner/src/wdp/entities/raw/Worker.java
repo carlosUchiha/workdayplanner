@@ -6,8 +6,8 @@
 package wdp.entities.raw;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
-import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -75,15 +75,15 @@ public class Worker implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date fired;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idWorker")
-    private List<Right> rightCollection;
+    private Collection<Right> rightCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idWorker")
-    private List<Assignment> assignmentCollection;
+    private Collection<Assignment> assignmentCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idWorker")
-    private List<Task> taskCollection;
+    private Collection<Task> taskCollection;
     @OneToMany(mappedBy = "idWorker")
-    private List<Settings> settingsCollection;
+    private Collection<Settings> settingsCollection;
     @OneToMany(mappedBy = "idAuthor")
-    private List<Note> noteCollection;
+    private Collection<Note> noteCollection;
     @JoinColumn(name = "ID_POST", referencedColumnName = "ID", nullable = false)
     @ManyToOne(optional = false)
     private Post idPost;
@@ -91,7 +91,7 @@ public class Worker implements Serializable {
     @ManyToOne(optional = false)
     private Team idTeam;
     @OneToMany(mappedBy = "idBoss")
-    private List<Worker> workerCollection;
+    private Collection<Worker> workerCollection;
     @JoinColumn(name = "ID_BOSS", referencedColumnName = "ID")
     @ManyToOne
     private Worker idBoss;
@@ -246,43 +246,43 @@ public class Worker implements Serializable {
         this.fired = fired;
     }
 
-    public List<Right> getRightCollection() {
+    public Collection<Right> getRightCollection() {
         return rightCollection;
     }
 
-    public void setRightCollection(List<Right> rightCollection) {
+    public void setRightCollection(Collection<Right> rightCollection) {
         this.rightCollection = rightCollection;
     }
 
-    public List<Assignment> getAssignmentCollection() {
+    public Collection<Assignment> getAssignmentCollection() {
         return assignmentCollection;
     }
 
-    public void setAssignmentCollection(List<Assignment> assignmentCollection) {
+    public void setAssignmentCollection(Collection<Assignment> assignmentCollection) {
         this.assignmentCollection = assignmentCollection;
     }
 
-    public List<Task> getTaskCollection() {
+    public Collection<Task> getTaskCollection() {
         return taskCollection;
     }
 
-    public void setTaskCollection(List<Task> taskCollection) {
+    public void setTaskCollection(Collection<Task> taskCollection) {
         this.taskCollection = taskCollection;
     }
 
-    public List<Settings> getSettingsCollection() {
+    public Collection<Settings> getSettingsCollection() {
         return settingsCollection;
     }
 
-    public void setSettingsCollection(List<Settings> settingsCollection) {
+    public void setSettingsCollection(Collection<Settings> settingsCollection) {
         this.settingsCollection = settingsCollection;
     }
 
-    public List<Note> getNoteCollection() {
+    public Collection<Note> getNoteCollection() {
         return noteCollection;
     }
 
-    public void setNoteCollection(List<Note> noteCollection) {
+    public void setNoteCollection(Collection<Note> noteCollection) {
         this.noteCollection = noteCollection;
     }
 
@@ -302,11 +302,11 @@ public class Worker implements Serializable {
         this.idTeam = idTeam;
     }
 
-    public List<Worker> getWorkerCollection() {
+    public Collection<Worker> getWorkerCollection() {
         return workerCollection;
     }
 
-    public void setWorkerCollection(List<Worker> workerCollection) {
+    public void setWorkerCollection(Collection<Worker> workerCollection) {
         this.workerCollection = workerCollection;
     }
 

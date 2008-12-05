@@ -32,7 +32,8 @@ public class Task implements Serializable {
     @Basic(optional = false)
     @Column(name = "ID", nullable = false)
     private Integer id;
-    @Column(name = "DESCRIPTION", length = 255)
+    @Basic(optional = false)
+    @Column(name = "DESCRIPTION", nullable = false, length = 255)
     private String description;
     @Column(name = "STARTED")
     @Temporal(TemporalType.TIMESTAMP)
@@ -40,8 +41,9 @@ public class Task implements Serializable {
     @Column(name = "FINISH")
     @Temporal(TemporalType.TIMESTAMP)
     private Date finish;
-    @Column(name = "MOOD")
-    private Integer mood;
+    @Basic(optional = false)
+    @Column(name = "MOOD", nullable = false)
+    private int mood;
     @Column(name = "CURRENT_ESTIMATION")
     private Integer currentEstimation;
     @JoinColumn(name = "ID_PROJECT", referencedColumnName = "ID", nullable = false)
@@ -56,6 +58,12 @@ public class Task implements Serializable {
 
     public Task(Integer id) {
         this.id = id;
+    }
+
+    public Task(Integer id, String description, int mood) {
+        this.id = id;
+        this.description = description;
+        this.mood = mood;
     }
 
     public Integer getId() {
@@ -90,11 +98,11 @@ public class Task implements Serializable {
         this.finish = finish;
     }
 
-    public Integer getMood() {
+    public int getMood() {
         return mood;
     }
 
-    public void setMood(Integer mood) {
+    public void setMood(int mood) {
         this.mood = mood;
     }
 

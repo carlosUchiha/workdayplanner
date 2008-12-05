@@ -6,7 +6,7 @@
 package wdp.entities.raw;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -33,18 +33,26 @@ public class Cost implements Serializable {
     private Integer id;
     @Column(name = "COST", precision = 15, scale = 15)
     private Double cost;
-    @Column(name = "NAME", length = 255)
+    @Basic(optional = false)
+    @Column(name = "NAME", nullable = false, length = 255)
     private String name;
-    @Column(name = "INCLUDE")
-    private Short include;
+    @Basic(optional = false)
+    @Column(name = "INCLUDE", nullable = false)
+    private short include;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCost")
-    private List<Project> projectCollection;
+    private Collection<Project> projectCollection;
 
     public Cost() {
     }
 
     public Cost(Integer id) {
         this.id = id;
+    }
+
+    public Cost(Integer id, String name, short include) {
+        this.id = id;
+        this.name = name;
+        this.include = include;
     }
 
     public Integer getId() {
@@ -71,19 +79,19 @@ public class Cost implements Serializable {
         this.name = name;
     }
 
-    public Short getInclude() {
+    public short getInclude() {
         return include;
     }
 
-    public void setInclude(Short include) {
+    public void setInclude(short include) {
         this.include = include;
     }
 
-    public List<Project> getProjectCollection() {
+    public Collection<Project> getProjectCollection() {
         return projectCollection;
     }
 
-    public void setProjectCollection(List<Project> projectCollection) {
+    public void setProjectCollection(Collection<Project> projectCollection) {
         this.projectCollection = projectCollection;
     }
 

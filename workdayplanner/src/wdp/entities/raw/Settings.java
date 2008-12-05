@@ -30,11 +30,14 @@ public class Settings implements Serializable {
     @Basic(optional = false)
     @Column(name = "ID", nullable = false)
     private Integer id;
-    @Column(name = "KEYWORD", length = 255)
+    @Basic(optional = false)
+    @Column(name = "KEYWORD", nullable = false, length = 255)
     private String keyword;
-    @Column(name = "VALUE_STRING", length = 255)
+    @Basic(optional = false)
+    @Column(name = "VALUE_STRING", nullable = false, length = 255)
     private String valueString;
-    @Column(name = "DEFAULT_ VALUE", length = 255)
+    @Basic(optional = false)
+    @Column(name = "DEFAULT_ VALUE", nullable = false, length = 255)
     private String defaultValue;
     @Column(name = "DESCRIPTION", length = 1000)
     private String description;
@@ -47,6 +50,13 @@ public class Settings implements Serializable {
 
     public Settings(Integer id) {
         this.id = id;
+    }
+
+    public Settings(Integer id, String keyword, String valueString, String defaultValue) {
+        this.id = id;
+        this.keyword = keyword;
+        this.valueString = valueString;
+        this.defaultValue = defaultValue;
     }
 
     public Integer getId() {
