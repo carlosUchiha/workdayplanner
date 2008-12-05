@@ -56,9 +56,22 @@ public class JProject extends javax.swing.JComponent {
         return object;
     }
 
-    public void setObject(Project object) {
+    public void setObject(wdp.entities.ready.Project object) {
         Project oldValue = this.object;
         this.object = object;
+        if (object != null) {
+            jTextFieldValue.setText(object.getName());
+            jTextFieldValue.setToolTipText(object.getDescription());
+        } else {
+            jTextFieldValue.setText("");
+            jTextFieldValue.setToolTipText("");
+        }
+        //changeSupport.firePropertyChange("object", oldValue, object);
+    }
+
+    void setObject(wdp.entities.raw.Project object) {
+        Project oldValue = this.object;
+        this.object = (Project) object;
         if (object != null) {
             jTextFieldValue.setText(object.getName());
             jTextFieldValue.setToolTipText(object.getDescription());
@@ -92,7 +105,7 @@ public class JProject extends javax.swing.JComponent {
   private javax.swing.JButton jButtonSelect;
   private javax.swing.JTextField jTextFieldValue;
   // End of variables declaration//GEN-END:variables
-    private Project object = null;
+    private wdp.entities.ready.Project object = null;
     //@Transient
     //private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
 }
