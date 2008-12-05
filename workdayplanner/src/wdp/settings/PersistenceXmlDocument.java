@@ -5,7 +5,9 @@
 
 package wdp.settings;
 
+import com.sun.org.apache.xml.internal.serialize.XMLSerializer;
 import java.io.IOException;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -24,6 +26,7 @@ public class PersistenceXmlDocument {
 
     private Document doc = null;
     private String dbUrl = null;
+    private static final String fileName = "src/META-INF/persistence.xml";
     private static Logger log = Logger.getLogger(PersistenceXmlDocument.class.getName());
 
     public PersistenceXmlDocument() throws ParserConfigurationException, SAXException, IOException {
@@ -35,26 +38,34 @@ public class PersistenceXmlDocument {
         factory.setIgnoringComments(true);
 
         factory.setIgnoringElementContentWhitespace(true);
-        factory.setValidating(true);
+        factory.setValidating(false);
         DocumentBuilder builder = factory.newDocumentBuilder();
 
-        InputSource source = new InputSource("persistence.xml");
+        InputSource source = new InputSource(fileName);
         doc = builder.parse(source);
         Element root = doc.getDocumentElement(); //persistence
         Element persistenceUnit = (Element)root.getElementsByTagName("persistence-unit").item(0);
         Element properties = (Element)persistenceUnit.getElementsByTagName("properties").item(0);
-        NodeList propList = properties.getChildNodes();
+        NodeList propList = properties.getElementsByTagName("property"); // lista wlasciwosci
         for(int i=0; i<propList.getLength(); i++) {
             Element property = (Element)propList.item(i);
             if(property.getAttribute("name").matches("toplink.jdbc.url")) {
                 dbUrl = property.getAttribute("value").toString();
-                log.fine("Znalazłem właściwość toplink.jdbc.url: "+dbUrl);
+                log.warning("Znalazłem właściwość toplink.jdbc.url: "+dbUrl);
             }
         }
     }
 
     void save() {
-        // czy w ogóle coś trzeba tu robić??
+        try {
+            XMLSerializer serializer = new XMLSerializer();
+            serializer.setOutputCharStream(new java.io.FileWriter(fileName));
+            serializer.serialize(doc);
+        } catch (IOException ex1) {
+            log.log(Level.SEVERE, null, ex1);
+        } catch (Exception ex2) {
+            ex2.printStackTrace();
+        }
     }
 
     /**
@@ -73,12 +84,12 @@ public class PersistenceXmlDocument {
         Element root = doc.getDocumentElement(); //persistence
         Element persistenceUnit = (Element)root.getElementsByTagName("persistence-unit").item(0);
         Element properties = (Element)persistenceUnit.getElementsByTagName("properties").item(0);
-        NodeList propList = properties.getChildNodes();
+        NodeList propList = properties.getElementsByTagName("property"); // lista wlasciwosci
         for(int i=0; i<propList.getLength(); i++) {
             Element property = (Element)propList.item(i);
             if(property.getAttribute("name").matches("toplink.jdbc.url")) {
                 property.setAttribute("value", dbUrl);
-                log.fine("Wpisałem właściwość toplink.jdbc.url: "+dbUrl);
+                log.warning("Wpisałem właściwość toplink.jdbc.url: "+dbUrl);
             }
         }
         this.dbUrl = dbUrl;
