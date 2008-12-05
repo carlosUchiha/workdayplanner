@@ -3,6 +3,9 @@
  */
 package wdp;
 
+import java.io.InputStream;
+import java.util.logging.Level;
+import java.util.logging.LogManager;
 import org.jdesktop.application.Application;
 import org.jdesktop.application.SingleFrameApplication;
 
@@ -19,6 +22,8 @@ public class WdpApp extends SingleFrameApplication {
      */
     @Override
     protected void startup() {
+        InputStream str = new InputStream();
+        LogManager.getLogManager().readConfiguration(str);
         wdpMainWindow = new WdpMainWindow(this);
         show(wdpMainWindow);
     }
