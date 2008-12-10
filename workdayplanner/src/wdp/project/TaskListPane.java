@@ -63,7 +63,7 @@ public class TaskListPane extends JPanel {
         org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, list, masterTable);
         org.jdesktop.swingbinding.JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${idProject}"));
         columnBinding.setColumnName("Id Project");
-        columnBinding.setColumnClass(wdp.entities.ready.Project.class);
+        columnBinding.setColumnClass(wdp.entities.raw.Project.class);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${started}"));
         columnBinding.setColumnName("Started");
         columnBinding.setColumnClass(java.util.Date.class);
@@ -284,7 +284,7 @@ private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     private javax.persistence.EntityManager entityManager;
     private com.toedter.calendar.JDateChooser jDateChooserToday;
     private javax.swing.JPopupMenu jPopupMenu1;
-    private java.util.List<wdp.entities.ready.Task> list;
+    private java.util.List<wdp.entities.raw.Task> list;
     private javax.swing.JScrollPane masterScrollPane;
     private javax.swing.JTable masterTable;
     private javax.persistence.Query query;

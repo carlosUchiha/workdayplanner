@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ReportTest" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="30" rightMargin="30" topMargin="20" bottomMargin="20">
+	<property name="ireport.scriptlethandling" value="0"/>
+	<property name="ireport.encoding" value="UTF-8"/>
+	<import value="net.sf.jasperreports.engine.*"/>
+	<import value="java.util.*"/>
+	<import value="net.sf.jasperreports.engine.data.*"/>
+	<queryString language="ejbql">
+		<![CDATA[Select w From Worker w Order By w.surname, w.firstname]]>
+	</queryString>
+	<field name="assignmentCollection" class="java.util.Collection"/>
+	<field name="birthday" class="java.util.Date"/>
+	<field name="class" class="java.lang.Class"/>
+	<field name="email" class="java.lang.String"/>
+	<field name="fired" class="java.util.Date"/>
+	<field name="firstname" class="java.lang.String"/>
+	<field name="hired" class="java.util.Date"/>
+	<field name="id" class="java.lang.Integer"/>
+	<field name="idBoss" class="wdp.entities.ready.Worker"/>
+	<field name="idPost" class="wdp.entities.ready.Post"/>
+	<field name="idTeam" class="wdp.entities.ready.Team"/>
+	<field name="im1" class="java.lang.String"/>
+	<field name="im2" class="java.lang.String"/>
+	<field name="im3" class="java.lang.String"/>
+	<field name="loginName" class="java.lang.String"/>
+	<field name="loginPassword" class="java.lang.String"/>
+	<field name="noteCollection" class="java.util.Collection"/>
+	<field name="office" class="java.lang.String"/>
+	<field name="rightCollection" class="java.util.Collection"/>
+	<field name="settingsCollection" class="java.util.Collection"/>
+	<field name="surname" class="java.lang.String"/>
+	<field name="taskCollection" class="java.util.Collection"/>
+	<field name="telHome" class="java.lang.String"/>
+	<field name="telMobile" class="java.lang.String"/>
+	<field name="telWork" class="java.lang.String"/>
+	<field name="workerCollection" class="java.util.Collection"/>
+	<field name="www" class="java.lang.String"/>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="50">
+			<staticText>
+				<reportElement key="staticText-1" x="0" y="2" width="170" height="19"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Workers list]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="50"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="30"/>
+	</columnHeader>
+	<detail>
+		<band height="27">
+			<textField isBlankWhenNull="false" hyperlinkType="None">
+				<reportElement key="textField" x="182" y="0" width="117" height="18"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{email}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false" hyperlinkType="None">
+				<reportElement key="textField" x="0" y="0" width="82" height="18"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{firstname}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false" hyperlinkType="None">
+				<reportElement key="textField" x="82" y="0" width="100" height="18"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{surname}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false" hyperlinkType="None">
+				<reportElement key="textField" x="299" y="0" width="77" height="18"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{office}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false" hyperlinkType="None">
+				<reportElement key="textField" x="376" y="0" width="71" height="18"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{telWork}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false" hyperlinkType="None">
+				<reportElement key="textField" x="447" y="0" width="88" height="18"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[""]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="30"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="50"/>
+	</pageFooter>
+	<lastPageFooter>
+		<band height="50"/>
+	</lastPageFooter>
+	<summary>
+		<band height="50"/>
+	</summary>
+</jasperReport>

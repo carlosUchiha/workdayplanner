@@ -20,6 +20,7 @@ import wdp.project.ProjectAndTaskFrame;
 import wdp.project.ProjectEditFrame;
 import wdp.project.ProjectTreePane;
 import wdp.project.TaskEditFrame;
+import wdp.reports.ReportLauncher;
 import wdp.settings.DbConnectionFrame;
 import wdp.worker.PostEditFrame;
 import wdp.worker.TeamEditFrame;
@@ -120,6 +121,8 @@ public class WdpMainWindow extends FrameView {
         jMenuItemTasks = new javax.swing.JMenuItem();
         jSeparator2 = new javax.swing.JSeparator();
         javax.swing.JMenuItem exitMenuItem = new javax.swing.JMenuItem();
+        jMenuTest = new javax.swing.JMenu();
+        jMenuItemReportTest = new javax.swing.JMenuItem();
         javax.swing.JMenu helpMenu = new javax.swing.JMenu();
         javax.swing.JMenuItem aboutMenuItem = new javax.swing.JMenuItem();
         statusPanel = new javax.swing.JPanel();
@@ -138,7 +141,7 @@ public class WdpMainWindow extends FrameView {
         );
         mainPanelLayout.setVerticalGroup(
             mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 286, Short.MAX_VALUE)
+            .addGap(0, 290, Short.MAX_VALUE)
         );
 
         menuBar.setName("menuBar"); // NOI18N
@@ -186,6 +189,20 @@ public class WdpMainWindow extends FrameView {
 
         menuBar.add(fileMenu);
 
+        jMenuTest.setText(resourceMap.getString("jMenuTest.text")); // NOI18N
+        jMenuTest.setName("jMenuTest"); // NOI18N
+
+        jMenuItemReportTest.setText(resourceMap.getString("jMenuItemReportTest.text")); // NOI18N
+        jMenuItemReportTest.setName("jMenuItemReportTest"); // NOI18N
+        jMenuItemReportTest.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemReportTestActionPerformed(evt);
+            }
+        });
+        jMenuTest.add(jMenuItemReportTest);
+
+        menuBar.add(jMenuTest);
+
         helpMenu.setText(resourceMap.getString("helpMenu.text")); // NOI18N
         helpMenu.setName("helpMenu"); // NOI18N
 
@@ -214,7 +231,7 @@ public class WdpMainWindow extends FrameView {
             .addGroup(statusPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(statusMessageLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 374, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 384, Short.MAX_VALUE)
                 .addComponent(progressBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(statusAnimationLabel)
@@ -236,6 +253,11 @@ public class WdpMainWindow extends FrameView {
         setMenuBar(menuBar);
         setStatusBar(statusPanel);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jMenuItemReportTestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemReportTestActionPerformed
+        ReportLauncher launcher = new ReportLauncher();
+        launcher.run();
+    }//GEN-LAST:event_jMenuItemReportTestActionPerformed
 
     @Action
     public void showAboutBox() {
@@ -344,9 +366,11 @@ public class WdpMainWindow extends FrameView {
     private javax.swing.JMenuItem jMenuItemCosts;
     private javax.swing.JMenuItem jMenuItemPosts;
     private javax.swing.JMenuItem jMenuItemProjects;
+    private javax.swing.JMenuItem jMenuItemReportTest;
     private javax.swing.JMenuItem jMenuItemTasks;
     private javax.swing.JMenuItem jMenuItemTeams;
     private javax.swing.JMenuItem jMenuItemWorkers;
+    private javax.swing.JMenu jMenuTest;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JMenuBar menuBar;
