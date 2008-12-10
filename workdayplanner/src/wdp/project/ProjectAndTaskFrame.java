@@ -8,8 +8,8 @@ import java.awt.EventQueue;
 import java.util.Date;
 import javax.swing.JFrame;
 import wdp.WdpApp;
-import wdp.entities.ready.Project;
-import wdp.entities.ready.Task;
+import wdp.entities.raw.Project;
+import wdp.entities.raw.Task;
 
 /**
  *

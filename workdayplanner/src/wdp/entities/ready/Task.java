@@ -23,6 +23,10 @@ public class Task extends wdp.entities.raw.Task {
         super();
     }
 
+    public Task(Project selected) {
+        throw new UnsupportedOperationException("Not yet implemented");
+    }
+
     public Task(wdp.entities.ready.Project selected) {
         throw new UnsupportedOperationException("Not yet implemented");
     }

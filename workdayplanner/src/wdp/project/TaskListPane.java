@@ -15,7 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import wdp.TimeCellRenderer;
-import wdp.entities.ready.Task;
+import wdp.entities.raw.Task;
 
 public class TaskListPane extends JPanel {
 
@@ -200,9 +200,9 @@ public class TaskListPane extends JPanel {
 
   private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
       int[] selected = masterTable.getSelectedRows();
-      List<wdp.entities.ready.Task> toRemove = new ArrayList<wdp.entities.ready.Task>(selected.length);
+      List<Task> toRemove = new ArrayList<Task>(selected.length);
       for (int idx = 0; idx < selected.length; idx++) {
-            wdp.entities.ready.Task t = list.get(masterTable.convertRowIndexToModel(selected[idx]));
+            Task t = list.get(masterTable.convertRowIndexToModel(selected[idx]));
           toRemove.add(t);
           entityManager.remove(t);
       }
