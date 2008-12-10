@@ -8,7 +8,7 @@ import javax.swing.JDialog;
 import org.jdesktop.application.Action;
 import wdp.SelectWinExitState;
 import wdp.WdpApp;
-import wdp.entities.ready.Task;
+import wdp.entities.raw.Task;
 
 /**
  *

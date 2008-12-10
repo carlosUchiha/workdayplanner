@@ -60,6 +60,10 @@ public class Task implements Serializable {
         this.id = id;
     }
 
+    public Task(Project selected) {
+        throw new UnsupportedOperationException("Not yet implemented");
+    }
+
     public Task(Integer id, String description, int mood) {
         this.id = id;
         this.description = description;
