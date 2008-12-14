@@ -1,13 +1,17 @@
 /*
+ * $Id$
  * JDateTimeChooser.java
- *
  * Created on 5 październik 2008, 08:44
  */
 
 package wdp.beans;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.util.Date;
+import java.util.logging.Logger;
 import javax.swing.JPopupMenu;
+import org.jdesktop.application.Action;
 
 /**
  *
@@ -43,6 +47,8 @@ public class JDateTimeChooser extends javax.swing.JPanel {
 
         setName("Form"); // NOI18N
 
+        javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance(wdp.WdpApp.class).getContext().getActionMap(JDateTimeChooser.class, this);
+        jButtonSelect.setAction(actionMap.get("selectDateTime")); // NOI18N
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(wdp.WdpApp.class).getContext().getResourceMap(JDateTimeChooser.class);
         jButtonSelect.setText(resourceMap.getString("jButtonSelect.text")); // NOI18N
         jButtonSelect.setName("jButtonSelect"); // NOI18N
@@ -52,7 +58,8 @@ public class JDateTimeChooser extends javax.swing.JPanel {
             }
         });
 
-        jTextFieldDateEditor.setText(resourceMap.getString("jTextFieldDateEditor.text")); // NOI18N
+        jTextFieldDateEditor.setToolTipText(resourceMap.getString("jTextFieldDateEditor.toolTipText")); // NOI18N
+        jTextFieldDateEditor.setDateFormatString(resourceMap.getString("jTextFieldDateEditor.dateFormatString")); // NOI18N
         jTextFieldDateEditor.setName("jTextFieldDateEditor"); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -60,29 +67,41 @@ public class JDateTimeChooser extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jTextFieldDateEditor, javax.swing.GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE)
+                .addComponent(jTextFieldDateEditor, javax.swing.GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButtonSelect))
+                .addComponent(jButtonSelect, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(jButtonSelect)
-                .addComponent(jTextFieldDateEditor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jButtonSelect, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTextFieldDateEditor, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
 private void jButtonSelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSelectActionPerformed
-    popup = new JPopupMenu();
-    popup.setLightWeightPopupEnabled(true);
-    dateTimePanel = new JDateTimePanel(selectedDate);
-    popup.add(dateTimePanel);
-    int x = jButtonSelect.getWidth() - (int) popup.getPreferredSize().getWidth();
-    int y = jButtonSelect.getY() + jButtonSelect.getHeight();
-    popup.show(jButtonSelect, x, y);
-    
+  
 }//GEN-LAST:event_jButtonSelectActionPerformed
 
+    @Action
+    public void selectDateTime() {
+        popup = new JPopupMenu();
+        popup.setLightWeightPopupEnabled(true);
+        dateTimePanel = new JDateTimePanel(selectedDate);
+        dateTimePanel.addPropertyChangeListener("date", new PropertyChangeListener() {
+            @Override
+            public void propertyChange(PropertyChangeEvent evt) {
+                log.info("Data zmieniona na : "+evt.getNewValue());
+                jTextFieldDateEditor.setDate((Date) evt.getNewValue());
+                jTextFieldDateEditor.repaint();
+                popup.setVisible(false);
+            }
+        });
+        popup.add(dateTimePanel);
+        int x = jButtonSelect.getWidth() - (int) popup.getPreferredSize().getWidth();
+        int y = jButtonSelect.getY() + jButtonSelect.getHeight();
+        popup.show(jButtonSelect, x, y);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonSelect;
@@ -91,5 +110,6 @@ private void jButtonSelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN
     private JPopupMenu popup = null;
     private JDateTimePanel dateTimePanel = null;
     private Date selectedDate = new Date();
+    private static Logger log = Logger.getLogger(JDateTimeChooser.class.getName());
     
 }

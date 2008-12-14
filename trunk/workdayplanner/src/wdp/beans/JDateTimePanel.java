@@ -1,12 +1,14 @@
 /*
+ * $Id$
  * JDateTimeChooser.java
- *
  * Created on 5 październik 2008, 08:35
  */
 
 package wdp.beans;
 
 import java.util.Date;
+import java.util.logging.Logger;
+import org.jdesktop.application.Action;
 
 /**
  *
@@ -48,6 +50,7 @@ public class JDateTimePanel extends javax.swing.JPanel {
 
         jCalendar1 = new com.toedter.calendar.JCalendar();
         jTimeChooser1 = new wdp.beans.JTimeChooser();
+        jButtonOk = new javax.swing.JButton();
 
         setName("Form"); // NOI18N
 
@@ -55,26 +58,45 @@ public class JDateTimePanel extends javax.swing.JPanel {
 
         jTimeChooser1.setName("jTimeChooser1"); // NOI18N
 
+        javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance(wdp.WdpApp.class).getContext().getActionMap(JDateTimePanel.class, this);
+        jButtonOk.setAction(actionMap.get("accept")); // NOI18N
+        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(wdp.WdpApp.class).getContext().getResourceMap(JDateTimePanel.class);
+        jButtonOk.setText(resourceMap.getString("jButtonOk.text")); // NOI18N
+        jButtonOk.setName("jButtonOk"); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jCalendar1, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
-            .addComponent(jTimeChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
+            .addComponent(jCalendar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jTimeChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jButtonOk))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jCalendar1, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jCalendar1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTimeChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButtonOk))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    @Action
+    public void accept() {
+        Date retVal = jCalendar1.getDate();
+        retVal.setHours(jTimeChooser1.getHour());
+        retVal.setMinutes(jTimeChooser1.getMinute());
+        firePropertyChange("date", jCalendar1.getDate(), retVal);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonOk;
     private com.toedter.calendar.JCalendar jCalendar1;
     private wdp.beans.JTimeChooser jTimeChooser1;
     // End of variables declaration//GEN-END:variables
+    private static Logger log = Logger.getLogger(JDateTimePanel.class.getName());
 }
