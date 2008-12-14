@@ -6,6 +6,7 @@ package wdp.project;
 
 import java.awt.EventQueue;
 import java.util.Iterator;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
@@ -65,9 +66,12 @@ public class ProjectTreePane extends javax.swing.JPanel {
 
   private void jTreeProjectsValueChanged(javax.swing.event.TreeSelectionEvent evt) {//GEN-FIRST:event_jTreeProjectsValueChanged
       Project oldSelected = selected;
-      selected = (Project) ((DefaultMutableTreeNode) evt.getPath().getLastPathComponent()).getUserObject();
-      System.out.println("Zaznaczono: " + evt.getPath() + " / zmiana:" + oldSelected + " na " + selected);
-      firePropertyChange("selected", oldSelected, selected);
+      Object selectedObject = ((DefaultMutableTreeNode) evt.getPath().getLastPathComponent()).getUserObject();
+      if(selectedObject instanceof Project ) {
+        selected = (Project) selectedObject;
+        log.fine("Zaznaczono: " + evt.getPath() + " / zmiana:" + oldSelected + " na " + selected);
+        firePropertyChange("selected", oldSelected, selected);
+      }
   }//GEN-LAST:event_jTreeProjectsValueChanged
   // Variables declaration - do not modify//GEN-BEGIN:variables
   private javax.persistence.EntityManager entityManager;
@@ -78,6 +82,7 @@ public class ProjectTreePane extends javax.swing.JPanel {
   // End of variables declaration//GEN-END:variables
     private DefaultMutableTreeNode top = new DefaultMutableTreeNode("Projects");
     private Project selected = null;
+    private static Logger log = Logger.getLogger(ProjectTreePane.class.getName());
 
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
