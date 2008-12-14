@@ -40,6 +40,8 @@ public class DbConnectionFrame extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jTextFieldDbUrl = new javax.swing.JTextField();
         jButtonSave = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jButtonCancel = new javax.swing.JButton();
 
         setName("Form"); // NOI18N
 
@@ -51,6 +53,14 @@ public class DbConnectionFrame extends javax.swing.JPanel {
         jButtonSave.setAction(actionMap.get("saveDbConnection")); // NOI18N
         jButtonSave.setName("jButtonSave"); // NOI18N
 
+        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(wdp.WdpApp.class).getContext().getResourceMap(DbConnectionFrame.class);
+        jLabel2.setText(resourceMap.getString("jLabel2.text")); // NOI18N
+        jLabel2.setName("jLabel2"); // NOI18N
+
+        jButtonCancel.setAction(actionMap.get("cancel")); // NOI18N
+        jButtonCancel.setText(resourceMap.getString("jButtonCancel.text")); // NOI18N
+        jButtonCancel.setName("jButtonCancel"); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -61,8 +71,13 @@ public class DbConnectionFrame extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextFieldDbUrl, javax.swing.GroupLayout.DEFAULT_SIZE, 377, Short.MAX_VALUE))
-                    .addComponent(jButtonSave, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 375, Short.MAX_VALUE)
+                            .addComponent(jTextFieldDbUrl, javax.swing.GroupLayout.DEFAULT_SIZE, 375, Short.MAX_VALUE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jButtonSave)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButtonCancel)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -72,8 +87,12 @@ public class DbConnectionFrame extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jTextFieldDbUrl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 125, Short.MAX_VALUE)
-                .addComponent(jButtonSave)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 105, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonCancel)
+                    .addComponent(jButtonSave))
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -82,7 +101,13 @@ public class DbConnectionFrame extends javax.swing.JPanel {
     public void saveDbConnection() {
         document.setDbUrl(jTextFieldDbUrl.getText());
         document.save();
-        this.setVisible(false);
+        //this.setVisible(false);
+        this.getParent().setVisible(false);
+    }
+
+    @Action
+    public void cancel() {
+        this.getParent().setVisible(false);
     }
 
     /**
@@ -116,8 +141,10 @@ public class DbConnectionFrame extends javax.swing.JPanel {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonCancel;
     private javax.swing.JButton jButtonSave;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JTextField jTextFieldDbUrl;
     // End of variables declaration//GEN-END:variables
     private static Logger log = Logger.getLogger(DbConnectionFrame.class.getName());

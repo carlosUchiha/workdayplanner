@@ -111,6 +111,32 @@
             </MenuItem>
           </SubComponents>
         </Menu>
+        <Menu class="javax.swing.JMenu" name="jMenuSettings">
+          <Properties>
+            <Property name="text" type="java.lang.String" resourceKey="jMenuSettings.text"/>
+            <Property name="name" type="java.lang.String" value="jMenuSettings" noResource="true"/>
+          </Properties>
+          <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuItemDbConfig">
+              <Properties>
+                <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.swingapp.ActionEditor">
+                  <action class="wdp.WdpMainWindow" id="editDbConnectionWindow" methodName="editDbConnectionWindow"/>
+                </Property>
+                <Property name="text" type="java.lang.String" resourceKey="jMenuItemDbConfig.text"/>
+                <Property name="name" type="java.lang.String" value="jMenuItemDbConfig" noResource="true"/>
+              </Properties>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuItemAdvancedSetings">
+              <Properties>
+                <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.swingapp.ActionEditor">
+                  <action class="wdp.WdpMainWindow" id="showAdvancedSettingsWindow" methodName="showAdvancedSettingsWindow"/>
+                </Property>
+                <Property name="text" type="java.lang.String" resourceKey="jMenuItemAdvancedSetings.text"/>
+                <Property name="name" type="java.lang.String" value="jMenuItemAdvancedSetings" noResource="true"/>
+              </Properties>
+            </MenuItem>
+          </SubComponents>
+        </Menu>
         <Menu class="javax.swing.JMenu" name="jMenuTest">
           <Properties>
             <Property name="text" type="java.lang.String" resourceKey="jMenuTest.text"/>

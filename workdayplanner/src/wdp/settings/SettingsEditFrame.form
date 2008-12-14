@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<Form version="1.5" maxVersion="1.5" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
+<Form version="1.5" maxVersion="1.7" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
   <NonVisualComponents>
     <Component class="javax.persistence.EntityManager" name="entityManager">
       <Properties>
@@ -23,7 +23,7 @@
         <Property name="observable" type="boolean" value="true"/>
       </Properties>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;wdp.entities.ready.Settings&gt;"/>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;wdp.entities.raw.Settings&gt;"/>
       </AuxValues>
     </Component>
   </NonVisualComponents>
@@ -62,23 +62,21 @@
                           <Component id="idLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="keywordLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="valueStringLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="defaultValueLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="descriptionLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="idWorkerLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="idField" alignment="0" pref="505" max="32767" attributes="0"/>
-                          <Component id="keywordField" alignment="0" pref="505" max="32767" attributes="0"/>
-                          <Component id="valueStringField" alignment="0" pref="505" max="32767" attributes="0"/>
-                          <Component id="defaultValueField" alignment="0" pref="505" max="32767" attributes="0"/>
-                          <Component id="descriptionField" alignment="0" pref="505" max="32767" attributes="0"/>
-                          <Component id="idWorkerField" alignment="0" pref="505" max="32767" attributes="0"/>
+                          <Component id="idField" alignment="0" pref="389" max="32767" attributes="0"/>
+                          <Component id="keywordField" alignment="0" pref="389" max="32767" attributes="0"/>
+                          <Component id="valueStringField" alignment="0" pref="389" max="32767" attributes="0"/>
+                          <Component id="descriptionField" alignment="0" pref="389" max="32767" attributes="0"/>
+                          <Component id="idWorkerField" alignment="0" pref="389" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="102" attributes="0">
                       <EmptySpace min="-2" max="-2" attributes="0"/>
-                      <Component id="masterScrollPane" pref="577" max="32767" attributes="0"/>
+                      <Component id="masterScrollPane" max="32767" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -104,11 +102,6 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="valueStringLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="valueStringField" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace min="-2" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="defaultValueLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="defaultValueField" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -161,17 +154,13 @@
                 <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN" value="2"/>
                 <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="String.class"/>
               </Subbinding>
-              <Subbinding sourcePath="${defaultValue}">
+              <Subbinding sourcePath="${description}">
                 <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN" value="3"/>
                 <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="String.class"/>
               </Subbinding>
-              <Subbinding sourcePath="${description}">
-                <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN" value="4"/>
-                <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="String.class"/>
-              </Subbinding>
               <Subbinding sourcePath="${idWorker}">
-                <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN" value="5"/>
-                <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="wdp.entities.ready.Worker.class"/>
+                <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN" value="4"/>
+                <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="wdp.entities.raw.Worker.class"/>
               </Subbinding>
             </BindingProperty>
           </BindingProperties>
@@ -194,12 +183,6 @@
       <Properties>
         <Property name="text" type="java.lang.String" resourceKey="valueStringLabel.text"/>
         <Property name="name" type="java.lang.String" value="valueStringLabel" noResource="true"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="defaultValueLabel">
-      <Properties>
-        <Property name="text" type="java.lang.String" resourceKey="defaultValueLabel.text"/>
-        <Property name="name" type="java.lang.String" value="defaultValueLabel" noResource="true"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="descriptionLabel">
@@ -245,17 +228,6 @@
           <Property name="incompletePathValue" type="java.lang.String" value="null"/>
         </BindingProperty>
         <BindingProperty name="enabled" source="masterTable" sourcePath="${selectedElement != null}" target="valueStringField" targetPath="enabled" updateStrategy="1" immediately="false"/>
-      </BindingProperties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="defaultValueField">
-      <Properties>
-        <Property name="name" type="java.lang.String" value="defaultValueField" noResource="true"/>
-      </Properties>
-      <BindingProperties>
-        <BindingProperty name="text" source="masterTable" sourcePath="${selectedElement.defaultValue}" target="defaultValueField" targetPath="text" updateStrategy="0" immediately="false">
-          <Property name="incompletePathValue" type="java.lang.String" value="null"/>
-        </BindingProperty>
-        <BindingProperty name="enabled" source="masterTable" sourcePath="${selectedElement != null}" target="defaultValueField" targetPath="enabled" updateStrategy="1" immediately="false"/>
       </BindingProperties>
     </Component>
     <Component class="javax.swing.JTextField" name="descriptionField">
@@ -310,9 +282,11 @@
     <Component class="javax.swing.JButton" name="deleteButton">
       <Properties>
         <Property name="text" type="java.lang.String" resourceKey="deleteButton.text"/>
-        <Property name="enabled" type="boolean" value="false"/>
         <Property name="name" type="java.lang.String" value="deleteButton" noResource="true"/>
       </Properties>
+      <BindingProperties>
+        <BindingProperty name="enabled" source="masterTable" sourcePath="${selectedElement != null}" target="deleteButton" targetPath="enabled" updateStrategy="1" immediately="false"/>
+      </BindingProperties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="deleteButtonActionPerformed"/>
       </Events>
