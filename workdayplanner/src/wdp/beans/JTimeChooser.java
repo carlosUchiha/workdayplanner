@@ -1,31 +1,20 @@
 /*
+ * $Id$
  * JTimePanel.java
- *
  * Created on 13 lipiec 2008, 10:27
  */
 
 package wdp.beans;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 import java.util.Calendar;
 import java.util.Date;
 import javax.swing.JFrame;
-import javax.swing.event.CaretEvent;
-import javax.swing.event.CaretListener;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 
 /**
  *
  * @author  robson
  */
-public class JTimeChooser extends javax.swing.JPanel implements PropertyChangeListener, 
-        ChangeListener, CaretListener, ActionListener, FocusListener {
+public class JTimeChooser extends javax.swing.JPanel {
     private static final long serialVersionUID = 8913369762644440134L;
     private int hour = 0;
     private int minute = 0;
@@ -100,38 +89,41 @@ public class JTimeChooser extends javax.swing.JPanel implements PropertyChangeLi
     }
     
     private void setHour(int hour) {
-        int oldHour = this.hour;
-        this.hour = hour;
-        firePropertyChange("hour", oldHour, hour);
+        if(hour>=0 && hour <24) {
+            int oldHour = this.hour;
+            this.hour = hour;
+            jSpinFieldHour.setValue(hour);
+            firePropertyChange("hour", oldHour, hour);
+        }
     }
     
     private void setMinute(int minute) {
-        int oldMinute = this.minute;
-        this.minute = minute;
-        firePropertyChange("minute", oldMinute, minute);
+        if(hour>=0 && hour <=59) {
+            int oldMinute = this.minute;
+            this.minute = minute;
+            jSpinFieldMinute.setValue(minute);
+            firePropertyChange("minute", oldMinute, minute);
+        }
     }
     
     private void setSecond(int second) {
-        int oldSecond = this.second;
-        this.second = second;
-        firePropertyChange("second", oldSecond, second);
+        if(hour>=0 && hour <=59) {
+            int oldSecond = this.second;
+            this.second = second;
+            firePropertyChange("second", oldSecond, second);
+        }
     }
     
     public int getMinute() {
-        return minute;
+        return jSpinFieldMinute.getValue();
     }
     
     public int getHour() {
-        return hour;
+        return jSpinFieldHour.getValue();
     }
     
     public int getSecond() {
         return second;
-    }
-    
-    @Override
-    public void propertyChange(PropertyChangeEvent arg0) {
-        throw new UnsupportedOperationException("Not supported yet.");
     }
     
     static public void main(String[] s) {
@@ -139,32 +131,5 @@ public class JTimeChooser extends javax.swing.JPanel implements PropertyChangeLi
         frame.getContentPane().add(new JTimeChooser());
         frame.pack();
         frame.setVisible(true);
-    }
-
-    @Override
-    public void stateChanged(ChangeEvent arg0) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public void caretUpdate(CaretEvent arg0) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent arg0) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public void focusGained(FocusEvent arg0) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public void focusLost(FocusEvent arg0) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    
+    }    
 }
