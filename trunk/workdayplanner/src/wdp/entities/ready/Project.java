@@ -1,5 +1,5 @@
 /*
- * $Id: Project.java 8 2008-05-08 15:59:57Z rdubisz $
+ * $Id$
  */
 package wdp.entities.ready;
 
