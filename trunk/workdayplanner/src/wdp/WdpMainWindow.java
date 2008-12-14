@@ -22,6 +22,7 @@ import wdp.project.ProjectTreePane;
 import wdp.project.TaskEditFrame;
 import wdp.reports.ReportLauncher;
 import wdp.settings.DbConnectionFrame;
+import wdp.settings.SettingsEditFrame;
 import wdp.worker.PostEditFrame;
 import wdp.worker.TeamEditFrame;
 
@@ -121,6 +122,9 @@ public class WdpMainWindow extends FrameView {
         jMenuItemTasks = new javax.swing.JMenuItem();
         jSeparator2 = new javax.swing.JSeparator();
         javax.swing.JMenuItem exitMenuItem = new javax.swing.JMenuItem();
+        jMenuSettings = new javax.swing.JMenu();
+        jMenuItemDbConfig = new javax.swing.JMenuItem();
+        jMenuItemAdvancedSetings = new javax.swing.JMenuItem();
         jMenuTest = new javax.swing.JMenu();
         jMenuItemReportTest = new javax.swing.JMenuItem();
         javax.swing.JMenu helpMenu = new javax.swing.JMenu();
@@ -188,6 +192,21 @@ public class WdpMainWindow extends FrameView {
         fileMenu.add(exitMenuItem);
 
         menuBar.add(fileMenu);
+
+        jMenuSettings.setText(resourceMap.getString("jMenuSettings.text")); // NOI18N
+        jMenuSettings.setName("jMenuSettings"); // NOI18N
+
+        jMenuItemDbConfig.setAction(actionMap.get("editDbConnectionWindow")); // NOI18N
+        jMenuItemDbConfig.setText(resourceMap.getString("jMenuItemDbConfig.text")); // NOI18N
+        jMenuItemDbConfig.setName("jMenuItemDbConfig"); // NOI18N
+        jMenuSettings.add(jMenuItemDbConfig);
+
+        jMenuItemAdvancedSetings.setAction(actionMap.get("showAdvancedSettingsWindow")); // NOI18N
+        jMenuItemAdvancedSetings.setText(resourceMap.getString("jMenuItemAdvancedSetings.text")); // NOI18N
+        jMenuItemAdvancedSetings.setName("jMenuItemAdvancedSetings"); // NOI18N
+        jMenuSettings.add(jMenuItemAdvancedSetings);
+
+        menuBar.add(jMenuSettings);
 
         jMenuTest.setText(resourceMap.getString("jMenuTest.text")); // NOI18N
         jMenuTest.setName("jMenuTest"); // NOI18N
@@ -354,6 +373,20 @@ public class WdpMainWindow extends FrameView {
     }
 
     @Action
+    public void showAdvancedSettingsWindow() {
+        JFrame frame = new JFrame();
+        frame.setContentPane(new SettingsEditFrame());
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(wdp.WdpApp.class).getContext().getResourceMap(WdpMainWindow.class);
+        frame.setTitle(resourceMap.getString("showAdvancedSettingsWindow.Action.text"));
+        frame.setIconImage(resourceMap.getImageIcon("showAdvancedSettingsWindow.Action.icon").getImage());
+        frame.pack();
+        frame.setVisible(true);
+        frame.setLocationRelativeTo(WdpApp.getApplication().getMainFrame());
+        WdpApp.getApplication().show(frame);
+    }
+
+    @Action
     public void showProjectTree() {
         JFrame frame = new JFrame();
         frame.setContentPane(new ProjectTreePane());
@@ -363,13 +396,16 @@ public class WdpMainWindow extends FrameView {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem jMenuItemAdvancedSetings;
     private javax.swing.JMenuItem jMenuItemCosts;
+    private javax.swing.JMenuItem jMenuItemDbConfig;
     private javax.swing.JMenuItem jMenuItemPosts;
     private javax.swing.JMenuItem jMenuItemProjects;
     private javax.swing.JMenuItem jMenuItemReportTest;
     private javax.swing.JMenuItem jMenuItemTasks;
     private javax.swing.JMenuItem jMenuItemTeams;
     private javax.swing.JMenuItem jMenuItemWorkers;
+    private javax.swing.JMenu jMenuSettings;
     private javax.swing.JMenu jMenuTest;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JPanel mainPanel;
@@ -405,4 +441,14 @@ public class WdpMainWindow extends FrameView {
             frame.setVisible(true);
         }
     }
+
+    @Action
+    public void editDbConnectionWindow() {
+        JFrame frame = new JFrame();
+        frame.setContentPane(new DbConnectionFrame());
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.pack();
+        frame.setVisible(true);
+    }
+
 }

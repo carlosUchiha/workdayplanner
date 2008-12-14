@@ -18,7 +18,8 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
 /**
- *
+ * Class for opening persistence.xml file.
+ * It contains database connection configuration.
  * @author robson
  */
 public class PersistenceXmlDocument {

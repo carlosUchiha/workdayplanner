@@ -5,6 +5,8 @@
 
 package wdp.entities.raw;
 
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -15,6 +17,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 
 /**
@@ -23,8 +26,10 @@ import javax.persistence.UniqueConstraint;
  */
 @Entity
 @Table(name = "SETTINGS", catalog = "", schema = "", uniqueConstraints = {@UniqueConstraint(columnNames = {"KEYWORD"})})
-@NamedQueries({@NamedQuery(name = "Settings.findAll", query = "SELECT s FROM Settings s"), @NamedQuery(name = "Settings.findById", query = "SELECT s FROM Settings s WHERE s.id = :id"), @NamedQuery(name = "Settings.findByKeyword", query = "SELECT s FROM Settings s WHERE s.keyword = :keyword"), @NamedQuery(name = "Settings.findByValueString", query = "SELECT s FROM Settings s WHERE s.valueString = :valueString"), @NamedQuery(name = "Settings.findByDefaultValue", query = "SELECT s FROM Settings s WHERE s.defaultValue = :defaultValue"), @NamedQuery(name = "Settings.findByDescription", query = "SELECT s FROM Settings s WHERE s.description = :description")})
+@NamedQueries({@NamedQuery(name = "Settings.findAll", query = "SELECT s FROM Settings s"), @NamedQuery(name = "Settings.findById", query = "SELECT s FROM Settings s WHERE s.id = :id"), @NamedQuery(name = "Settings.findByKeyword", query = "SELECT s FROM Settings s WHERE s.keyword = :keyword"), @NamedQuery(name = "Settings.findByValueString", query = "SELECT s FROM Settings s WHERE s.valueString = :valueString"), @NamedQuery(name = "Settings.findByDescription", query = "SELECT s FROM Settings s WHERE s.description = :description")})
 public class Settings implements Serializable {
+    @Transient
+    private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -36,9 +41,6 @@ public class Settings implements Serializable {
     @Basic(optional = false)
     @Column(name = "VALUE_STRING", nullable = false, length = 255)
     private String valueString;
-    @Basic(optional = false)
-    @Column(name = "DEFAULT_ VALUE", nullable = false, length = 255)
-    private String defaultValue;
     @Column(name = "DESCRIPTION", length = 1000)
     private String description;
     @JoinColumn(name = "ID_WORKER", referencedColumnName = "ID")
@@ -52,11 +54,10 @@ public class Settings implements Serializable {
         this.id = id;
     }
 
-    public Settings(Integer id, String keyword, String valueString, String defaultValue) {
+    public Settings(Integer id, String keyword, String valueString) {
         this.id = id;
         this.keyword = keyword;
         this.valueString = valueString;
-        this.defaultValue = defaultValue;
     }
 
     public Integer getId() {
@@ -64,7 +65,9 @@ public class Settings implements Serializable {
     }
 
     public void setId(Integer id) {
+        Integer oldId = this.id;
         this.id = id;
+        changeSupport.firePropertyChange("id", oldId, id);
     }
 
     public String getKeyword() {
@@ -72,7 +75,9 @@ public class Settings implements Serializable {
     }
 
     public void setKeyword(String keyword) {
+        String oldKeyword = this.keyword;
         this.keyword = keyword;
+        changeSupport.firePropertyChange("keyword", oldKeyword, keyword);
     }
 
     public String getValueString() {
@@ -80,15 +85,9 @@ public class Settings implements Serializable {
     }
 
     public void setValueString(String valueString) {
+        String oldValueString = this.valueString;
         this.valueString = valueString;
-    }
-
-    public String getDefaultValue() {
-        return defaultValue;
-    }
-
-    public void setDefaultValue(String defaultValue) {
-        this.defaultValue = defaultValue;
+        changeSupport.firePropertyChange("valueString", oldValueString, valueString);
     }
 
     public String getDescription() {
@@ -96,7 +95,9 @@ public class Settings implements Serializable {
     }
 
     public void setDescription(String description) {
+        String oldDescription = this.description;
         this.description = description;
+        changeSupport.firePropertyChange("description", oldDescription, description);
     }
 
     public Worker getIdWorker() {
@@ -104,7 +105,9 @@ public class Settings implements Serializable {
     }
 
     public void setIdWorker(Worker idWorker) {
+        Worker oldIdWorker = this.idWorker;
         this.idWorker = idWorker;
+        changeSupport.firePropertyChange("idWorker", oldIdWorker, idWorker);
     }
 
     @Override
@@ -130,6 +133,14 @@ public class Settings implements Serializable {
     @Override
     public String toString() {
         return "wdp.entities.raw.Settings[id=" + id + "]";
+    }
+
+    public void addPropertyChangeListener(PropertyChangeListener listener) {
+        changeSupport.addPropertyChangeListener(listener);
+    }
+
+    public void removePropertyChangeListener(PropertyChangeListener listener) {
+        changeSupport.removePropertyChangeListener(listener);
     }
 
 }
