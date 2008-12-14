@@ -17,8 +17,7 @@
     <properties>
       <property name="toplink.jdbc.user" value="sysdba"/>
       <property name="toplink.jdbc.password" value="masterkey"/>
-      
-      <property name="toplink.jdbc.url" value="jdbc:firebirdsql:localhost:C:/Projects/workdayplanner/db/db.fdb"/>
+      <property name="toplink.jdbc.url" value="jdbc:firebirdsql:localhost:D:/Projects/workdayplanner/db/db.fdb"/>
       <property name="toplink.jdbc.driver" value="org.firebirdsql.jdbc.FBDriver"/>
       <property name="toplink.target-database" value="Oracle"/>
     </properties>
