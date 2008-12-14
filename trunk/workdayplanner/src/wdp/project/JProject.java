@@ -8,7 +8,7 @@ import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import javax.persistence.Transient;
 import org.jdesktop.application.Action;
-import wdp.entities.ready.Project;
+import wdp.entities.raw.Project;
 
 /**
  *
@@ -56,19 +56,6 @@ public class JProject extends javax.swing.JComponent {
         return object;
     }
 
-    public void setObject(wdp.entities.ready.Project object) {
-        Project oldValue = this.object;
-        this.object = object;
-        if (object != null) {
-            jTextFieldValue.setText(object.getName());
-            jTextFieldValue.setToolTipText(object.getDescription());
-        } else {
-            jTextFieldValue.setText("");
-            jTextFieldValue.setToolTipText("");
-        }
-        //changeSupport.firePropertyChange("object", oldValue, object);
-    }
-
     void setObject(wdp.entities.raw.Project object) {
         Project oldValue = this.object;
         this.object = (Project) object;
@@ -79,7 +66,7 @@ public class JProject extends javax.swing.JComponent {
             jTextFieldValue.setText("");
             jTextFieldValue.setToolTipText("");
         }
-        //changeSupport.firePropertyChange("object", oldValue, object);
+        changeSupport.firePropertyChange("object", oldValue, object);
     }
 
     @Override
@@ -88,7 +75,7 @@ public class JProject extends javax.swing.JComponent {
         jButtonSelect.setEnabled(aEnabled);
     }
 
-    /*@Override
+    @Override
     public void addPropertyChangeListener(PropertyChangeListener listener) {
         changeSupport.addPropertyChangeListener(listener);
     }
@@ -96,16 +83,18 @@ public class JProject extends javax.swing.JComponent {
     @Override
     public void removePropertyChangeListener(PropertyChangeListener listener) {
         changeSupport.addPropertyChangeListener(listener);
-    }*/
+    }
 
     @Action
     public void showProjectsListWindow() {
+        
     }
+
   // Variables declaration - do not modify//GEN-BEGIN:variables
   private javax.swing.JButton jButtonSelect;
   private javax.swing.JTextField jTextFieldValue;
   // End of variables declaration//GEN-END:variables
-    private wdp.entities.ready.Project object = null;
-    //@Transient
-    //private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
+    private wdp.entities.raw.Project object = null;
+    @Transient
+    private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
 }

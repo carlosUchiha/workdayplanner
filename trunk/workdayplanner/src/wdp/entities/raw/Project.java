@@ -248,7 +248,14 @@ public class Project implements Serializable {
 
     @Override
     public String toString() {
-        return "wdp.entities.raw.Project[id=" + id + "]";
+        return getName();
+    }
+
+    /**
+     * Debugging info
+     */
+    public String toDebugString() {
+        return "wdp.entities.raw.Project[id=" + id + "] "+getName();
     }
 
 }

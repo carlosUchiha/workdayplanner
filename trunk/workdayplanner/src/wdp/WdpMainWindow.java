@@ -395,6 +395,15 @@ public class WdpMainWindow extends FrameView {
         frame.setVisible(true);
     }
 
+    @Action
+    public void editDbConnectionWindow() {
+        JFrame frame = new JFrame();
+        frame.setContentPane(new DbConnectionFrame());
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.pack();
+        frame.setVisible(true);
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem jMenuItemAdvancedSetings;
     private javax.swing.JMenuItem jMenuItemCosts;
@@ -440,15 +449,6 @@ public class WdpMainWindow extends FrameView {
             frame.pack();
             frame.setVisible(true);
         }
-    }
-
-    @Action
-    public void editDbConnectionWindow() {
-        JFrame frame = new JFrame();
-        frame.setContentPane(new DbConnectionFrame());
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.pack();
-        frame.setVisible(true);
     }
 
 }
