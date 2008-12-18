@@ -14,7 +14,7 @@ import javax.swing.JPopupMenu;
 import org.jdesktop.application.Action;
 
 /**
- *
+ * Date + time chooser bean
  * @author  robson
  */
 public class JDateTimeChooser extends javax.swing.JPanel {
@@ -41,41 +41,40 @@ public class JDateTimeChooser extends javax.swing.JPanel {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
         jButtonSelect = new javax.swing.JButton();
         jTextFieldDateEditor = new com.toedter.calendar.JTextFieldDateEditor();
 
         setName("Form"); // NOI18N
+        setLayout(new java.awt.GridBagLayout());
 
         javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance(wdp.WdpApp.class).getContext().getActionMap(JDateTimeChooser.class, this);
         jButtonSelect.setAction(actionMap.get("selectDateTime")); // NOI18N
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(wdp.WdpApp.class).getContext().getResourceMap(JDateTimeChooser.class);
+        jButtonSelect.setIcon(resourceMap.getIcon("jButtonSelect.icon")); // NOI18N
         jButtonSelect.setText(resourceMap.getString("jButtonSelect.text")); // NOI18N
         jButtonSelect.setName("jButtonSelect"); // NOI18N
+        jButtonSelect.setPreferredSize(new java.awt.Dimension(21, 21));
         jButtonSelect.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonSelectActionPerformed(evt);
             }
         });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
+        add(jButtonSelect, gridBagConstraints);
 
         jTextFieldDateEditor.setDateFormatString(resourceMap.getString("jTextFieldDateEditor.dateFormatString")); // NOI18N
         jTextFieldDateEditor.setName("jTextFieldDateEditor"); // NOI18N
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jTextFieldDateEditor, javax.swing.GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButtonSelect, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(jButtonSelect, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(jTextFieldDateEditor, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        add(jTextFieldDateEditor, gridBagConstraints);
     }// </editor-fold>//GEN-END:initComponents
 
 private void jButtonSelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSelectActionPerformed
@@ -90,10 +89,10 @@ private void jButtonSelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN
         dateTimePanel.addPropertyChangeListener("date", new PropertyChangeListener() {
             @Override
             public void propertyChange(PropertyChangeEvent evt) {
-                log.info("Data zmieniona na : "+evt.getNewValue());
+                log.fine("Date changed to : "+evt.getNewValue());
                 selectedDate = (Date) evt.getNewValue();
                 jTextFieldDateEditor.setDate((Date) evt.getNewValue());
-                log.info("A wpisala sie jako : "+jTextFieldDateEditor.getDate());
+                log.fine("Date formatted as : "+jTextFieldDateEditor.getDate());
                 jTextFieldDateEditor.repaint();
                 popup.setVisible(false);
             }
