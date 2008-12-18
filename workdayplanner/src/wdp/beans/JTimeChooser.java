@@ -69,12 +69,11 @@ public class JTimeChooser extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     public void setDate(Date aDate) {
-        int aHour = aDate.getHours();
-        int aMinute = aDate.getMinutes();
-        int aSecond = aDate.getSeconds();
-        setHour(aHour);
-        setMinute(aMinute);
-        setSecond(aSecond);
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(aDate);
+        setHour(calendar.get(Calendar.HOUR_OF_DAY));
+        setMinute(calendar.get(Calendar.MINUTE));
+        setSecond(calendar.get(Calendar.SECOND));
     }
     
     public void setTime(int hour, int minute) {

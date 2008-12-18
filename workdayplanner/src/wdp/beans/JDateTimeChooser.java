@@ -94,6 +94,7 @@ private void jButtonSelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN
                 log.info("Data zmieniona na : "+evt.getNewValue());
                 selectedDate = (Date) evt.getNewValue();
                 jTextFieldDateEditor.setDate((Date) evt.getNewValue());
+                log.info("A wpisala sie jako : "+jTextFieldDateEditor.getDate());
                 jTextFieldDateEditor.repaint();
                 popup.setVisible(false);
             }
