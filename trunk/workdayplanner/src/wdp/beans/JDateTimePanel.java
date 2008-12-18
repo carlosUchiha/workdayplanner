@@ -6,6 +6,7 @@
 
 package wdp.beans;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.logging.Logger;
 import org.jdesktop.application.Action;
@@ -33,10 +34,11 @@ public class JDateTimePanel extends javax.swing.JPanel {
     }
     
     public Date getDate() {
-        Date retVal = jCalendar1.getDate();
-        retVal.setHours(jTimeChooser1.getHour());
-        retVal.setMinutes(jTimeChooser1.getMinute());
-        return retVal;
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(jCalendar1.getDate());
+        calendar.set(Calendar.HOUR_OF_DAY, jTimeChooser1.getHour());
+        calendar.set(Calendar.MINUTE, jTimeChooser1.getMinute());
+        return calendar.getTime();
     }
 
     /** This method is called from within the constructor to
@@ -87,10 +89,11 @@ public class JDateTimePanel extends javax.swing.JPanel {
 
     @Action
     public void accept() {
-        Date retVal = jCalendar1.getDate();
-        retVal.setHours(jTimeChooser1.getHour());
-        retVal.setMinutes(jTimeChooser1.getMinute());
-        firePropertyChange("date", jCalendar1.getDate(), retVal);
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(jCalendar1.getDate());
+        calendar.set(Calendar.HOUR_OF_DAY, jTimeChooser1.getHour());
+        calendar.set(Calendar.MINUTE, jTimeChooser1.getMinute());
+        firePropertyChange("date", jCalendar1.getDate(), calendar.getTime());
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
