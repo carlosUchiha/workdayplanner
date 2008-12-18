@@ -20,9 +20,9 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
-              <Component id="jTextFieldDateEditor" pref="192" max="32767" attributes="0"/>
+              <Component id="jTextFieldDateEditor" pref="196" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jButtonSelect" min="-2" pref="27" max="-2" attributes="0"/>
+              <Component id="jButtonSelect" min="-2" pref="23" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -50,7 +50,6 @@
     </Component>
     <Component class="com.toedter.calendar.JTextFieldDateEditor" name="jTextFieldDateEditor">
       <Properties>
-        <Property name="toolTipText" type="java.lang.String" resourceKey="jTextFieldDateEditor.toolTipText"/>
         <Property name="dateFormatString" type="java.lang.String" resourceKey="jTextFieldDateEditor.dateFormatString"/>
         <Property name="name" type="java.lang.String" value="jTextFieldDateEditor" noResource="true"/>
       </Properties>

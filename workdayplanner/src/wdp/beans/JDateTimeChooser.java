@@ -58,7 +58,6 @@ public class JDateTimeChooser extends javax.swing.JPanel {
             }
         });
 
-        jTextFieldDateEditor.setToolTipText(resourceMap.getString("jTextFieldDateEditor.toolTipText")); // NOI18N
         jTextFieldDateEditor.setDateFormatString(resourceMap.getString("jTextFieldDateEditor.dateFormatString")); // NOI18N
         jTextFieldDateEditor.setName("jTextFieldDateEditor"); // NOI18N
 
@@ -67,9 +66,9 @@ public class JDateTimeChooser extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jTextFieldDateEditor, javax.swing.GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE)
+                .addComponent(jTextFieldDateEditor, javax.swing.GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButtonSelect, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jButtonSelect, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
